@@ -1,7 +1,21 @@
 const featured = [
   {
     id: 1,
-  
+    name: "MacBook Neo",
+    tagline: "Amazing Mac. Surprising price.",
+    theme: "light",
+    bg: "#fbfbfd",
+    fg: "#1d1d1f",
+    subtitleColor: "#1d1d1f",
+    img: "/images/macbook_neo/hero_macbook_neo__gnm3snkti4a6_mediumtall_2x.jpg",
+    imagePosition: "center bottom",
+    links: [
+      { label: "Learn more", href: "#" },
+      { label: "Buy", href: "#" },
+    ],
+  },
+  {
+    id: 2,
     name: "iPad Air",
     logo: "/images/ipad_air/hero_logo_ipad_air__ejixj9pic0uq_medium_2x.png",
     tagline: "Now supercharged by M4.",
@@ -9,22 +23,12 @@ const featured = [
     bg: "#fbfbfd",
     fg: "#1d1d1f",
     subtitleColor: "#1d1d1f",
-    linkColor: "#0071e3",
     img: "/images/ipad_air/hero_ipad_air_m4__ew8k92mk1w6e_mediumtall_2x.jpg",
-    imgCropTop: "-20px",
-  },
-  {
-    id: 2,
-    
-    name: "MacBook Air",
-    tagline: "Incredibly thin. Exceptionally capable.",
-    theme: "light",
-    bg: "#f5f5f7",
-    fg: "#1d1d1f",
-    subtitleColor: "#6e6e73",
-    linkColor: "#0071e3",
-    img: "/images/macbook_neo/hero_macbook_neo__gnm3snkti4a6_mediumtall_2x.jpg",
-    imgCropTop: "-20px",
+    imagePosition: "center bottom",
+    links: [
+      { label: "Learn more", href: "#" },
+      { label: "Buy", href: "#" },
+    ],
   },
 ];
 
@@ -35,15 +39,13 @@ export default function FeaturedDuo() {
         <div
           key={item.id}
           className="featured-tile"
-          style={{ background: item.bg, color: item.fg, "--tile-bg": item.bg }}
+          style={{
+            background: item.bg,
+            color: item.fg,
+            "--promo-link-color": item.theme === "dark" ? "#f5f5f7" : "#06c",
+          }}
         >
           <div className="featured-tile-text">
-            <p
-              className="featured-eyebrow"
-              style={{ color: item.subtitleColor }}
-            >
-              {item.eyebrow}
-            </p>
             {item.logo ? (
               <img
                 src={item.logo}
@@ -59,20 +61,27 @@ export default function FeaturedDuo() {
             >
               {item.tagline}
             </p>
-            <div className="featured-cta">
-              <a href="#" className="pill-btn pill-btn-filled">
-                Learn more
-              </a>
-              <a href="#" className="pill-btn pill-btn-outline">
-                Buy
-              </a>
+            <div className="promo-buttons featured-cta">
+              {item.links.map((link, index) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className={`pill-btn ${index === 0 ? "pill-btn-filled" : "pill-btn-outline"}`}
+                >
+                  {link.label}
+                </a>
+              ))}
             </div>
           </div>
           <img
             src={item.img}
             alt={item.name}
             className="featured-img-placeholder"
-            style={item.imgCropTop ? { marginTop: item.imgCropTop } : undefined}
+            style={
+              item.imagePosition
+                ? { objectPosition: item.imagePosition }
+                : undefined
+            }
           />
         </div>
       ))}

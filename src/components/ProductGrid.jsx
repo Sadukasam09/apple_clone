@@ -1,91 +1,149 @@
 const products = [
   {
     id: 1,
-    name: "MacBook Pro",
-    tagline: "Mind-blowing. Head-turning.",
-    theme: "dark",
-    bg: "#000000",
-    fg: "#f5f5f7",
-    img: "/images/grid/macbook_Pro/promo_macbook_pro__e3xqrygvp9ea_medium_2x.jpg",
-    imgCropTop: "-100px",
-  },
-  {
-    id: 2,
-    name: "iPad Pro",
-    tagline: "Thinnest product Apple has ever made.",
-    theme: "dark",
-    bg: "#000000",
-    fg: "#f5f5f7",
-    img: "/images/grid/ipad_pro/promo_ipad_pro__c529dk533k4m_medium_2x.jpg",
-    imgCropBottom: "-120px",
-  },
-  {
-    id: 3,
-    name: "Apple Watch Series 11",
-    tagline: "The ultimate way to watch your health.",
-    theme: "light",
-    bg: "#f5f5f7",
-    fg: "#1d1d1f",
-    img: "/images/grid/apple_watch/promo_apple_watch_series_11__b63hxviqvonm_medium_2x.jpg",
-  },
-  {
-    id: 4,
-    name: "AirPods Pro Max",
-    tagline: "Listening. Remastered.",
-    theme: "light",
-    bg: "#f5f5f7",
-    fg: "#1d1d1f",
-    img: "/images/grid/airpods_promax/promo_airpods_max_2_announce__gixce23ubaa2_medium_2x.jpg",
-  },
-  {
-    id: 5,
     name: "Apple at 50",
-    tagline: "Celebrating five decades of innovation.",
+    logo: "/images/grid/apple_logo/promo_logo_apple_50_headline__5493ndwfu0iy_medium_2x.png",
+    tagline: "",
     theme: "light",
     bg: "#fbfbfd",
     fg: "#1d1d1f",
     img: "/images/grid/apple_logo/promo_apple_50__cb3xo5si7y6a_medium_2x.jpg",
+    imageFit: "contain",
+    imagePosition: "center center",
+    imageBoxed: true,
+    imageWidth: "82%",
+    imageMask:
+      "linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.08) 8%, rgba(0, 0, 0, 0.45) 16%, black 34%, black 66%, rgba(0, 0, 0, 0.45) 84%, rgba(0, 0, 0, 0.08) 92%, transparent 100%)",
+    contentPosition: "bottom",
+    links: [{ label: "Read the letter from Tim", href: "#" }],
+  },
+  {
+    id: 2,
+    name: "MacBook Pro",
+    tagline: "Now with M5, M5 Pro and M5 Max.",
+    theme: "dark",
+    bg: "#000000",
+    fg: "#f5f5f7",
+    img: "/images/grid/macbook_Pro/promo_macbook_pro__e3xqrygvp9ea_medium_2x.jpg",
+    imageFit: "contain",
+    imagePosition: "center center",
+    links: [
+      { label: "Learn more", href: "#" },
+      { label: "Buy", href: "#" },
+    ],
+  },
+  {
+    id: 3,
+    name: "AirPods Max 2",
+    tagline: "Listening. Remastered.",
+    subcopy: "Available early next month",
+    theme: "light",
+    bg: "#f5f5f7",
+    fg: "#1d1d1f",
+    img: "/images/grid/airpods_promax/promo_airpods_max_2_announce__gixce23ubaa2_medium_2x.jpg",
+    imageFit: "contain",
+    imagePosition: "center center",
+    contentPosition: "bottom",
+    links: [
+      { label: "Learn more", href: "#" },
+      { label: "Order", href: "#" },
+    ],
+  },
+  {
+    id: 4,
+    name: "Apple Watch Series 11",
+    logo: "/images/grid/apple_watch/promo_logo_apple_watch_series_11_preorder__fl4pzqrs45me_medium_2x.png",
+    tagline: "The ultimate watch for a healthy life.",
+    theme: "light",
+    bg: "#f5f5f7",
+    fg: "#1d1d1f",
+    img: "/images/grid/apple_watch/promo_apple_watch_series_11__b63hxviqvonm_medium_2x.jpg",
+    imageFit: "contain",
+    imagePosition: "center center",
+    links: [
+      { label: "Learn more", href: "#" },
+      { label: "Buy", href: "#" },
+    ],
+  },
+  {
+    id: 5,
+    name: "iPad Pro",
+    tagline: "Advanced AI performance and game-changing capabilities.",
+    theme: "dark",
+    bg: "#000000",
+    fg: "#f5f5f7",
+    img: "/images/grid/ipad_pro/promo_ipad_pro__c529dk533k4m_medium_2x.jpg",
+    imagePosition: "center center",
+    links: [
+      { label: "Learn more", href: "#" },
+      { label: "Buy", href: "#" },
+    ],
   },
   {
     id: 6,
-    name: "iPhone Trade In",
-    tagline: "Get credit toward a new iPhone.",
+    name: "Apple Trade In",
+    logo: "/images/grid/trade_in/promo_logo_iphone_tradein__7y3gtai5az66_medium_2x.png",
+    tagline: "Upgrade and save. It's that easy.",
     theme: "light",
     bg: "#f5f5f7",
     fg: "#1d1d1f",
     img: "/images/grid/trade_in/promo_iphone_tradein__bugw15ka691e_medium_2x.jpg",
+    imagePosition: "center center",
+    links: [{ label: "Get your estimate", href: "#" }],
   },
 ];
 
 function ProductCard({ product }) {
-  const isDark = product.theme === "dark";
   return (
     <div
       className="apple-product-card"
       style={{
         background: product.bg,
         color: product.fg,
+        "--promo-link-color": product.theme === "dark" ? "#f5f5f7" : "#06c",
+        "--product-image-fit": product.imageFit ?? "cover",
+        "--product-image-width": product.imageWidth ?? "100%",
+        "--product-image-mask": product.imageMask ?? "none",
       }}
     >
       <img
         src={product.img}
         alt={product.name}
-        className="apple-product-img-placeholder"
-        style={{
-          ...(product.imgCropTop ? { marginTop: product.imgCropTop } : {}),
-          ...(product.imgCropBottom ? { marginBottom: product.imgCropBottom } : {}),
-        }}
+        className={`apple-product-img-placeholder${product.imageBoxed ? " apple-product-img-boxed" : ""}`}
+        style={
+          product.imagePosition
+            ? { objectPosition: product.imagePosition }
+            : undefined
+        }
       />
-      <div className="apple-product-text">
-        <h2 className="apple-product-name">{product.name}</h2>
-        <p className="apple-product-tagline">{product.tagline}</p>
-        <div className="apple-product-cta">
-          <a href="#" className="pill-btn pill-btn-filled">
-            Learn more
-          </a>
-          <a href="#" className="pill-btn pill-btn-outline">
-            Shop
-          </a>
+      <div
+        className={`apple-product-text${product.contentPosition === "bottom" ? " apple-product-text-bottom" : ""}`}
+      >
+        {product.logo ? (
+          <img
+            src={product.logo}
+            alt={product.name}
+            className="apple-product-logo"
+          />
+        ) : (
+          <h2 className="apple-product-name">{product.name}</h2>
+        )}
+        {product.tagline ? (
+          <p className="apple-product-tagline">{product.tagline}</p>
+        ) : null}
+        {product.subcopy ? (
+          <p className="apple-product-subcopy">{product.subcopy}</p>
+        ) : null}
+        <div className="promo-buttons apple-product-cta">
+          {product.links.map((link, index) => (
+            <a
+              key={link.label}
+              href={link.href}
+              className={`pill-btn ${index === 0 ? "pill-btn-filled" : "pill-btn-outline"}`}
+            >
+              {link.label}
+            </a>
+          ))}
         </div>
       </div>
     </div>

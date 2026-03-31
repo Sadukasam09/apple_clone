@@ -1,0 +1,392 @@
+/* SupportPage.css */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.sup-page {
+  background: #fff;
+  color: #1d1d1f;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.47059;
+  letter-spacing: -0.022em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+.sup-content-width {
+  width: min(1200px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+/* Hero / Search */
+.sup-hero {
+  background: #f5f5f7;
+  padding: 72px 0 64px;
+  text-align: center;
+}
+.sup-hero-title {
+  font-size: clamp(28px, 3.6vw, 48px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  margin: 0 0 32px;
+  color: #1d1d1f;
+}
+.sup-search-form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.sup-search-wrap {
+  position: relative;
+  flex: 1;
+  max-width: 520px;
+  min-width: 220px;
+}
+.sup-search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+}
+.sup-search-input {
+  width: 100%;
+  height: 44px;
+  border: 1.5px solid #d2d2d7;
+  border-radius: 100px;
+  padding: 0 16px 0 42px;
+  font-size: 15px;
+  background: #fff;
+  color: #1d1d1f;
+  outline: none;
+  transition: border-color 160ms;
+  -webkit-appearance: none;
+}
+.sup-search-input:focus {
+  border-color: #0071e3;
+}
+.sup-search-btn {
+  height: 44px;
+  padding: 0 22px;
+  background: #0071e3;
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 160ms;
+}
+.sup-search-btn:hover {
+  background: #0077ed;
+}
+
+/* Section headings */
+.sup-section-title {
+  font-size: clamp(19px, 2.2vw, 28px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin: 0 0 28px;
+  color: #1d1d1f;
+}
+
+/* Product quick links */
+.sup-products {
+  padding: 64px 0;
+  background: #fff;
+}
+.sup-product-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+}
+.sup-product-card {
+  background: #f5f5f7;
+  border-radius: 18px;
+  overflow: hidden;
+  padding: 20px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  gap: 12px;
+  transition:
+    background 160ms,
+    transform 200ms;
+}
+.sup-product-card:hover {
+  background: #e8e8ec;
+  transform: scale(1.02);
+}
+.sup-product-img {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sup-product-img img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.sup-product-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1d1d1f;
+  text-align: center;
+}
+
+/* Support tools */
+.sup-tools-section {
+  background: #f5f5f7;
+  padding: 64px 0;
+}
+.sup-tools-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.sup-tool-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  text-decoration: none;
+  transition: box-shadow 200ms;
+}
+.sup-tool-card:hover {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.09);
+}
+.sup-tool-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 2px;
+}
+.sup-tool-body {
+  flex: 1;
+  min-width: 0;
+}
+.sup-tool-title {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  color: #1d1d1f;
+}
+.sup-tool-desc {
+  font-size: 14px;
+  color: #6e6e73;
+  margin: 0;
+  line-height: 1.45;
+}
+.sup-tool-arrow {
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+/* Popular topics */
+.sup-popular-section {
+  background: #fff;
+  padding: 64px 0;
+}
+.sup-popular-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+.sup-popular-item {
+  border-bottom: 1px solid #d2d2d7;
+}
+.sup-popular-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 8px 16px 0;
+  font-size: 15px;
+  color: #1d1d1f;
+  text-decoration: none;
+  font-weight: 500;
+  gap: 8px;
+}
+.sup-popular-link:hover {
+  color: #0071e3;
+}
+.sup-popular-link svg {
+  flex-shrink: 0;
+}
+
+/* AppleCare */
+.sup-applecare {
+  background: #f5f5f7;
+  padding: 80px 0;
+}
+.sup-applecare-card {
+  background: #fff;
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 64px;
+  padding: 56px;
+}
+.sup-applecare-body {
+  flex: 1;
+}
+.sup-applecare-eyebrow {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6e6e73;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 10px;
+}
+.sup-applecare-title {
+  font-size: clamp(22px, 2.8vw, 36px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin: 0 0 16px;
+  color: #1d1d1f;
+}
+.sup-applecare-desc {
+  font-size: 16px;
+  color: #6e6e73;
+  line-height: 1.5;
+  max-width: 420px;
+  margin: 0 0 24px;
+}
+.sup-applecare-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.sup-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 18px;
+  background: #0071e3;
+  color: #fff;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 160ms;
+}
+.sup-btn-primary:hover {
+  background: #0077ed;
+}
+.sup-btn-link {
+  font-size: 15px;
+  color: #06c;
+  text-decoration: none;
+}
+.sup-btn-link:hover {
+  text-decoration: underline;
+}
+.sup-applecare-img {
+  flex: 1;
+  max-width: 480px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.sup-applecare-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Service programmes */
+.sup-service-section {
+  background: #fff;
+  padding: 64px 0;
+}
+.sup-service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.sup-service-card {
+  background: #f5f5f7;
+  border-radius: 18px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.sup-service-title {
+  font-size: 19px;
+  font-weight: 700;
+  margin: 0;
+  color: #1d1d1f;
+}
+.sup-service-desc {
+  font-size: 14px;
+  color: #6e6e73;
+  margin: 0;
+  line-height: 1.5;
+  flex: 1;
+}
+.sup-service-link {
+  font-size: 15px;
+  color: #06c;
+  text-decoration: none;
+  font-weight: 500;
+}
+.sup-service-link:hover {
+  text-decoration: underline;
+}
+
+/* Footnotes */
+.sup-footnotes {
+  padding: 32px 0 48px;
+  border-top: 1px solid #d2d2d7;
+  background: #fff;
+}
+.sup-footnotes p {
+  font-size: 12px;
+  color: #6e6e73;
+  margin: 0 0 8px;
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .sup-product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .sup-tools-grid {
+    grid-template-columns: 1fr;
+  }
+  .sup-popular-list {
+    grid-template-columns: 1fr;
+  }
+  .sup-service-grid {
+    grid-template-columns: 1fr;
+  }
+  .sup-applecare-card {
+    flex-direction: column;
+    gap: 32px;
+    padding: 32px;
+  }
+}
+@media (max-width: 600px) {
+  .sup-product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

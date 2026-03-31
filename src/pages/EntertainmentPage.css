@@ -1,0 +1,241 @@
+/* EntertainmentPage.css */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.ent-page {
+  background: #fff;
+  color: #1d1d1f;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.47059;
+  letter-spacing: -0.022em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+.ent-content-width {
+  width: min(1200px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+/* Hero */
+.ent-hero {
+  background: #fff;
+  padding: 56px 0 48px;
+}
+.ent-hero-title {
+  font-size: clamp(44px, 6.5vw, 80px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.06em;
+  color: #1d1d1f;
+  margin: 0 0 20px;
+}
+.ent-hero-sub {
+  max-width: 640px;
+  font-size: clamp(15px, 1.6vw, 19px);
+  color: #6e6e73;
+  margin: 0;
+  line-height: 1.35;
+}
+
+/* Service cards */
+.ent-services {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.ent-service-card {
+  padding: 72px 0;
+}
+.ent-card-inner {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+}
+.ent-reverse .ent-card-inner {
+  flex-direction: row-reverse;
+}
+.ent-card-body {
+  flex: 1;
+  min-width: 0;
+}
+.ent-card-name {
+  font-size: clamp(24px, 3.2vw, 44px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  margin: 0 0 8px;
+  line-height: 1.05;
+}
+.ent-card-tagline {
+  font-size: clamp(17px, 1.8vw, 22px);
+  font-weight: 600;
+  margin: 0 0 16px;
+  line-height: 1.2;
+}
+.ent-card-desc {
+  font-size: 16px;
+  margin: 0 0 28px;
+  line-height: 1.55;
+  max-width: 460px;
+}
+.ent-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.ent-btn-cta {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 20px;
+  border-radius: 100px;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 160ms;
+}
+.ent-btn-cta:hover {
+  opacity: 0.85;
+}
+.ent-btn-learn {
+  font-size: 15px;
+  text-decoration: none;
+}
+.ent-btn-learn:hover {
+  text-decoration: underline;
+}
+.ent-card-img-wrap {
+  flex: 1;
+  border-radius: 20px;
+  overflow: hidden;
+  max-width: 520px;
+}
+.ent-card-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+}
+
+/* Apple One */
+.ent-one-section {
+  background: #f5f5f7;
+  padding: 80px 0;
+}
+.ent-one-card {
+  background: #fff;
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 64px;
+  padding: 56px;
+}
+.ent-one-body {
+  flex: 1;
+}
+.ent-one-eyebrow {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6e6e73;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 12px;
+}
+.ent-one-title {
+  font-size: clamp(22px, 2.8vw, 36px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+  margin: 0 0 16px;
+  color: #1d1d1f;
+}
+.ent-one-desc {
+  font-size: 16px;
+  color: #6e6e73;
+  line-height: 1.5;
+  max-width: 420px;
+  margin: 0 0 24px;
+}
+.ent-one-actions {
+  margin-bottom: 24px;
+}
+.ent-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 18px;
+  background: #0071e3;
+  color: #fff;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 160ms;
+}
+.ent-btn-primary:hover {
+  background: #0077ed;
+}
+.ent-one-services {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.ent-one-badge {
+  padding: 4px 12px;
+  border-radius: 100px;
+  background: #f5f5f7;
+  font-size: 13px;
+  font-weight: 500;
+  color: #1d1d1f;
+}
+.ent-one-img-wrap {
+  flex: 1;
+  max-width: 480px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.ent-one-img-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Footnotes */
+.ent-footnotes {
+  padding: 32px 0 48px;
+  border-top: 1px solid #d2d2d7;
+}
+.ent-footnotes p {
+  font-size: 12px;
+  color: #6e6e73;
+  margin: 0 0 8px;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .ent-card-inner,
+  .ent-reverse .ent-card-inner,
+  .ent-one-card {
+    flex-direction: column;
+    gap: 32px;
+  }
+  .ent-card-img-wrap,
+  .ent-one-img-wrap {
+    max-width: 100%;
+  }
+  .ent-one-card {
+    padding: 32px;
+  }
+  .ent-service-card {
+    padding: 48px 0;
+  }
+}

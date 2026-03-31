@@ -19,7 +19,6 @@ export default function Hero() {
           src="/images/iphones/hero_iphone_family__fuz5j2v5xx6y_mediumtall_2x.jpg"
           alt="iPhone 17 family"
           className="apple-hero-img-placeholder"
-          style={{ marginTop: "-20px" }}
         />
       </div>
     </section>
