@@ -1,1 +1,73 @@
-/* Apple clone — component overrides live in index.css */
+/* Apple clone — cross-page responsive overrides */
+
+@media (max-width: 734px) {
+  :where(
+    .iphone-buy-card,
+    .iphone-lineup-card,
+    .iphone-feature-card,
+    .ipad-buy-card,
+    .ipad-lineup-card,
+    .ipad-feature-card,
+    .mac-lineup-card,
+    .mac-buy-card,
+    .mac-feature-card,
+    .watch-model-card,
+    .watch-benefit-card,
+    .watch-feature-card,
+    .watch-companion-card,
+    .store-card,
+    .store-info-card,
+    .store-card-featured,
+    .store-rail-compact .store-card,
+    .store-rail-compact .store-card-featured
+  ) {
+    flex-basis: 82vw !important;
+  }
+
+  :where(
+    .tvh-showcase-card,
+    .tvh-stage-card,
+    .tvh-reason-card,
+    .apple-product-card
+  ) {
+    min-height: 440px !important;
+  }
+
+  :where([class$="-card"], [class*="-card "], .store-card, .store-info-card) {
+    border-radius: 18px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  :where(
+    .iphone-buy-card,
+    .iphone-lineup-card,
+    .iphone-feature-card,
+    .ipad-buy-card,
+    .ipad-lineup-card,
+    .ipad-feature-card,
+    .mac-lineup-card,
+    .mac-buy-card,
+    .mac-feature-card,
+    .watch-model-card,
+    .watch-benefit-card,
+    .watch-feature-card,
+    .watch-companion-card,
+    .store-card,
+    .store-info-card,
+    .store-card-featured,
+    .store-rail-compact .store-card,
+    .store-rail-compact .store-card-featured
+  ) {
+    flex-basis: 78vw !important;
+  }
+
+  :where(
+    .tvh-showcase-card,
+    .tvh-stage-card,
+    .tvh-reason-card,
+    .apple-product-card
+  ) {
+    min-height: 380px !important;
+  }
+}

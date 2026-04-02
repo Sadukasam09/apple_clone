@@ -59,6 +59,40 @@
 @media (max-width: 480px) {
   :root {
     --apple-page-gutter-mobile: 24px;
+    --apple-card-radius: 22px;
+    --apple-card-radius-compact: 18px;
+  }
+}
+
+@media (max-width: 734px) {
+  :root {
+    --apple-card-radius: 24px;
+    --apple-card-radius-compact: 20px;
+  }
+
+  :where([class$="-card"], [class*="-card "], .store-card, .store-info-card) {
+    border-radius: min(var(--apple-card-radius-compact), 20px);
+  }
+
+  :where(
+    .iphone-buy-card,
+    .iphone-lineup-card,
+    .iphone-feature-card,
+    .ipad-buy-card,
+    .ipad-lineup-card,
+    .ipad-feature-card,
+    .mac-lineup-card,
+    .mac-buy-card,
+    .mac-feature-card,
+    .watch-model-card,
+    .watch-benefit-card,
+    .watch-feature-card,
+    .watch-companion-card,
+    .store-card,
+    .store-info-card,
+    .store-card-featured
+  ) {
+    flex-basis: 84vw;
   }
 }
 
