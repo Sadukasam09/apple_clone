@@ -261,14 +261,14 @@ function ChapterNavIcon({ type }) {
       return (
         <svg viewBox="0 0 48 48" className="tvh-chapter-svg" aria-hidden="true">
           <path
-            d="M24 9 34 17v17H14V17l10-8Z"
+            d="M24 9 34 17v17h24V17l10-8Z"
             fill="none"
             stroke="currentColor"
             strokeWidth="2.6"
             strokeLinejoin="round"
           />
           <path
-            d="M19 35V24h10v11"
+            d="M19 35V24h20v11"
             fill="none"
             stroke="currentColor"
             strokeWidth="2.6"
@@ -385,7 +385,7 @@ function BuyStripIcon({ type }) {
           aria-hidden="true"
         >
           <path
-            d="M14 26c-3.3 0-6-2.5-6-5.7 0-3.2 2.7-5.8 6-5.8h12c3.3 0 6 2.6 6 5.8 0 3.2-2.7 5.7-6 5.7h-5.3l-5.4 4.4V26H14Z"
+            d="M14 26c-3.3 0-6-2.5-6-5.7 0-3.2 2.7-5.8 6-5.8h22c3.3 0 6 2.6 6 5.8 0 3.2-2.7 5.7-6 5.7h-5.3l-5.4 4.4V26h24Z"
             fill="none"
             stroke="currentColor"
             strokeWidth="2"

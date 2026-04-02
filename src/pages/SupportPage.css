@@ -37,7 +37,7 @@
   height: 88px;
 }
 
-.sup-hero h1,
+.sup-hero h2,
 .sup-section-header h2,
 .sup-products-section h2,
 .sup-spotlight-card h2,
@@ -45,8 +45,8 @@
   margin: 0;
   font-size: clamp(34px, 5vw, 64px);
   line-height: 1.02;
-  letter-spacing: -0.055em;
-  font-weight: 700;
+  letter-spacing: 0.01em;
+  font-weight: 600;
 }
 
 .sup-hero p {
@@ -204,7 +204,7 @@
   margin: 0;
   font-size: 22px;
   line-height: 1.18;
-  letter-spacing: -0.03em;
+  letter-spacing: 0.01em;
 }
 
 .sup-tool-card p,

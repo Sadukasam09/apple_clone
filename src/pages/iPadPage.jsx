@@ -1,7 +1,5 @@
 import "./iPadPage.css";
 
-const appleAsset = (path) => `https://www.apple.com${path}`;
-
 const chapterNavItems = [
   {
     label: "iPad Pro",
@@ -122,9 +120,8 @@ const whyBuyCards = [
     label: "Ways to Buy",
     title: "Monthly payment options available.",
     copy: "Choose an easy way to finance with convenient payment options.",
-    image: appleAsset(
-      "/v/ipad/home/cf/images/overview/why-apple/ways_to_buy__f1j7cxfmvs82_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/ipad/home/cf/images/overview/why-apple/ways_to_buy__f1j7cxfmvs82_large.jpg",
     href: "https://www.apple.com/in/shop/goto/ways_to_buy",
   },
   {
@@ -132,9 +129,8 @@ const whyBuyCards = [
     label: "Apple Trade In",
     title: "Save with Apple Trade In.",
     copy: "Get credit towards your next iPad when you trade in an eligible device at an Apple Store.",
-    image: appleAsset(
-      "/v/ipad/home/cf/images/overview/why-apple/trade_in__byyqhgbmgzuu_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/ipad/home/cf/images/overview/why-apple/trade_in__byyqhgbmgzuu_large.jpg",
     href: "https://www.apple.com/in/shop/goto/trade_in",
   },
   {
@@ -142,9 +138,8 @@ const whyBuyCards = [
     label: "Education Pricing",
     title: "Save on a new iPad with education pricing.",
     copy: "Available to college students and educators.",
-    image: appleAsset(
-      "/v/ipad/home/cf/images/overview/why-apple/education__cfy0vhcfpmwy_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/ipad/home/cf/images/overview/why-apple/education__cfy0vhcfpmwy_large.jpg",
     href: "https://www.apple.com/in/shop/goto/educationrouting",
   },
   {
@@ -152,9 +147,8 @@ const whyBuyCards = [
     label: "Personal Setup",
     title: "Meet your new iPad with Personal Setup.",
     copy: "Jump into online sessions with a Specialist to set up your iPad and discover new features.",
-    image: appleAsset(
-      "/v/ipad/home/cf/images/overview/why-apple/personal_setup__eujkfxdmrmqy_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/ipad/home/cf/images/overview/why-apple/personal_setup__eujkfxdmrmqy_large.jpg",
     href: "https://www.apple.com/in/shop/goto/personal_setup",
   },
   {
@@ -162,9 +156,8 @@ const whyBuyCards = [
     label: "Delivery and Pickup",
     title: "Get flexible delivery and easy pickup.",
     copy: "Get free delivery or pickup at your Apple Store.",
-    image: appleAsset(
-      "/v/ipad/home/cf/images/overview/why-apple/delivery__gbrpvjpmdyiq_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/ipad/home/cf/images/overview/why-apple/delivery__gbrpvjpmdyiq_large.jpg",
     href: "https://www.apple.com/in/shop/goto/shipping_pickup",
   },
   {
@@ -172,9 +165,8 @@ const whyBuyCards = [
     label: "Engraving",
     title: "Personalise your iPad for free.",
     copy: "Engrave your new iPad with a mix of emoji, names, initials and numbers.",
-    image: appleAsset(
-      "/v/ipad/home/cf/images/overview/why-apple/engraving__ddfbjkhgk1iq_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/ipad/home/cf/images/overview/why-apple/engraving__ddfbjkhgk1iq_large.jpg",
     href: "https://www.apple.com/in/shop/goto/help/engraving_and_gift_wrap",
   },
   {
@@ -182,9 +174,8 @@ const whyBuyCards = [
     label: "Guided Shopping",
     title: "Shop live with a Specialist.",
     copy: "Let us guide you live over video and answer all of your questions.",
-    image: appleAsset(
-      "/v/ipad/home/cf/images/overview/why-apple/guided_shopping__dtyqe25ek66y_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/ipad/home/cf/images/overview/why-apple/guided_shopping__dtyqe25ek66y_large.jpg",
     href: "https://contactretail.apple.com/?ap=com&c=in&l=en&pg=COM:retailStore",
   },
   {
@@ -192,9 +183,8 @@ const whyBuyCards = [
     label: "Apple Store App",
     title: "Explore a shopping experience designed around you.",
     copy: "Use the Apple Store app to get a more personal way to shop.",
-    image: appleAsset(
-      "/v/ipad/home/cf/images/overview/why-apple/apple_store_app__bj2xb5hfqf2e_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/ipad/home/cf/images/overview/why-apple/apple_store_app__bj2xb5hfqf2e_large.jpg",
     href: "https://apps.apple.com/in/app/apple-store/id375380948",
   },
 ];
@@ -204,63 +194,56 @@ const getToKnowCards = [
     id: "ipados-apps",
     label: "iPadOS + Apps",
     title: "Flexible windowing.\nA multitasker’s delight.",
-    image: appleAsset(
-      "/v/ipad/home/cf/images/overview/consider/ipados__bm50r6ftdca2_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/ipad/home/cf/images/overview/consider/ipados__bm50r6ftdca2_large.jpg",
     tone: "dark",
   },
   {
     id: "apple-intelligence",
     label: "Apple Intelligence",
     title: "Effortlessly helpful every day.",
-    image: appleAsset(
-      "/v/ipad/home/cf/images/overview/consider/apple_intelligence__bqkx185k78qu_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/ipad/home/cf/images/overview/consider/apple_intelligence__bqkx185k78qu_large.jpg",
     tone: "dark",
   },
   {
     id: "productivity",
     label: "Productivity",
     title: "Your workplace can be any place.",
-    image: appleAsset(
-      "/v/ipad/home/cf/images/overview/consider/productivity__e2ufnttgtbqy_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/ipad/home/cf/images/overview/consider/productivity__e2ufnttgtbqy_large.jpg",
     tone: "light",
   },
   {
     id: "creativity",
     label: "Creativity",
     title: "Take your inner artist out and about.",
-    image: appleAsset(
-      "/v/ipad/home/cf/images/overview/consider/creativity__cxqmk4zy9tyu_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/ipad/home/cf/images/overview/consider/creativity__cxqmk4zy9tyu_large.jpg",
     tone: "dark",
   },
   {
     id: "learning",
     label: "Learning",
     title: "Your classroom can be anywhere.",
-    image: appleAsset(
-      "/v/ipad/home/cf/images/overview/consider/learning__fjgnijmv6gue_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/ipad/home/cf/images/overview/consider/learning__fjgnijmv6gue_large.jpg",
     tone: "light",
   },
   {
     id: "entertainment",
     label: "Entertainment",
     title: "Kick back. Tune in. Game on.",
-    image: appleAsset(
-      "/v/ipad/home/cf/images/overview/consider/entertainment__c1gixzdyv4iu_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/ipad/home/cf/images/overview/consider/entertainment__c1gixzdyv4iu_large.jpg",
     tone: "dark",
   },
   {
     id: "apple-pencil",
     label: "Apple Pencil",
     title: "Dream it up.\nJot it down.",
-    image: appleAsset(
-      "/v/ipad/home/cf/images/overview/consider/apple_pencil__fv9eodmg26uq_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/ipad/home/cf/images/overview/consider/apple_pencil__fv9eodmg26uq_large.jpg",
     tone: "light",
   },
 ];
@@ -291,25 +274,22 @@ const significantStories = [
     id: "iphone",
     title: "iPad and iPhone",
     copy: "iPad is perfect for taking the content you capture on iPhone and bringing it to life on an immersive canvas. You can shoot videos and photos on your iPhone and use the large display of your iPad to edit, add animations and more. You can also pick up wherever you left off with Handoff.",
-    image: appleAsset(
-      "/v/ipad/home/cf/images/overview/significant_others/ipad_iphone__cmg5iqw7yduu_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/ipad/home/cf/images/overview/significant_others/ipad_iphone__cmg5iqw7yduu_large.jpg",
   },
   {
     id: "mac",
     title: "iPad and Mac",
     copy: "With Sidecar, you can extend or mirror your Mac workspace by using iPad as a second display. And with Universal Control, you can use a single mouse and keyboard to move between your Mac and iPad seamlessly.",
-    image: appleAsset(
-      "/v/ipad/home/cf/images/overview/significant_others/ipad_mac__db2d5kfwlnsy_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/ipad/home/cf/images/overview/significant_others/ipad_mac__db2d5kfwlnsy_large.jpg",
   },
   {
     id: "watch",
     title: "iPad and Apple Watch",
     copy: "Keep an eye on notifications, timers and activity on Apple Watch while your creative and everyday work continues on iPad across the same Apple ecosystem.",
-    image: appleAsset(
-      "/v/ipad/home/cf/images/overview/significant_others/ipad_watch__dq8e4j5g5oyy_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/ipad/home/cf/images/overview/significant_others/ipad_watch__dq8e4j5g5oyy_large.jpg",
   },
 ];
 
@@ -402,7 +382,7 @@ function IPadPage() {
       </div>
 
       <header className="ipad-header ipad-shell">
-        <h1 className="ipad-header-title">iPad</h1>
+        <h2 className="ipad-header-title">iPad</h2>
       </header>
 
       <nav className="ipad-chapternav" aria-label="iPad family">

@@ -63,7 +63,7 @@
   margin: 0;
   font-size: clamp(56px, 8vw, 92px);
   line-height: 0.94;
-  letter-spacing: -0.075em;
+  letter-spacing: 0.01em;
 }
 
 .ipad-chapternav {
@@ -156,7 +156,7 @@
   margin: 0;
   font-size: clamp(38px, 5.2vw, 72px);
   line-height: 0.98;
-  letter-spacing: -0.065em;
+  letter-spacing: 0.01em;
 }
 
 .ipad-section-head-solo {
@@ -271,7 +271,7 @@
   margin: 0;
   font-size: clamp(24px, 2.4vw, 34px);
   line-height: 1.08;
-  letter-spacing: -0.04em;
+  letter-spacing: 0.01em;
 }
 
 .ipad-lineup-rail {
@@ -568,7 +568,7 @@
   margin: 0 0 30px;
   font-size: clamp(56px, 8vw, 92px);
   line-height: 0.94;
-  letter-spacing: -0.075em;
+  letter-spacing: 0.01em;
 }
 
 .ipad-router-grid {

@@ -133,7 +133,7 @@ export default function SupportPage() {
             src="https://support.apple.com/content/dam/edam/applecare/images/en_US/psp/psp_heroes/support-home-apple-logo-circle-blue.png"
             alt="Apple Support"
           />
-          <h1>Need help? Start here.</h1>
+          <h2>Need help? Start here.</h2>
           <p>
             Search articles, explore product help and reach trusted Apple
             support resources from one place.

@@ -9,11 +9,18 @@
   background: #fff;
   color: #1d1d1f;
   font-family:
-    "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
-    "Helvetica Neue", Helvetica, Arial, sans-serif;
+    "SF Pro Display Custom",
+    "SF Pro Display",
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Text",
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif;
   font-size: 17px;
   line-height: 1.47059;
-  letter-spacing: -0.022em;
+  letter-spacing: 0.01em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -27,9 +34,9 @@
 .pp-h2 {
   margin: 0;
   font-size: clamp(28px, 3.2vw, 48px);
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.07;
-  letter-spacing: -0.045em;
+  letter-spacing: 0.01em;
   color: #1d1d1f;
 }
 .pp-text-link {
@@ -67,9 +74,9 @@
 }
 .pp-hero-title {
   font-size: clamp(44px, 6.5vw, 80px);
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1;
-  letter-spacing: -0.06em;
+  letter-spacing: 0.01em;
   color: #1d1d1f;
   margin: 0;
 }
@@ -127,10 +134,10 @@
   background: #bf4800;
   color: #fff;
   font-size: 8px;
-  font-weight: 700;
+  font-weight: 600;
   padding: 1px 4px;
   border-radius: 4px;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.01em;
   line-height: 1.4;
 }
 
@@ -245,16 +252,16 @@
   background: #bf4800;
   color: #fff;
   font-size: 9px;
-  font-weight: 700;
+  font-weight: 600;
   padding: 2px 5px;
   border-radius: 4px;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.01em;
   margin-bottom: 2px;
   align-self: flex-start;
 }
 .pp-card-name {
   font-size: clamp(18px, 1.6vw, 22px);
-  font-weight: 700;
+  font-weight: 600;
   color: #1d1d1f;
   line-height: 1.15;
   margin: 0;
@@ -351,7 +358,7 @@
 }
 .pp-why-card-title {
   font-size: 19px;
-  font-weight: 700;
+  font-weight: 600;
   margin: 0 0 8px;
   color: #1d1d1f;
 }
@@ -402,9 +409,9 @@
 }
 .pp-know-card-cat {
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.01em;
   margin: 0 0 6px;
   color: rgba(255, 255, 255, 0.7);
 }
@@ -413,7 +420,7 @@
 }
 .pp-know-card-title {
   font-size: 17px;
-  font-weight: 700;
+  font-weight: 600;
   margin: 0;
   line-height: 1.25;
   color: #fff;
@@ -445,7 +452,7 @@
 }
 .pp-essentials-card-title {
   font-size: clamp(17px, 1.8vw, 22px);
-  font-weight: 700;
+  font-weight: 600;
   margin: 0 0 8px;
   color: #1d1d1f;
 }
@@ -502,12 +509,12 @@
   font-weight: 600;
   color: #6e6e73;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.01em;
   margin: 0 0 8px;
 }
 .pp-others-card-title {
   font-size: clamp(17px, 1.8vw, 22px);
-  font-weight: 700;
+  font-weight: 600;
   margin: 0 0 12px;
   color: #1d1d1f;
   line-height: 1.1;

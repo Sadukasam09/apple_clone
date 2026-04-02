@@ -1,79 +1,67 @@
 import { useEffect, useRef, useState } from "react";
 import "./WatchPage.css";
 
-const appleAsset = (path) => `https://www.apple.com${path}`;
-
 const chapterNavItems = [
   {
     label: "Series 11",
     href: "https://www.apple.com/in/apple-watch-series-11/",
-    image: appleAsset(
-      "/assets-www/en_WW/watch/chapter_nav/watch_s11_f3d43534c.svg",
-    ),
+    image:
+      "https://www.apple.com/assets-www/en_WW/watch/chapter_nav/watch_s11_f3d43534c.svg",
   },
   {
     label: "SE 3",
     href: "https://www.apple.com/in/apple-watch-se-3/",
-    image: appleAsset(
-      "/assets-www/en_WW/watch/chapter_nav/watch_se_5af4fbe6c.svg",
-    ),
+    image:
+      "https://www.apple.com/assets-www/en_WW/watch/chapter_nav/watch_se_5af4fbe6c.svg",
   },
   {
     label: "Ultra 3",
     href: "https://www.apple.com/in/apple-watch-ultra-3/",
-    image: appleAsset(
-      "/assets-www/en_WW/watch/chapter_nav/watch_ultra_c6d26b96b.svg",
-    ),
+    image:
+      "https://www.apple.com/assets-www/en_WW/watch/chapter_nav/watch_ultra_c6d26b96b.svg",
   },
   {
     label: "Nike",
     href: "https://www.apple.com/in/apple-watch-nike/",
-    image: appleAsset(
-      "/assets-www/en_WW/watch/chapter_nav/watch_nike_095f6983c.svg",
-    ),
+    image:
+      "https://www.apple.com/assets-www/en_WW/watch/chapter_nav/watch_nike_095f6983c.svg",
   },
   {
     label: "Compare",
     href: "https://www.apple.com/in/watch/compare/",
-    image: appleAsset(
-      "/assets-www/en_WW/watch/chapter_nav/compare_watch_6b6259c4a.svg",
-    ),
+    image:
+      "https://www.apple.com/assets-www/en_WW/watch/chapter_nav/compare_watch_6b6259c4a.svg",
   },
   {
     label: "Straps",
     badge: "New",
     href: "https://www.apple.com/in/shop/goto/watch/bands",
-    image: appleAsset(
-      "/assets-www/en_WW/watch/chapter_nav/watch_bands_0e3eb7a2d.svg",
-    ),
+    image:
+      "https://www.apple.com/assets-www/en_WW/watch/chapter_nav/watch_bands_0e3eb7a2d.svg",
   },
   {
     label: "Accessories",
     href: "https://www.apple.com/in/shop/goto/watch/accessories",
-    image: appleAsset(
-      "/assets-www/en_WW/watch/chapter_nav/accessories_watch_6ad7b5f53.svg",
-    ),
+    image:
+      "https://www.apple.com/assets-www/en_WW/watch/chapter_nav/accessories_watch_6ad7b5f53.svg",
   },
   {
     label: "Apple Fitness+",
     href: "https://www.apple.com/in/apple-fitness-plus/",
-    image: appleAsset(
-      "/assets-www/en_WW/watch/chapter_nav/fitness_plus_5e817af2a.svg",
-    ),
+    image:
+      "https://www.apple.com/assets-www/en_WW/watch/chapter_nav/fitness_plus_5e817af2a.svg",
   },
   {
     label: "Shop Watch",
     href: "https://www.apple.com/in/shop/goto/buy_watch",
-    image: appleAsset(
-      "/assets-www/en_WW/watch/chapter_nav/shop_watch_4b61b477b.svg",
-    ),
+    image:
+      "https://www.apple.com/assets-www/en_WW/watch/chapter_nav/shop_watch_4b61b477b.svg",
   },
   {
     label: "watchOS 26",
     href: "https://www.apple.com/in/os/watchos/",
-    image: appleAsset(
-      "/assets-www/en_WW/watch/chapter_nav/watchos_cfaae638b.svg",
-    ),
+    image:
+      "https://www.apple.com/assets-www/en_WW/watch/chapter_nav/watchos_cfaae638b.svg",
   },
 ];
 
@@ -84,9 +72,8 @@ const lineupModels = [
     tagline: "The ultimate watch for a healthy life.",
     finish: "41 mm or 45 mm case. Aluminium or titanium.",
     price: "From \u20b946,900.00**",
-    image: appleAsset(
-      "/assets-www/en_WW/watch/product_tile/large/s11_01ae61a6b_2x.png",
-    ),
+    image:
+      "https://www.apple.com/assets-www/en_WW/watch/product_tile/large/s11_01ae61a6b_2x.png",
     learnHref: "https://www.apple.com/in/apple-watch-series-11/",
     buyHref:
       "https://www.apple.com/in/shop/goto/buy_watch/apple_watch_series_11",
@@ -106,9 +93,8 @@ const lineupModels = [
     tagline: "Essential health features at a great value.",
     finish: "40 mm or 44 mm aluminium case.",
     price: "From \u20b925,900.00**",
-    image: appleAsset(
-      "/assets-www/en_WW/watch/product_tile/large/se_32690d524_2x.png",
-    ),
+    image:
+      "https://www.apple.com/assets-www/en_WW/watch/product_tile/large/se_32690d524_2x.png",
     learnHref: "https://www.apple.com/in/apple-watch-se-3/",
     buyHref: "https://www.apple.com/in/shop/goto/buy_watch/apple_watch_se",
     colors: ["#d9d6d1", "#2d2d31"],
@@ -119,9 +105,8 @@ const lineupModels = [
     tagline: "The ultimate sports and adventure watch.",
     finish: "49 mm titanium case with precision dual-frequency GPS.",
     price: "From \u20b989,900.00**",
-    image: appleAsset(
-      "/assets-www/en_IN/watch/product_tile/large/u3_6b7e98fe2_2x.png",
-    ),
+    image:
+      "https://www.apple.com/assets-www/en_IN/watch/product_tile/large/u3_6b7e98fe2_2x.png",
     learnHref: "https://www.apple.com/in/apple-watch-ultra-3/",
     buyHref: "https://www.apple.com/in/shop/goto/buy_watch/apple_watch_ultra_3",
     colors: ["#c9b393", "#3d515b"],
@@ -133,47 +118,41 @@ const whyBuyCards = [
     title: "Ways to Buy",
     description:
       "Choose a way to pay, including convenient monthly payment options.",
-    image: appleAsset(
-      "/assets-www/en_WW/watch/incentive_card/large/financing_04ab3d017_2x.jpg",
-    ),
+    image:
+      "https://www.apple.com/assets-www/en_WW/watch/incentive_card/large/financing_04ab3d017_2x.jpg",
   },
   {
     title: "Delivery and Pickup",
     description: "Enjoy free delivery or easy pickup at your Apple Store.",
-    image: appleAsset(
-      "/assets-www/en_WW/watch/incentive_card/large/delivery_and_pickup_2a582422f_2x.jpg",
-    ),
+    image:
+      "https://www.apple.com/assets-www/en_WW/watch/incentive_card/large/delivery_and_pickup_2a582422f_2x.jpg",
   },
   {
     title: "Personal Setup",
     description:
       "Set up your new Apple Watch with an online Specialist session.",
-    image: appleAsset(
-      "/assets-www/en_WW/watch/incentive_card/large/personal_setup_df47efc29_2x.jpg",
-    ),
+    image:
+      "https://www.apple.com/assets-www/en_WW/watch/incentive_card/large/personal_setup_df47efc29_2x.jpg",
   },
   {
     title: "Guided Video Shopping",
     description:
       "Shop live with a Specialist over video and get answers in real time.",
-    image: appleAsset(
-      "/assets-www/en_IN/watch/incentive_card/large/specialist_81772a16c_2x.jpg",
-    ),
+    image:
+      "https://www.apple.com/assets-www/en_IN/watch/incentive_card/large/specialist_81772a16c_2x.jpg",
   },
   {
     title: "Apple Trade In",
     description:
       "Save on a new Apple Watch when you trade in an eligible device at an Apple Store.",
-    image: appleAsset(
-      "/assets-www/en_WW/watch/incentive_card/large/trade_in_d7fa0dfa7_2x.jpg",
-    ),
+    image:
+      "https://www.apple.com/assets-www/en_WW/watch/incentive_card/large/trade_in_d7fa0dfa7_2x.jpg",
   },
   {
     title: "Apple Store App",
     description: "Get a more personal way to shop with the Apple Store app.",
-    image: appleAsset(
-      "/assets-www/en_WW/watch/incentive_card/large/store_app_fba803b7c_2x.jpg",
-    ),
+    image:
+      "https://www.apple.com/assets-www/en_WW/watch/incentive_card/large/store_app_fba803b7c_2x.jpg",
   },
 ];
 
@@ -182,65 +161,57 @@ const featureCards = [
     category: "Health",
     title: "Knows you.\nInsights and out.",
     tone: "dark",
-    image: appleAsset(
-      "/assets-www/en_WW/watch/feature_card/large/health_a1aa3fe20_2x.jpg",
-    ),
+    image:
+      "https://www.apple.com/assets-www/en_WW/watch/feature_card/large/health_a1aa3fe20_2x.jpg",
   },
   {
     category: "Fitness",
     title: "Unlimited motivation.",
     tone: "dark",
-    image: appleAsset(
-      "/assets-www/en_IN/watch1/feature_card/large/fitness_cab5dfca5_2x.jpg",
-    ),
+    image:
+      "https://www.apple.com/assets-www/en_IN/watch2/feature_card/large/fitness_cab5dfca5_2x.jpg",
   },
   {
     category: "Safety",
     title: "Keep help close at hand.",
     tone: "light",
-    image: appleAsset(
-      "/assets-www/en_WW/watch/feature_card/large/safety_b3e0fe93f_2x.jpg",
-    ),
+    image:
+      "https://www.apple.com/assets-www/en_WW/watch/feature_card/large/safety_b3e0fe93f_2x.jpg",
   },
   {
     category: "Apple Watch Ultra 3",
     title: "The ultimate sports\nand adventure watch.",
     tone: "dark",
-    image: appleAsset(
-      "/assets-www/en_IN/watch1/feature_card/large/adventure_43270ba52_2x.jpg",
-    ),
+    image:
+      "https://www.apple.com/assets-www/en_IN/watch2/feature_card/large/adventure_43270ba52_2x.jpg",
   },
   {
     category: "Connectivity",
     title: "The right call for\nstaying in touch.",
     tone: "light",
-    image: appleAsset(
-      "/assets-www/en_IN/watch1/feature_card/large/connectivity_9f98b7daf_2x.jpg",
-    ),
+    image:
+      "https://www.apple.com/assets-www/en_IN/watch2/feature_card/large/connectivity_9f98b7daf_2x.jpg",
   },
   {
     category: "Personalisation",
     title: "Make it you-nique.",
     tone: "dark",
-    image: appleAsset(
-      "/assets-www/en_WW/watch/feature_card/large/personalization_186f896b8_2x.jpg",
-    ),
+    image:
+      "https://www.apple.com/assets-www/en_WW/watch/feature_card/large/personalization_186f896b8_2x.jpg",
   },
   {
     category: "Apple Watch For Your Kids",
     title: "Independence for them.\nPeace of mind for you.",
     tone: "light",
-    image: appleAsset(
-      "/assets-www/en_IN/watch1/feature_card/large/family_setup_322cbddb5_2x.jpg",
-    ),
+    image:
+      "https://www.apple.com/assets-www/en_IN/watch2/feature_card/large/family_setup_322cbddb5_2x.jpg",
   },
   {
     category: "Apple Watch + iPhone",
     title: "Dynamic duo.",
     tone: "light",
-    image: appleAsset(
-      "/assets-www/en_WW/watch/feature_card/large/watch_and_iphone_44eb2d765_2x.jpg",
-    ),
+    image:
+      "https://www.apple.com/assets-www/en_WW/watch/feature_card/large/watch_and_iphone_44eb2d765_2x.jpg",
   },
 ];
 
@@ -251,9 +222,8 @@ const companionStories = [
     teaser: "Start a workout on your wrist and bring it to life on iPhone.",
     description:
       "Combining Apple Watch and iPhone opens up a world of features. You can start a cycling workout on your watch and see your metrics automatically appear as a Live Activity on your iPhone.",
-    image: appleAsset(
-      "/assets-www/en_IN/watch/image_accordion/large/watch_and_iphone_963309f31_2x.jpg",
-    ),
+    image:
+      "https://www.apple.com/assets-www/en_IN/watch/image_accordion/large/watch_and_iphone_963309f31_2x.jpg",
     href: "https://www.apple.com/in/iphone/",
   },
   {
@@ -262,9 +232,8 @@ const companionStories = [
     teaser: "Control your listening without reaching for your phone.",
     description:
       "Apple Watch and AirPods are made for each other. Control your AirPods from your wrist and let your watch automatically switch your audio as you move between devices.",
-    image: appleAsset(
-      "/assets-www/en_IN/watch/image_accordion/large/watch_and_airpods_d359e9f1d_2x.jpg",
-    ),
+    image:
+      "https://www.apple.com/assets-www/en_IN/watch/image_accordion/large/watch_and_airpods_d359e9f1d_2x.jpg",
     href: "https://www.apple.com/in/airpods/",
   },
   {
@@ -273,9 +242,8 @@ const companionStories = [
     teaser: "See live metrics during every Fitness+ session.",
     description:
       "Apple Fitness+ is a fitness and wellness service built for Apple Watch. With thousands of workouts and meditations, it is easy to find something you love.",
-    image: appleAsset(
-      "/assets-www/en_IN/watch/image_accordion/large/watch_and_fitness_plus_f19ef6975_2x.jpg",
-    ),
+    image:
+      "https://www.apple.com/assets-www/en_IN/watch/image_accordion/large/watch_and_fitness_plus_f19ef6975_2x.jpg",
     href: "https://www.apple.com/in/apple-fitness-plus/",
   },
 ];
@@ -549,7 +517,7 @@ export default function WatchPage() {
       <header className="watch-hero">
         <div className="watch-shell watch-hero-grid">
           <div className="watch-hero-copy">
-            <h1>Apple Watch</h1>
+            <h2>Apple Watch</h2>
             <p className="watch-hero-lede">
               Apple Watch is the ultimate device for a healthy life. Available
               in three models: Apple Watch Series 11, Apple Watch SE 3 and Apple
@@ -740,9 +708,9 @@ export default function WatchPage() {
             </div>
             <div className="watch-essentials-media">
               <img
-                src={appleAsset(
-                  "/assets-www/en_WW/watch/01_banner_card_1up/large/essentials_319dfa557_2x.jpg",
-                )}
+                src={
+                  "https://www.apple.com/assets-www/en_WW/watch/01_banner_card_1up/large/essentials_319dfa557_2x.jpg"
+                }
                 alt="Apple Watch straps in fresh colours"
                 loading="lazy"
               />

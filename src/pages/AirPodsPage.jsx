@@ -1,50 +1,38 @@
 import { useState } from "react";
 import "./AirPodsPage.css";
 
-const appleAsset = (path) => `https://www.apple.com${path}`;
-
 /* ── Color swatches for AirPods Max 2 ── */
 const maxColors = [
   {
     id: "purple",
     color: "#7E5BC1",
     label: "Purple",
-    src: appleAsset(
-      "/v/airpods/ae/images/overview/airpods_max_purple__d9y3g3n7cnyq_large.png",
-    ),
+    src: "https://www.apple.com/v/airpods/ae/images/overview/airpods_max_purple__d9y3g3n7cnyq_large.png",
   },
   {
     id: "stardust",
     color: "#E3DDCF",
     label: "Stardust",
     border: "rgba(0,0,0,0.2)",
-    src: appleAsset(
-      "/v/airpods/ae/images/overview/airpods_max_stardust__l9lr6719rmaa_large.png",
-    ),
+    src: "https://www.apple.com/v/airpods/ae/images/overview/airpods_max_stardust__l9lr6719rmaa_large.png",
   },
   {
     id: "orange",
     color: "#E8632A",
     label: "Orange",
-    src: appleAsset(
-      "/v/airpods/ae/images/overview/airpods_max_orange__gln3ifz5o9ei_large.png",
-    ),
+    src: "https://www.apple.com/v/airpods/ae/images/overview/airpods_max_orange__gln3ifz5o9ei_large.png",
   },
   {
     id: "blue",
     color: "#3B79C0",
     label: "Blue",
-    src: appleAsset(
-      "/v/airpods/ae/images/overview/airpods_max_blue__fsfaleh1smuu_large.png",
-    ),
+    src: "https://www.apple.com/v/airpods/ae/images/overview/airpods_max_blue__fsfaleh2smuu_large.png",
   },
   {
     id: "midnight",
     color: "#1c1c1e",
     label: "Midnight",
-    src: appleAsset(
-      "/v/airpods/ae/images/overview/airpods_max_black__x3byrd2venmu_large.png",
-    ),
+    src: "https://www.apple.com/v/airpods/ae/images/overview/airpods_max_black__x3byrd2venmu_large.png",
   },
 ];
 
@@ -168,7 +156,9 @@ const compareModels = [
       },
       { text: "Adaptive Audio and Transparency mode" },
       { text: "Personalised Spatial Audio with dynamic head tracking" },
-      { text: "Lossless Audio and ultra\u2011low latency audio via USB\u2011C" },
+      {
+        text: "Lossless Audio and ultra\u2011low latency audio via USB\u2011C",
+      },
       { unavailable: "Heart rate sensing unavailable" },
       { text: "Loud Sound Reduction" },
       { text: "Live Translation" },
@@ -190,11 +180,9 @@ const featureCards = [
     title: "Track your heart rate and calories burned during workouts.",
     expand:
       "With AirPods Pro 3, you can keep track of your heart rate and calories burned during workouts. Using LEDs that pulse invisible light 256 times per second — and sensor fusion from the accelerometers — AirPods Pro 3 give you incredibly accurate data from the treadmill to the trail.",
-    image: appleAsset(
-      "/in/airpods/images/overview/consider/card_heart_rate_sensing__exas9s71qo4m_large.jpg",
-    ),
-    imgAlt:
-      "AirPods Pro 3 next to iPhone with heart rate monitor on screen",
+    image:
+      "https://www.apple.com/in/airpods/images/overview/consider/card_heart_rate_sensing__exas9s71qo4m_large.jpg",
+    imgAlt: "AirPods Pro 3 next to iPhone with heart rate monitor on screen",
     wide: false,
   },
   {
@@ -204,9 +192,8 @@ const featureCards = [
     caption: "Available in selected languages and regions.",
     expand:
       "Live Translation lets you communicate across languages like never before. While having a conversation with someone, their speech is automatically translated into your preferred language with AirPods Max 2, AirPods Pro 3 or AirPods 4 with Active Noise Cancellation.",
-    image: appleAsset(
-      "/v/airpods/ae/images/overview/consider/card_live_translation__ep68h9wscbee_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/airpods/ae/images/overview/consider/card_live_translation__ep68h9wscbee_large.jpg",
     imgAlt: "Live Translation icon on iPhone",
     wide: false,
   },
@@ -216,9 +203,8 @@ const featureCards = [
     title: "Control what you hear. And what you don\u2019t.",
     expand:
       "Active Noise Cancellation reduces unwanted sounds so you can immerse yourself in what you\u2019re listening to or simply stay focused. And Transparency lets you comfortably hear the world around you.",
-    image: appleAsset(
-      "/v/airpods/ae/images/overview/consider/card_noise_cancellation__bcl69t06noci_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/airpods/ae/images/overview/consider/card_noise_cancellation__bcl69t06noci_large.jpg",
     imgAlt: "AirPods Pro 3 with circular sound ripple",
     wide: false,
   },
@@ -228,9 +214,8 @@ const featureCards = [
     title: "Minimise your exposure to loud noise.",
     expand:
       "With AirPods Pro 3, Loud Sound Reduction minimises your exposure to loud environmental noise.",
-    image: appleAsset(
-      "/in/airpods/images/overview/consider/card_hearing_health__ss2uxyv3j5m6_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/in/airpods/images/overview/consider/card_hearing_health__ss2uxyv3j5m6_large.jpg",
     imgAlt: "Blue sound wave and Hearing Test icon",
     wide: false,
   },
@@ -240,9 +225,8 @@ const featureCards = [
     title: "Immersive sound. Fine\u2011tuned to you.",
     expand:
       "Personalised Spatial Audio brings you 3D sound suited to your specific ear shape for a theatre-like experience that surrounds you with sound.",
-    image: appleAsset(
-      "/v/airpods/ae/images/overview/consider/card_personalized_spatial_audio__d9ghs2utja82_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/airpods/ae/images/overview/consider/card_personalized_spatial_audio__d9ghs2utja82_large.jpg",
     imgAlt: "AirPods Pro 3 inserted in the ear of a dancer",
     wide: true,
   },
@@ -294,8 +278,20 @@ function CompareIcon({ type }) {
     ),
     adaptive: (
       <>
-        <path d="M29 15Q33 19 29 24" stroke="#1d1d1f" strokeWidth="2" strokeLinecap="round" opacity="0.45" />
-        <path d="M33 12Q38 19 33 26" stroke="#1d1d1f" strokeWidth="2" strokeLinecap="round" opacity="0.22" />
+        <path
+          d="M29 15Q33 19 29 24"
+          stroke="#1d1d1f"
+          strokeWidth="2"
+          strokeLinecap="round"
+          opacity="0.45"
+        />
+        <path
+          d="M33 12Q38 19 33 26"
+          stroke="#1d1d1f"
+          strokeWidth="2"
+          strokeLinecap="round"
+          opacity="0.22"
+        />
       </>
     ),
     spatial: (
@@ -315,26 +311,86 @@ function CompareIcon({ type }) {
     ),
     hearing: (
       <>
-        <path d="M28 17Q32 21 28 25" stroke="#1d1d1f" strokeWidth="2" strokeLinecap="round" opacity="0.42" />
-        <path d="M31 14Q37 21 31 28" stroke="#1d1d1f" strokeWidth="2" strokeLinecap="round" opacity="0.2" />
+        <path
+          d="M28 17Q32 21 28 25"
+          stroke="#1d1d1f"
+          strokeWidth="2"
+          strokeLinecap="round"
+          opacity="0.42"
+        />
+        <path
+          d="M31 14Q37 21 31 28"
+          stroke="#1d1d1f"
+          strokeWidth="2"
+          strokeLinecap="round"
+          opacity="0.2"
+        />
       </>
     ),
     translation: (
       <>
-        <rect x="5" y="3" width="14" height="8" rx="1.5" stroke="#1d1d1f" strokeWidth="1.5" opacity="0.4" />
-        <rect x="21" y="7" width="14" height="8" rx="1.5" stroke="#1d1d1f" strokeWidth="1.5" opacity="0.4" />
+        <rect
+          x="5"
+          y="3"
+          width="14"
+          height="8"
+          rx="1.5"
+          stroke="#1d1d1f"
+          strokeWidth="1.5"
+          opacity="0.4"
+        />
+        <rect
+          x="21"
+          y="7"
+          width="14"
+          height="8"
+          rx="1.5"
+          stroke="#1d1d1f"
+          strokeWidth="1.5"
+          opacity="0.4"
+        />
       </>
     ),
     battery: (
       <>
-        <rect x="10" y="3" width="18" height="10" rx="2" stroke="#1d1d1f" strokeWidth="1.5" opacity="0.38" />
-        <rect x="14" y="6" width="6" height="4" rx="0.5" fill="#1d1d1f" opacity="0.38" />
+        <rect
+          x="10"
+          y="3"
+          width="18"
+          height="10"
+          rx="2"
+          stroke="#1d1d1f"
+          strokeWidth="1.5"
+          opacity="0.38"
+        />
+        <rect
+          x="14"
+          y="6"
+          width="6"
+          height="4"
+          rx="0.5"
+          fill="#1d1d1f"
+          opacity="0.38"
+        />
       </>
     ),
     charging: (
       <>
-        <rect x="10" y="3" width="18" height="10" rx="2" stroke="#1d1d1f" strokeWidth="1.5" opacity="0.38" />
-        <path d="M22 3.5 L18 9 L21 9 L18 16.5 L24 8 L21 8 Z" fill="#1d1d1f" opacity="0.5" />
+        <rect
+          x="10"
+          y="3"
+          width="18"
+          height="10"
+          rx="2"
+          stroke="#1d1d1f"
+          strokeWidth="1.5"
+          opacity="0.38"
+        />
+        <path
+          d="M22 3.5 L18 9 L21 9 L18 16.5 L24 8 L21 8 Z"
+          fill="#1d1d1f"
+          opacity="0.5"
+        />
       </>
     ),
     siri: (
@@ -351,7 +407,13 @@ function CompareIcon({ type }) {
 
   if (type === "lossless") {
     return (
-      <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true" fill="none">
+      <svg
+        width="40"
+        height="40"
+        viewBox="0 0 40 40"
+        aria-hidden="true"
+        fill="none"
+      >
         <path
           d="M4 20 L9 12 L14 28 L19 8 L24 32 L29 16 L34 22"
           stroke="#1d1d1f"
@@ -364,7 +426,13 @@ function CompareIcon({ type }) {
   }
 
   return (
-    <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true" fill="none">
+    <svg
+      width="40"
+      height="40"
+      viewBox="0 0 40 40"
+      aria-hidden="true"
+      fill="none"
+    >
       {head}
       {extras[type] ?? null}
     </svg>
@@ -397,7 +465,9 @@ function Chevron({ color = "currentColor" }) {
 function FeatureCard({ card }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className={`ap2-consider-card${card.wide ? " ap2-consider-card-wide" : ""}`}>
+    <div
+      className={`ap2-consider-card${card.wide ? " ap2-consider-card-wide" : ""}`}
+    >
       <img
         src={card.image}
         alt={card.imgAlt}
@@ -407,9 +477,7 @@ function FeatureCard({ card }) {
       <div className="ap2-consider-body">
         <p className="ap2-consider-label">{card.label}</p>
         <h3 className="ap2-consider-title">{card.title}</h3>
-        {card.caption && (
-          <p className="ap2-consider-caption">{card.caption}</p>
-        )}
+        {card.caption && <p className="ap2-consider-caption">{card.caption}</p>}
         <button
           className="ap2-consider-toggle"
           onClick={() => setOpen((o) => !o)}
@@ -507,7 +575,7 @@ export default function AirPodsPage() {
         {/* ── Page intro ── */}
         <section className="ap2-intro">
           <div className="ap2-content">
-            <h1 className="ap2-page-title">AirPods</h1>
+            <h2 className="ap2-page-title">AirPods</h2>
             <p className="ap2-intro-copy">
               Get up to ₹4,000 instant cashback on AirPods with eligible cards.
               Plus up to 6 months of No Cost EMI.{" "}
@@ -563,14 +631,18 @@ export default function AirPodsPage() {
             </div>
 
             {/* Color swatches */}
-            <div className="ap2-colorswatches" role="group" aria-label="AirPods Max colour">
+            <div
+              className="ap2-colorswatches"
+              role="group"
+              aria-label="AirPods Max colour"
+            >
               {maxColors.map((c) => (
                 <button
                   key={c.id}
                   className={`ap2-swatch${maxColor.id === c.id ? " ap2-swatch-active" : ""}`}
                   style={{
-                    background: c.color,
-                    borderColor: c.border ?? "transparent",
+                    "--swatch-color": c.color,
+                    "--swatch-border": c.border ?? "transparent",
                   }}
                   aria-label={c.label}
                   aria-pressed={maxColor.id === c.id}
@@ -621,9 +693,9 @@ export default function AirPodsPage() {
             </div>
             <div className="ap2-hero-imgwrap">
               <img
-                src={appleAsset(
-                  "/v/airpods/ae/images/overview/hero_endframe__calpooy4ucr6_large.jpg",
-                )}
+                src={
+                  "https://www.apple.com/v/airpods/ae/images/overview/hero_endframe__calpooy4ucr6_large.jpg"
+                }
                 alt="AirPods Pro 3 — left and right wireless earbuds"
                 className="ap2-hero-img"
                 loading="eager"
@@ -659,9 +731,9 @@ export default function AirPodsPage() {
             </div>
             <div className="ap2-hero-imgwrap">
               <img
-                src={appleAsset(
-                  "/v/airpods/ae/images/overview/hero__gb4d3fd8jnu6_large.jpg",
-                )}
+                src={
+                  "https://www.apple.com/v/airpods/ae/images/overview/hero__gb4d3fd8jnu6_large.jpg"
+                }
                 alt="A dancer wearing AirPods 4"
                 className="ap2-hero-img"
                 loading="eager"
@@ -681,10 +753,12 @@ export default function AirPodsPage() {
                 exactly the same height — no JS height-sync needed.
               */}
               <div className="ap2-compare-table">
-
                 {/* ── Row 0: product headers ── */}
                 {compareModels.map((model) => (
-                  <div key={`h-${model.id}`} className="ap2-compare-header-cell">
+                  <div
+                    key={`h-${model.id}`}
+                    className="ap2-compare-header-cell"
+                  >
                     <a
                       href={model.learnUrl}
                       target="_blank"
@@ -821,17 +895,17 @@ export default function AirPodsPage() {
             </div>
             <div className="ap2-music-imagery">
               <img
-                src={appleAsset(
-                  "/v/airpods/ae/images/overview/music/music_album_hero__gme6dccldf6u_large.jpg",
-                )}
+                src={
+                  "https://www.apple.com/v/airpods/ae/images/overview/music/music_album_hero__gme6dccldf6u_large.jpg"
+                }
                 alt="New Music Mix playlist"
                 className="ap2-music-hero"
                 loading="lazy"
               />
               <img
-                src={appleAsset(
-                  "/v/airpods/ae/images/overview/music/music_album_stack__bi4gk5n0vwb6_large.png",
-                )}
+                src={
+                  "https://www.apple.com/v/airpods/ae/images/overview/music/music_album_stack__bi4gk5n0vwb6_large.png"
+                }
                 alt=""
                 aria-hidden="true"
                 className="ap2-music-stack"
@@ -890,9 +964,9 @@ export default function AirPodsPage() {
                 taxes).
               </li>
               <li>
-                ** New subscribers only. ₹119/month after trial. Offer
-                available for new Apple Music subscribers with a new eligible
-                device for a limited time only. Terms apply.
+                ** New subscribers only. ₹119/month after trial. Offer available
+                for new Apple Music subscribers with a new eligible device for a
+                limited time only. Terms apply.
               </li>
               <li>‡ Includes instant cashback and No Cost EMI.</li>
               <li>

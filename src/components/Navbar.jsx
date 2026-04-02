@@ -684,18 +684,6 @@ export default function Navbar() {
     >
       <nav className="apple-nav" aria-label="Primary">
         <div className="apple-nav-inner">
-          <button
-            type="button"
-            className="apple-nav-hamburger"
-            onClick={() => setMenuOpen((open) => !open)}
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={menuOpen}
-            aria-controls="apple-mobile-nav"
-          >
-            <span />
-            <span />
-          </button>
-
           <Link
             to="/"
             className="apple-nav-logo"
@@ -774,6 +762,17 @@ export default function Navbar() {
                 className="apple-nav-icon-img apple-nav-icon-img-cart"
               />
             </Link>
+            <button
+              type="button"
+              className="apple-nav-hamburger"
+              onClick={() => setMenuOpen((open) => !open)}
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
+              aria-controls="apple-mobile-nav"
+            >
+              <span />
+              <span />
+            </button>
           </div>
         </div>
       </nav>

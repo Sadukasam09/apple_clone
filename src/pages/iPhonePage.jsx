@@ -1,72 +1,61 @@
 import { useState } from "react";
 import "./iPhonePage.css";
 
-const appleAsset = (path) => `https://www.apple.com${path}`;
-
 const chapterNavItems = [
   {
     label: "iPhone 17 Pro",
     href: "https://www.apple.com/in/iphone-17-pro/",
-    image: appleAsset(
-      "/in/iphone/home/images/overview/chapternav/nav_iphone_17pro__d60uog2c064i_large.png",
-    ),
+    image:
+      "https://www.apple.com/in/iphone/home/images/overview/chapternav/nav_iphone_17pro__d60uog2c064i_large.png",
   },
   {
     label: "iPhone Air",
     href: "https://www.apple.com/in/iphone-air/",
-    image: appleAsset(
-      "/v/iphone/home/cj/images/overview/chapternav/nav_iphone_air__f066mfdfhi62_large.png",
-    ),
+    image:
+      "https://www.apple.com/v/iphone/home/cj/images/overview/chapternav/nav_iphone_air__f066mfdfhi62_large.png",
   },
   {
     label: "iPhone 17",
     href: "https://www.apple.com/in/iphone-17/",
-    image: appleAsset(
-      "/in/iphone/home/images/overview/chapternav/nav_iphone_17__ffxyxejeezqm_large.png",
-    ),
+    image:
+      "https://www.apple.com/in/iphone/home/images/overview/chapternav/nav_iphone_17__ffxyxejeezqm_large.png",
   },
   {
     label: "iPhone 17e",
     badge: "New",
     href: "https://www.apple.com/in/iphone-17e/",
-    image: appleAsset(
-      "/in/iphone/home/images/overview/chapternav/nav_iphone_17e__dea363vi6ggi_large.png",
-    ),
+    image:
+      "https://www.apple.com/in/iphone/home/images/overview/chapternav/nav_iphone_17e__dea363vi6ggi_large.png",
   },
   {
     label: "iPhone 16",
     href: "https://www.apple.com/in/shop/goto/buy_iphone/iphone_16",
-    image: appleAsset(
-      "/in/iphone/home/images/overview/chapternav/nav_iphone_16__kcscr25z9num_large.png",
-    ),
+    image:
+      "https://www.apple.com/in/iphone/home/images/overview/chapternav/nav_iphone_16__kcscr25z9num_large.png",
   },
   {
     label: "Compare",
     href: "https://www.apple.com/in/iphone/compare/",
-    image: appleAsset(
-      "/v/iphone/home/cj/images/overview/chapternav/nav_compare__e3xurpy671me_large.png",
-    ),
+    image:
+      "https://www.apple.com/v/iphone/home/cj/images/overview/chapternav/nav_compare__e3xurpy671me_large.png",
   },
   {
     label: "Accessories",
     href: "/accessories",
-    image: appleAsset(
-      "/v/iphone/home/cj/images/overview/chapternav/nav_accessories__d0p6sy36eueu_large.png",
-    ),
+    image:
+      "https://www.apple.com/v/iphone/home/cj/images/overview/chapternav/nav_accessories__d0p6sy36eueu_large.png",
   },
   {
     label: "Shop iPhone",
     href: "https://www.apple.com/in/shop/goto/buy_iphone",
-    image: appleAsset(
-      "/in/iphone/home/images/overview/chapternav/nav_shop_alt__dur38g1c4ii6_large.png",
-    ),
+    image:
+      "https://www.apple.com/in/iphone/home/images/overview/chapternav/nav_shop_alt__dur38g1c4ii6_large.png",
   },
   {
     label: "iOS",
     href: "https://www.apple.com/in/os/ios/",
-    image: appleAsset(
-      "/v/iphone/home/cj/images/overview/chapternav/nav_ios__e5jic1u960ya_large.png",
-    ),
+    image:
+      "https://www.apple.com/v/iphone/home/cj/images/overview/chapternav/nav_ios__e5jic1u960ya_large.png",
   },
 ];
 
@@ -77,9 +66,8 @@ const lineupModels = [
     tagline: "Innovative design for ultimate performance and battery life.",
     price: "From ₹134900.00*",
     emi: "or ₹21650.00/mo. for 6 mo.‡",
-    image: appleAsset(
-      "/in/iphone/home/images/overview/select/iphone_17pro__t1j902iw6kya_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/in/iphone/home/images/overview/select/iphone_17pro__t1j902iw6kya_large.jpg",
     alt: "iPhone 17 Pro in cosmic orange.",
     colors: ["#c56f41", "#293b78", "#d7d7d9"],
     learnHref: "https://www.apple.com/in/iphone-17-pro/",
@@ -91,9 +79,8 @@ const lineupModels = [
     tagline: "The thinnest iPhone ever. With the power of pro inside.",
     price: "From ₹119900.00*",
     emi: "or ₹19150.00/mo. for 6 mo.‡",
-    image: appleAsset(
-      "/v/iphone/home/cj/images/overview/select/iphone_air__b5qmgl05ojyq_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/iphone/home/cj/images/overview/select/iphone_air__b5qmgl05ojyq_large.jpg",
     alt: "iPhone Air in sky blue.",
     colors: ["#b6d7ea", "#d3c19c", "#f1efec", "#2e2d31"],
     learnHref: "https://www.apple.com/in/iphone-air/",
@@ -105,9 +92,8 @@ const lineupModels = [
     tagline: "Even more delightful. Even more durable.",
     price: "From ₹82900.00*",
     emi: "or ₹14468.00/mo. for 6 mo.‡‡",
-    image: appleAsset(
-      "/in/iphone/home/images/overview/select/iphone_17__fb1277oq3eaa_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/in/iphone/home/images/overview/select/iphone_17__fb1277oq3eaa_large.jpg",
     alt: "iPhone 17 in lavender.",
     colors: ["#c7b0f4", "#c6d2b2", "#abc4dd", "#f2f2f4", "#2e2d31"],
     learnHref: "https://www.apple.com/in/iphone-17/",
@@ -120,9 +106,8 @@ const lineupModels = [
     tagline: "Feature stacked. Value packed.",
     price: "From ₹64900.00*",
     emi: "or ₹11327.00/mo. for 6 mo.‡‡",
-    image: appleAsset(
-      "/in/iphone/home/images/overview/select/iphone_17e__cq5ygzct314y_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/in/iphone/home/images/overview/select/iphone_17e__cq5ygzct314y_large.jpg",
     alt: "iPhone 17e in soft pink.",
     colors: ["#e6c5d0", "#f3f2f5", "#2b2b2f"],
     learnHref: "https://www.apple.com/in/iphone-17e/",
@@ -134,9 +119,8 @@ const lineupModels = [
     tagline: "Amazing performance. Durable design.",
     price: "From ₹69900.00*",
     emi: "or ₹10983.00/mo. for 6 mo.‡",
-    image: appleAsset(
-      "/in/iphone/home/images/overview/select/iphone_16__b6tkv86m2gc2_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/in/iphone/home/images/overview/select/iphone_16__b6tkv86m2gc2_large.jpg",
     alt: "iPhone 16 in ultramarine.",
     colors: ["#5a80ef", "#6db8a8", "#efc4d2", "#f3f4f6", "#2f2f33"],
     learnHref: "https://www.apple.com/in/iphone-16/specs/",
@@ -149,63 +133,56 @@ const featureCards = [
     id: "innovation",
     label: "Innovation",
     title: "Beautiful and durable,\nby design.",
-    image: appleAsset(
-      "/v/iphone/home/cj/images/overview/consider/innovation__fmir5mp9zpay_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/iphone/home/cj/images/overview/consider/innovation__fmir5mp9zpay_large.jpg",
     tone: "dark",
   },
   {
     id: "cameras",
     label: "Cutting-Edge Cameras",
     title: "Picture your best\nphotos and videos.",
-    image: appleAsset(
-      "/v/iphone/home/cj/images/overview/consider/camera__dez4cvpw83sm_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/iphone/home/cj/images/overview/consider/camera__dez4cvpw83sm_large.jpg",
     tone: "dark",
   },
   {
     id: "chip",
     label: "Chip and Battery Life",
     title: "Fast that lasts.",
-    image: appleAsset(
-      "/v/iphone/home/cj/images/overview/consider/chip__fh5j5on49p2e_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/iphone/home/cj/images/overview/consider/chip__fh5j5on49p2e_large.jpg",
     tone: "dark",
   },
   {
     id: "ios",
     label: "iOS and Apple Intelligence",
     title: "New look.\nEven more magic.",
-    image: appleAsset(
-      "/in/iphone/home/images/overview/consider/ios__8z58j1o80yqi_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/in/iphone/home/images/overview/consider/ios__8z58j1o80yqi_large.jpg",
     tone: "dark",
   },
   {
     id: "environment",
     label: "Environment",
     title: "Designed with the earth\nin mind.",
-    image: appleAsset(
-      "/v/iphone/home/cj/images/overview/consider/environment__c8tpot4ti2qa_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/iphone/home/cj/images/overview/consider/environment__c8tpot4ti2qa_large.jpg",
     tone: "light",
   },
   {
     id: "privacy",
     label: "Privacy",
     title: "Your data. Just where\nyou want it.",
-    image: appleAsset(
-      "/v/iphone/home/cj/images/overview/consider/privacy__cv4ztv5gebyq_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/iphone/home/cj/images/overview/consider/privacy__cv4ztv5gebyq_large.jpg",
     tone: "light",
   },
   {
     id: "peace-of-mind",
     label: "Peace of Mind",
     title: "Helpful features.\nJust in case.",
-    image: appleAsset(
-      "/in/iphone/home/images/overview/consider/safety__grtwyqpan8yi_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/in/iphone/home/images/overview/consider/safety__grtwyqpan8yi_large.jpg",
     tone: "dark",
   },
 ];
@@ -216,9 +193,8 @@ const whyBuyCards = [
     label: "Apple Trade In",
     title: "Save on a new iPhone with a trade-in.",
     copy: "Get up to ₹22000.00–₹62700.00 in credit towards iPhone 17, iPhone Air or iPhone 17 Pro when you trade in iPhone 13 or higher.**",
-    image: appleAsset(
-      "/v/iphone/home/cj/images/overview/incentive/trade_in__d4dobu5egm0y_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/iphone/home/cj/images/overview/incentive/trade_in__d4dobu5egm0y_large.jpg",
     href: "https://www.apple.com/in/shop/goto/trade_in",
   },
   {
@@ -226,9 +202,8 @@ const whyBuyCards = [
     label: "Ways to Buy",
     title: "Monthly payment options are available.",
     copy: "Choose the easy way to finance with convenient monthly payment options.",
-    image: appleAsset(
-      "/in/iphone/home/images/overview/incentive/buy__gdo4oaj4ekmm_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/in/iphone/home/images/overview/incentive/buy__gdo4oaj4ekmm_large.jpg",
     href: "https://www.apple.com/in/shop/goto/ways_to_buy",
   },
   {
@@ -236,9 +211,8 @@ const whyBuyCards = [
     label: "Personal Setup",
     title: "Make the most of your iPhone with an online session.",
     copy: "Talk one-to-one with a Specialist to set up your device and discover new features.",
-    image: appleAsset(
-      "/v/iphone/home/cj/images/overview/incentive/setup__d177om0fsqs2_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/iphone/home/cj/images/overview/incentive/setup__d177om0fsqs2_large.jpg",
     href: "https://www.apple.com/in/shop/goto/personal_setup",
   },
   {
@@ -246,9 +220,8 @@ const whyBuyCards = [
     label: "Delivery and Pickup",
     title: "Get flexible delivery and easy pickup.",
     copy: "Get free delivery or pickup at your Apple Store.",
-    image: appleAsset(
-      "/v/iphone/home/cj/images/overview/incentive/deliver__by32yxmh41ma_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/iphone/home/cj/images/overview/incentive/deliver__by32yxmh41ma_large.jpg",
     href: "https://www.apple.com/in/shop/goto/shipping_pickup",
   },
   {
@@ -256,9 +229,8 @@ const whyBuyCards = [
     label: "Guided Shopping",
     title: "Shop live with a Specialist.",
     copy: "Let us help you find what you need and answer all of your questions, one-to-one, at an Apple Store or online.",
-    image: appleAsset(
-      "/in/iphone/home/images/overview/incentive/specialist__bxk6m5pp2k3m_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/in/iphone/home/images/overview/incentive/specialist__bxk6m5pp2k3m_large.jpg",
     href: "https://contactretail.apple.com/?ap=com&c=in&l=en&pg=COM:retailStore",
   },
   {
@@ -266,9 +238,8 @@ const whyBuyCards = [
     label: "Apple Store App",
     title: "Explore a shopping experience designed around you.",
     copy: "Use the app to get a more personal way to shop.",
-    image: appleAsset(
-      "/v/iphone/home/cj/images/overview/incentive/app__evu5fxqoamye_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/iphone/home/cj/images/overview/incentive/app__evu5fxqoamye_large.jpg",
     href: "https://apps.apple.com/in/app/apple-store/id375380948/",
   },
 ];
@@ -278,9 +249,8 @@ const essentialsCards = [
     id: "accessories",
     title: "iPhone accessories",
     copy: "Cases, MagSafe gear, straps, and other add-ons that protect the phone or change how you carry it.",
-    image: appleAsset(
-      "/v/iphone/home/cj/images/overview/essentials/accessories__ghgqo4vsxcqe_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/iphone/home/cj/images/overview/essentials/accessories__ghgqo4vsxcqe_large.jpg",
     href: "/accessories",
     cta: "Shop accessories",
   },
@@ -289,9 +259,8 @@ const essentialsCards = [
     badge: "New",
     title: "AirTag",
     copy: "Pair it with iPhone to keep track of keys, luggage, or bags with more precise location help.",
-    image: appleAsset(
-      "/v/iphone/home/cj/images/overview/essentials/airtag_accessories__kpd2m3mfy4ia_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/iphone/home/cj/images/overview/essentials/airtag_accessories__kpd2m3mfy4ia_large.jpg",
     href: "https://www.apple.com/in/shop/goto/buy_airtag/airtag",
     cta: "Buy AirTag",
   },
@@ -304,9 +273,8 @@ const companionStories = [
     teaser: "Mirror, paste, call, and keep files flowing across both devices.",
     description:
       "iPhone Mirroring, shared clipboards, continuity calling, and iCloud access make the Mac pairing feel especially cohesive.",
-    image: appleAsset(
-      "/in/iphone/home/images/overview/augment/mac__e1itm725bz8m_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/in/iphone/home/images/overview/augment/mac__e1itm725bz8m_large.jpg",
     alt: "iPhone mirrored on a Mac display.",
     href: "/mac",
   },
@@ -317,9 +285,8 @@ const companionStories = [
       "Use your watch as a finder, remote, and extension of incoming calls.",
     description:
       "Apple Watch can help locate your phone, preview a camera shot, and keep a conversation moving from wrist to handset.",
-    image: appleAsset(
-      "/v/iphone/home/cj/images/overview/augment/watch__co62o3s4jn6u_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/iphone/home/cj/images/overview/augment/watch__co62o3s4jn6u_large.jpg",
     alt: "iPhone next to Apple Watch using camera remote.",
     href: "/watch",
   },
@@ -330,9 +297,8 @@ const companionStories = [
       "Fast pairing, adaptive audio, and a listening experience tuned to your surroundings.",
     description:
       "AirPods setup is nearly instant on iPhone, and the pairing unlocks personalized audio and smarter noise behavior.",
-    image: appleAsset(
-      "/in/iphone/home/images/overview/augment/airpods__bz9s5pwm8j6u_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/in/iphone/home/images/overview/augment/airpods__bz9s5pwm8j6u_large.jpg",
     alt: "iPhone next to open AirPods case.",
     href: "/airpods",
   },
@@ -446,7 +412,7 @@ function IPhonePage() {
 
       <header className="iphone-header iphone-shell">
         <div className="iphone-header-title-wrap">
-          <h1 className="iphone-header-title">iPhone</h1>
+          <h2 className="iphone-header-title">iPhone</h2>
         </div>
       </header>
 
@@ -558,9 +524,9 @@ function IPhonePage() {
           <div className="iphone-guided-card">
             <img
               className="iphone-guided-image"
-              src={appleAsset(
-                "/v/iphone/home/cj/images/overview/guided-tour/guided_tour__e70yvshmbb2i_large.jpg",
-              )}
+              src={
+                "https://www.apple.com/v/iphone/home/cj/images/overview/guided-tour/guided_tour__e70yvshmbb2i_large.jpg"
+              }
               alt="A Guided Tour, person holding iPhone 17 Pro and iPhone Air."
               loading="lazy"
             />

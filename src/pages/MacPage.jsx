@@ -1,87 +1,72 @@
 import { useState } from "react";
 import "./MacPage.css";
 
-/* ── helpers ── */
-const appleAsset = (path) => `https://www.apple.com${path}`;
-const cdnAsset = (key) =>
-  `https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/${key}`;
-
 /* ── Chapter nav ── */
 const chapterNavItems = [
   {
     label: "MacBook Neo",
     badge: "New",
     href: "https://www.apple.com/in/macbook-neo/",
-    image: cdnAsset(
-      "store-card-13-macbook-neo-nav-202503?wid=200&hei=200&fmt=png-alpha&.v=1740772173939",
-    ),
+    image:
+      "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-13-macbook-neo-nav-202503?wid=200&hei=200&fmt=png-alpha&.v=1740772173939",
   },
   {
     label: "MacBook Air",
     badge: "New",
     href: "https://www.apple.com/in/macbook-air/",
-    image: cdnAsset(
-      "store-card-13-macbook-air-nav-202503?wid=200&hei=200&fmt=png-alpha&.v=1740772174329",
-    ),
+    image:
+      "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-13-macbook-air-nav-202503?wid=200&hei=200&fmt=png-alpha&.v=1740772174329",
   },
   {
     label: "MacBook Pro",
     badge: "New",
     href: "https://www.apple.com/in/macbook-pro/",
-    image: cdnAsset(
-      "store-card-13-macbook-pro-nav-202503?wid=200&hei=200&fmt=png-alpha&.v=1740782219568",
-    ),
+    image:
+      "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-13-macbook-pro-nav-202503?wid=200&hei=200&fmt=png-alpha&.v=1740782219568",
   },
   {
     label: "iMac",
     href: "https://www.apple.com/in/imac/",
-    image: cdnAsset(
-      "store-card-13-imac-nav-202410?wid=200&hei=200&fmt=png-alpha&.v=1728342374591",
-    ),
+    image:
+      "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-13-imac-nav-202410?wid=200&hei=200&fmt=png-alpha&.v=1728342374591",
   },
   {
     label: "Mac mini",
     href: "https://www.apple.com/in/mac-mini/",
-    image: cdnAsset(
-      "store-card-13-mac-mini-nav-202410?wid=200&hei=200&fmt=png-alpha&.v=1730075288419",
-    ),
+    image:
+      "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-13-mac-mini-nav-202410?wid=200&hei=200&fmt=png-alpha&.v=1730075288419",
   },
   {
     label: "Mac Studio",
     badge: "New",
     href: "https://www.apple.com/in/mac-studio/",
-    image: cdnAsset(
-      "store-card-13-mac-studio-nav-202503?wid=200&hei=200&fmt=png-alpha&.v=1740772356783",
-    ),
+    image:
+      "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-13-mac-studio-nav-202503?wid=200&hei=200&fmt=png-alpha&.v=1740772356783",
   },
   {
     label: "Compare",
     href: "https://www.apple.com/in/mac/compare/",
-    image: cdnAsset(
-      "store-card-13-compare-mac-202503?wid=200&hei=200&fmt=png-alpha&.v=1740772362203",
-    ),
+    image:
+      "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-13-compare-mac-202503?wid=200&hei=200&fmt=png-alpha&.v=1740772362203",
   },
   {
     label: "Displays",
     badge: "New",
     href: "https://www.apple.com/in/displays/",
-    image: cdnAsset(
-      "store-card-13-display-nav-202503?wid=200&hei=200&fmt=png-alpha&.v=1740772362203",
-    ),
+    image:
+      "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-13-display-nav-202503?wid=200&hei=200&fmt=png-alpha&.v=1740772362203",
   },
   {
     label: "Accessories",
     href: "https://www.apple.com/in/shop/goto/mac/accessories",
-    image: cdnAsset(
-      "store-card-13-accessories-mac-202503?wid=200&hei=200&fmt=png-alpha&.v=1740772362203",
-    ),
+    image:
+      "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-13-accessories-mac-202503?wid=200&hei=200&fmt=png-alpha&.v=1740772362203",
   },
   {
     label: "Shop Mac",
     href: "https://www.apple.com/in/shop/goto/buy_mac",
-    image: cdnAsset(
-      "store-card-13-shop-mac-202503?wid=200&hei=200&fmt=png-alpha&.v=1740772362203",
-    ),
+    image:
+      "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-13-shop-mac-202503?wid=200&hei=200&fmt=png-alpha&.v=1740772362203",
   },
 ];
 
@@ -98,9 +83,8 @@ const lineupModels = [
     price: "From ₹69,900.00**",
     emi: "or ₹11,150.00/mo. for 6 mo.*",
     colors: ["#c9cacb", "#f2c8d6", "#dce873", "#5a6ad4"],
-    image: cdnAsset(
-      "store-card-40-macbook-neo-202503?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1740772307337",
-    ),
+    image:
+      "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-40-macbook-neo-202503?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1740772307337",
     learnHref: "https://www.apple.com/in/macbook-neo/",
     buyHref: "https://www.apple.com/in/shop/goto/buy_mac/macbook_neo",
   },
@@ -113,9 +97,8 @@ const lineupModels = [
     price: "From ₹1,19,900.00**",
     emi: "or ₹18,817.00/mo. for 6 mo.*",
     colors: ["#a9d4ff", "#dad6d0", "#f3e5b4", "#2b3040"],
-    image: cdnAsset(
-      "store-card-40-macbook-air-202503?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1740772307337",
-    ),
+    image:
+      "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-40-macbook-air-202503?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1740772307337",
     learnHref: "https://www.apple.com/in/macbook-air/",
     buyHref: "https://www.apple.com/in/shop/goto/buy_mac/macbook_air",
   },
@@ -128,9 +111,8 @@ const lineupModels = [
     price: "From ₹1,89,900.00**",
     emi: "or ₹29,983.00/mo. for 6 mo.*",
     colors: ["#1e1e1e", "#d6d4d0"],
-    image: cdnAsset(
-      "store-card-40-macbook-pro-202503?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1740782219568",
-    ),
+    image:
+      "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-40-macbook-pro-202503?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1740782219568",
     learnHref: "https://www.apple.com/in/macbook-pro/",
     buyHref: "https://www.apple.com/in/shop/goto/buy_mac/macbook_pro",
   },
@@ -149,9 +131,8 @@ const lineupModels = [
       "https://www.apple.com/assets-www/en_WW/common/color_indicator/fp_color_indicator_yellow_3d07e057d.png",
       "https://www.apple.com/assets-www/en_WW/common/color_indicator/fp_color_indicator_green_f02f2102c.png",
     ],
-    image: cdnAsset(
-      "store-card-40-imac-202410?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1728342376329",
-    ),
+    image:
+      "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-40-imac-202410?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1728342376329",
     learnHref: "https://www.apple.com/in/imac/",
     buyHref: "https://www.apple.com/in/shop/goto/buy_mac/imac",
   },
@@ -163,9 +144,8 @@ const lineupModels = [
     tagline: "The mini-est, most affordable Mac desktop.",
     price: "From ₹59,900.00**",
     emi: "or ₹9,317.00/mo. for 6 mo.*",
-    image: cdnAsset(
-      "store-card-40-mac-mini-202410?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1730075290527",
-    ),
+    image:
+      "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-40-mac-mini-202410?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1730075290527",
     learnHref: "https://www.apple.com/in/mac-mini/",
     buyHref: "https://www.apple.com/in/shop/goto/buy_mac/mac_mini",
   },
@@ -177,9 +157,8 @@ const lineupModels = [
     tagline: "Powerful performance and connectivity for pros.",
     price: "From ₹2,14,900.00**",
     emi: "or ₹34,150.00/mo. for 6 mo.*",
-    image: cdnAsset(
-      "store-card-40-mac-studio-202503?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1740772359059",
-    ),
+    image:
+      "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-40-mac-studio-202503?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1740772359059",
     learnHref: "https://www.apple.com/in/mac-studio/",
     buyHref: "https://www.apple.com/in/shop/goto/buy_mac/mac_studio",
   },
@@ -191,9 +170,8 @@ const lineupModels = [
     tagline: "A 5K Retina display that\u2019s perfect for Mac.",
     price: "From ₹1,89,900.00\u25ca\u25ca",
     emi: "or ₹33,142.00/mo. for 6 mo.\u25ca",
-    image: cdnAsset(
-      "store-card-40-studio-display-202503?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1740772333996",
-    ),
+    image:
+      "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-40-studio-display-202503?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1740772333996",
     learnHref: "https://www.apple.com/in/studio-display/",
     buyHref: "https://www.apple.com/in/shop/goto/buy_mac/mac_studio_display",
   },
@@ -206,9 +184,8 @@ const lineupModels = [
       "The ultimate 5K Retina XDR display for creative and pro workflows.",
     price: "From ₹3,99,900.00\u25ca\u25ca",
     emi: "or ₹69,793.00/mo. for 6 mo.\u25ca",
-    image: cdnAsset(
-      "store-card-40-pro-display-xdr-202309?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1693346626695",
-    ),
+    image:
+      "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-40-pro-display-xdr-202309?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1693346626695",
     learnHref: "https://www.apple.com/in/studio-display-xdr/",
     buyHref: "https://www.apple.com/in/shop/goto/buy_mac/studio_display_xdr",
   },
@@ -221,9 +198,8 @@ const whyBuyCards = [
     label: "Ways to Buy",
     title: "Monthly payment options are available.",
     copy: "Choose an easy way to finance with convenient payment options.",
-    image: appleAsset(
-      "/v/mac/home/cd/images/overview/why_apple/financing__dol3s5rdvqia_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/mac/home/cd/images/overview/why_apple/financing__dol3s5rdvqia_large.jpg",
     href: "https://www.apple.com/in/shop/goto/ways_to_buy",
   },
   {
@@ -231,9 +207,8 @@ const whyBuyCards = [
     label: "Customise",
     title: "Customise your Mac.",
     copy: "Choose your chip, memory, storage, even colour.",
-    image: appleAsset(
-      "/v/mac/home/cd/images/overview/why_apple/customise__cymo75dpg5ma_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/mac/home/cd/images/overview/why_apple/customise__cymo75dpg5ma_large.jpg",
     href: "https://www.apple.com/in/shop/goto/buy_mac",
   },
   {
@@ -241,9 +216,8 @@ const whyBuyCards = [
     label: "Education Pricing",
     title: "Save on a new Mac with education pricing.",
     copy: "Students and educators can save exclusively through the Apple Store.****",
-    image: appleAsset(
-      "/v/mac/home/cd/images/overview/why_apple/education__ek1akovofbqa_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/mac/home/cd/images/overview/why_apple/education__ek1akovofbqa_large.jpg",
     href: "https://www.apple.com/in/shop/goto/educationrouting",
   },
   {
@@ -251,9 +225,8 @@ const whyBuyCards = [
     label: "Personal Setup",
     title: "Meet your new Mac with Personal Setup.",
     copy: "Get one-to-one guidance with data transfer, the latest features and more.",
-    image: appleAsset(
-      "/v/mac/home/cd/images/overview/why_apple/personal_setup__blb9x0g2mxya_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/mac/home/cd/images/overview/why_apple/personal_setup__blb9x0g2mxya_large.jpg",
     href: "https://www.apple.com/in/shop/goto/personal_setup",
   },
   {
@@ -261,9 +234,8 @@ const whyBuyCards = [
     label: "Delivery and Pickup",
     title: "Get flexible delivery and easy pickup.",
     copy: "Get free delivery or pickup at your Apple Store.",
-    image: appleAsset(
-      "/v/mac/home/cd/images/overview/why_apple/delivery__dh8c9ne3l5ia_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/mac/home/cd/images/overview/why_apple/delivery__dh8c9ne3l5ia_large.jpg",
     href: "https://www.apple.com/in/shop/shipping-pickup",
   },
   {
@@ -271,9 +243,8 @@ const whyBuyCards = [
     label: "Trade In",
     title: "Save with Apple\u00a0Trade\u00a0In.",
     copy: "Get credit towards your next Mac when you trade in an eligible device at an Apple Store.\u00b9",
-    image: appleAsset(
-      "/v/mac/home/cd/images/overview/why_apple/trade_in__ccfzjb6plb6e_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/mac/home/cd/images/overview/why_apple/trade_in__ccfzjb6plb6e_large.jpg",
     href: "https://www.apple.com/in/shop/goto/trade_in",
   },
   {
@@ -281,9 +252,8 @@ const whyBuyCards = [
     label: "Guided Shopping",
     title: "Shop live with a\u00a0Specialist.",
     copy: "Let us help you find what you need and answer all your questions, one-to-one, at an Apple Store or online.",
-    image: appleAsset(
-      "/v/mac/home/cd/images/overview/why_apple/guided_shopping__el68i3gywpqm_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/mac/home/cd/images/overview/why_apple/guided_shopping__el68i3gywpqm_large.jpg",
     href: "https://contactretail.apple.com/?pg=COM:mac&ap=COM&c=in&l=en",
   },
   {
@@ -291,9 +261,8 @@ const whyBuyCards = [
     label: "Apple Store App",
     title: "Explore a shopping experience designed around you.",
     copy: "Use the Apple Store app to get a more personal way to shop.",
-    image: appleAsset(
-      "/v/mac/home/cd/images/overview/why_apple/apple_store_app__bnbpkex5v7q2_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/mac/home/cd/images/overview/why_apple/apple_store_app__bnbpkex5v7q2_large.jpg",
     href: "https://apps.apple.com/in/app/apple-store/id375380948",
   },
 ];
@@ -304,72 +273,64 @@ const featureCards = [
     id: "performance",
     label: "Performance and Battery Life",
     title: "Go fast.\u00a0Go far.",
-    image: appleAsset(
-      "/v/mac/home/cd/images/overview/consider/performance__b7qvzyfk5r6q_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/mac/home/cd/images/overview/consider/performance__b7qvzyfk5r6q_large.jpg",
     tone: "dark",
   },
   {
     id: "ai",
     label: "Built for AI",
     title: "Smart. Secure.\nOn device.",
-    image: appleAsset(
-      "/v/mac/home/cd/images/overview/consider/built_for_apple_intelligence__f2g8l46if5u2_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/mac/home/cd/images/overview/consider/built_for_apple_intelligence__f2g8l46if5u2_large.jpg",
     tone: "dark",
   },
   {
     id: "macos",
     label: "macOS and Apple Intelligence",
     title: "Easy to use.\u00a0Easy to love.",
-    image: appleAsset(
-      "/v/mac/home/cd/images/overview/consider/macos__b8h5me9j3cqa_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/mac/home/cd/images/overview/consider/macos__b8h5me9j3cqa_large.jpg",
     tone: "light",
   },
   {
     id: "mac-iphone",
     label: "Mac + iPhone",
     title: "Together they work\nwonders.",
-    image: appleAsset(
-      "/v/mac/home/cd/images/overview/consider/mac_iphone__gh1tblkt6bqm_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/mac/home/cd/images/overview/consider/mac_iphone__gh2tblkt6bqm_large.jpg",
     tone: "light",
   },
   {
     id: "compatibility",
     label: "Compatibility",
     title: "Mac runs your\nfavourite apps.",
-    image: appleAsset(
-      "/v/mac/home/cd/images/overview/consider/compatibility__f8hm76ektxua_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/mac/home/cd/images/overview/consider/compatibility__f8hm76ektxua_large.jpg",
     tone: "light",
   },
   {
     id: "privacy",
     label: "Privacy and Security",
     title: "Your business is\nnobody else\u2019s.",
-    image: appleAsset(
-      "/v/mac/home/cd/images/overview/consider/privacy__e66n36h1q0om_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/mac/home/cd/images/overview/consider/privacy__e66n36h2q0om_large.jpg",
     tone: "dark",
   },
   {
     id: "durability",
     label: "Durability",
     title: "Built to stand\nthe test of time.",
-    image: appleAsset(
-      "/v/mac/home/cd/images/overview/consider/durability__ck6nkw4c5rki_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/mac/home/cd/images/overview/consider/durability__ck6nkw4c5rki_large.jpg",
     tone: "light",
   },
   {
     id: "values",
     label: "Apple Values",
     title: "Our values drive\neverything we do.",
-    image: appleAsset(
-      "/v/mac/home/cd/images/overview/consider/apple_values__f9kyyvtj0b6a_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/mac/home/cd/images/overview/consider/apple_values__f9kyyvtj0b6a_large.jpg",
     tone: "light",
   },
 ];
@@ -380,9 +341,8 @@ const essentialsCards = [
     id: "accessories",
     title: "Mac accessories",
     copy: "Explore keyboards, mice and other essentials.",
-    image: cdnAsset(
-      "accessories-category-card-mac-202307?wid=800&hei=800&fmt=jpeg&qlt=90&.v=1687543083228",
-    ),
+    image:
+      "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/accessories-category-card-mac-202307?wid=800&hei=800&fmt=jpeg&qlt=90&.v=1687543083228",
     href: "https://www.apple.com/in/shop/goto/mac/accessories",
     cta: "Shop Mac accessories",
   },
@@ -391,9 +351,8 @@ const essentialsCards = [
     badge: "New",
     title: "Studio Display",
     copy: "The 68.29\u2009cm (27\u2033) 5K Retina display pairs beautifully with Mac.",
-    image: cdnAsset(
-      "store-card-40-studio-display-202503?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1740772333996",
-    ),
+    image:
+      "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-40-studio-display-202503?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1740772333996",
     href: "https://www.apple.com/in/studio-display/",
     cta: "Learn more",
   },
@@ -407,9 +366,8 @@ const companionStories = [
     teaser: "Mirror, call, copy across devices — then continue on either one.",
     description:
       "Answer calls or messages from your iPhone directly on your Mac. See and control what\u2019s on your iPhone from your Mac with iPhone Mirroring and Live Activities. Use Universal Clipboard to copy images, video or text from your iPhone, then paste into another app on your nearby Mac.",
-    image: appleAsset(
-      "/v/mac/home/cd/images/overview/continuity/mac_iphone__dvlbqlf8b3xy_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/mac/home/cd/images/overview/continuity/mac_iphone__dvlbqlf8b3xy_large.jpg",
     href: "/iphone",
   },
   {
@@ -418,9 +376,8 @@ const companionStories = [
     teaser: "Use iPad as a second display or drawing tablet.",
     description:
       "Use your iPad as a second display for your Mac. Or use it as a drawing tablet with Apple Pencil. Work with the same files from either device, thanks to iCloud.",
-    image: appleAsset(
-      "/v/mac/home/cd/images/overview/continuity/mac_ipad__efp2s86j1xoy_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/mac/home/cd/images/overview/continuity/mac_ipad__efp2s86j1xoy_large.jpg",
     href: "/ipad",
   },
   {
@@ -429,9 +386,8 @@ const companionStories = [
     teaser: "Unlock your Mac just by wearing your watch.",
     description:
       "Unlock your Mac automatically when you\u2019re wearing your Apple Watch. Approve password requests on your Mac from your wrist.",
-    image: appleAsset(
-      "/v/mac/home/cd/images/overview/continuity/mac_watch__ddkzkg9m0guq_large.jpg",
-    ),
+    image:
+      "https://www.apple.com/v/mac/home/cd/images/overview/continuity/mac_watch__ddkzkg9m0guq_large.jpg",
     href: "/watch",
   },
 ];
@@ -553,7 +509,7 @@ function MacPage() {
 
       {/* Mac header */}
       <header className="mac-header mac-shell">
-        <h1 className="mac-header-title">Mac</h1>
+        <h2 className="mac-header-title">Mac</h2>
       </header>
 
       {/* Sticky chapter nav */}
@@ -743,9 +699,9 @@ function MacPage() {
             </div>
             <div className="mac-switch-media">
               <img
-                src={appleAsset(
-                  "/v/mac/home/cd/images/overview/switch/mac_does_that__f4t5v2wmwa6e_large.jpg",
-                )}
+                src={
+                  "https://www.apple.com/v/mac/home/cd/images/overview/switch/mac_does_that__f4t5v2wmwa6e_large.jpg"
+                }
                 alt="Mac does that"
                 loading="lazy"
               />

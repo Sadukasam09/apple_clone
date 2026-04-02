@@ -405,7 +405,7 @@ export default function StorePage() {
     <main className="store-page">
       <section className="store-hero">
         <div className="store-hero-copy">
-          <h1>Store</h1>
+          <h2>Store</h2>
         </div>
         <div className="store-hero-aside">
           <h2>The best way to buy the products you love.</h2>

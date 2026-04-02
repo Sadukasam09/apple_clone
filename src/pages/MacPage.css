@@ -75,7 +75,7 @@
   margin: 0;
   font-size: clamp(56px, 8vw, 92px);
   line-height: 0.94;
-  letter-spacing: -0.075em;
+  letter-spacing: 0.01em;
 }
 
 /* ── Chapter nav ── */
@@ -169,7 +169,7 @@
   margin: 0;
   font-size: clamp(38px, 5.2vw, 72px);
   line-height: 0.98;
-  letter-spacing: -0.065em;
+  letter-spacing: 0.01em;
 }
 
 .mac-section-head-solo {
@@ -271,7 +271,7 @@
   color: var(--mac-subtle);
   font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.01em;
   text-transform: uppercase;
 }
 
@@ -407,7 +407,7 @@
   margin: 0;
   font-size: clamp(24px, 2.4vw, 32px);
   line-height: 1.08;
-  letter-spacing: -0.04em;
+  letter-spacing: 0.01em;
 }
 
 .mac-lineup-price,
@@ -676,7 +676,7 @@
   font-size: 22px;
   font-weight: 600;
   line-height: 1.1;
-  letter-spacing: -0.03em;
+  letter-spacing: 0.01em;
 }
 
 .mac-companion-tab-copy {
@@ -731,7 +731,7 @@
   margin: 0 0 30px;
   font-size: clamp(56px, 8vw, 92px);
   line-height: 0.94;
-  letter-spacing: -0.075em;
+  letter-spacing: 0.01em;
 }
 
 .mac-router-grid {

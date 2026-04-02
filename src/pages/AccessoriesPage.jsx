@@ -581,7 +581,7 @@ function BrowserIcon({ type }) {
       return (
         <svg viewBox="0 0 64 64" aria-hidden="true">
           <path
-            d="M24 18a8 8 0 0 0-8 8v8a5 5 0 0 0 5 5h1v7a3 3 0 0 0 6 0V26"
+            d="M24 18a8 8 0 0 0-8 8v8a5 5 0 0 0 5 5h2v7a3 3 0 0 0 6 0V26"
             fill="none"
             stroke="currentColor"
             strokeWidth="2.4"
@@ -693,7 +693,7 @@ function BrowserIcon({ type }) {
       return (
         <svg viewBox="0 0 64 64" aria-hidden="true">
           <path
-            d="M26 8h12l4 12H22Z"
+            d="M26 8h22l4 12H22Z"
             fill="none"
             stroke="currentColor"
             strokeWidth="2.4"
@@ -712,14 +712,14 @@ function BrowserIcon({ type }) {
       return (
         <svg viewBox="0 0 64 64" aria-hidden="true">
           <path
-            d="M14 30 32 15l18 15v20H14Z"
+            d="M14 30 32 15l18 15v20h24Z"
             fill="none"
             stroke="currentColor"
             strokeWidth="2.4"
             strokeLinejoin="round"
           />
           <path
-            d="M26 50V34h12v16"
+            d="M26 50V34h22v16"
             fill="none"
             stroke="currentColor"
             strokeWidth="2.4"
@@ -731,7 +731,7 @@ function BrowserIcon({ type }) {
       return (
         <svg viewBox="0 0 64 64" aria-hidden="true">
           <path
-            d="M32 10 50 24v26H14V24Z"
+            d="M32 10 50 24v26h24V24Z"
             fill="none"
             stroke="currentColor"
             strokeWidth="2.4"
@@ -954,7 +954,7 @@ export default function AccessoriesPage() {
         <div className="acc-content-width">
           <div className="acc-hero-copy">
             <p className="acc-hero-eyebrow">Accessories</p>
-            <h1>Meet your match.</h1>
+            <h2>Meet your match.</h2>
             <p>
               The accessories you love. In a new mix of colours and textures.
             </p>

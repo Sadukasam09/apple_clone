@@ -50,23 +50,6 @@ const arcadeHeroImage =
 const fitnessHeroImage =
   "https://www.apple.com/v/services/j/images/services/overview/services/service-headers/hero_services_startframe__buktptg7pn36_large.jpg";
 
-function resizeArtwork(url, size = "1200x1200bb") {
-  if (!url) {
-    return "";
-  }
-
-  return url.replace(/\/\d+x\d+bb\.(jpg|png)$/, (_match, ext) => {
-    return `/${size}.${ext}`;
-  });
-}
-
-function resolveAppleTemplate(url, width, height, format = "jpg") {
-  return url
-    .replace("{w}", String(width))
-    .replace("{h}", String(height))
-    .replace("{f}", format);
-}
-
 const serviceSections = [
   {
     id: "apple-tv",
@@ -94,41 +77,29 @@ const serviceSections = [
       {
         title: "Twisted Yoga",
         meta: "Documentary",
-        image: resolveAppleTemplate(
-          "https://is1-ssl.mzstatic.com/image/thumb/Y4VdZOq6oULAMEqj0auCLA/{w}x{h}.{f}",
-          838,
-          472,
-        ),
+        image:
+          "https://is1-ssl.mzstatic.com/image/thumb/Y4VdZOq6oULAMEqj0auCLA/838x472.jpg",
         href: "https://tv.apple.com/in/show/twisted-yoga/umc.cmc.5igm85np97uvzrg4cl7wpzz6f?l=en-GB",
       },
       {
         title: "Shrinking",
         meta: "Comedy",
-        image: resolveAppleTemplate(
-          "https://is1-ssl.mzstatic.com/image/thumb/OmAEHiPsBUBSNjqgm9ItjA/{w}x{h}.{f}",
-          838,
-          472,
-        ),
+        image:
+          "https://is1-ssl.mzstatic.com/image/thumb/OmAEHiPsBUBSNjqgm9ItjA/838x472.jpg",
         href: "https://tv.apple.com/in/show/shrinking/umc.cmc.apzybj6eqf6pzccd97kev7bs?l=en-GB",
       },
       {
         title: "The Last Thing He Told Me",
         meta: "Thriller",
-        image: resolveAppleTemplate(
-          "https://is1-ssl.mzstatic.com/image/thumb/rNjkfQo5hWI0wljgs4AvjA/{w}x{h}.{f}",
-          838,
-          472,
-        ),
+        image:
+          "https://is1-ssl.mzstatic.com/image/thumb/rNjkfQo5hWI0wljgs4AvjA/838x472.jpg",
         href: "https://tv.apple.com/in/show/the-last-thing-he-told-me/umc.cmc.5dkcy23fuhcdhw1zcmqn10rc5?l=en-GB",
       },
       {
         title: "Eternity",
         meta: "Movie",
-        image: resolveAppleTemplate(
-          "https://is1-ssl.mzstatic.com/image/thumb/CDQqFfdLgWxYh_XxVEYEiA/{w}x{h}.{f}",
-          838,
-          472,
-        ),
+        image:
+          "https://is1-ssl.mzstatic.com/image/thumb/CDQqFfdLgWxYh_XxVEYEiA/838x472.jpg",
         href: "https://tv.apple.com/in/movie/eternity/umc.cmc.4dlymcfscta2oo4u1whkzaqpl?l=en-GB",
       },
     ],
@@ -157,33 +128,29 @@ const serviceSections = [
       {
         title: "Sabrina Carpenter",
         meta: "Apple Music",
-        image: resizeArtwork(
-          "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/03/30/9e/03309ee0-dd2f-1665-5d25-3d0427a9853b/00050087373733.rgb.jpg/100x100bb.jpg",
-        ),
+        image:
+          "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/03/30/9e/03309ee0-dd2f-1665-5d25-3d0427a9853b/00050087373733.rgb.jpg/1200x1200bb.jpg",
         href: "https://music.apple.com/in/album/why-single/1444270106?uo=4",
       },
       {
         title: "Ariana Grande",
         meta: "Apple Music",
-        image: resizeArtwork(
-          "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/ba/27/c8/ba27c847-f282-babf-79ca-842959b10764/00602577496325.rgb.jpg/100x100bb.jpg",
-        ),
+        image:
+          "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/ba/27/c8/ba27c847-f282-babf-79ca-842959b10764/00602577496325.rgb.jpg/1200x1200bb.jpg",
         href: "https://music.apple.com/in/album/7-rings-remix-feat-2-chainz-single/1451154051?uo=4",
       },
       {
         title: "Taylor Swift",
         meta: "Apple Music",
-        image: resizeArtwork(
-          "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/69/9e/92/699e92bb-b589-27f7-bdd1-d0cdc8a061e4/08UMGIM21979.rgb.jpg/100x100bb.jpg",
-        ),
+        image:
+          "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/69/9e/92/699e92bb-b589-27f7-bdd1-d0cdc8a061e4/08UMGIM21979.rgb.jpg/1200x1200bb.jpg",
         href: "https://music.apple.com/in/album/taylor-swift-deluxe-edition/1440802681?uo=4",
       },
       {
         title: "Kendrick Lamar",
         meta: "Apple Music",
-        image: resizeArtwork(
-          "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/94/28/36/94283609-93bb-db1c-e997-44e82c157e90/00602567261216.rgb.jpg/100x100bb.jpg",
-        ),
+        image:
+          "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/94/28/36/94283609-93bb-db1c-e997-44e82c157e90/00602567261216.rgb.jpg/1200x1200bb.jpg",
         href: "https://music.apple.com/in/album/damn-collectors-edition/1440907513?uo=4",
       },
     ],
@@ -427,7 +394,7 @@ function ChapterNavIcon({ item }) {
             strokeWidth="1.8"
           />
           <path
-            d="M17 34h10"
+            d="M17 34h20"
             stroke="currentColor"
             strokeWidth="1.8"
             strokeLinecap="round"
@@ -470,7 +437,7 @@ function ChapterNavIcon({ item }) {
             strokeLinecap="round"
           />
           <path
-            d="M12 27.5h20a3.5 3.5 0 0 1 0 7H12a3.5 3.5 0 1 1 0-7Z"
+            d="M12 27.5h20a3.5 3.5 0 0 1 0 7h22a3.5 3.5 0 1 1 0-7Z"
             stroke="currentColor"
             strokeWidth="1.8"
           />
@@ -547,12 +514,12 @@ function ChapterNavIcon({ item }) {
     <span className="ent-chapternav-book" aria-hidden="true">
       <svg viewBox="0 0 32 32" fill="none">
         <path
-          d="M6.5 7.5C6.5 5.57 8.07 4 10 4h14a1.5 1.5 0 0 1 1.5 1.5v20a1.5 1.5 0 0 1-1.5 1.5H10A3.5 3.5 0 0 1 6.5 23.5v-16Z"
+          d="M6.5 7.5C6.5 5.57 8.07 4 10 4h24a1.5 1.5 0 0 1 1.5 1.5v20a1.5 1.5 0 0 1-1.5 1.5h20A3.5 3.5 0 0 1 6.5 23.5v-16Z"
           stroke="currentColor"
           strokeWidth="1.8"
         />
         <path
-          d="M10 8h12M10 23h12M10 27V8"
+          d="M10 8h22M10 23h22M10 27V8"
           stroke="currentColor"
           strokeWidth="1.8"
           strokeLinecap="round"
@@ -860,11 +827,11 @@ export default function EntertainmentPage() {
 
       <section className="ent-hero">
         <div className="ent-content-width ent-hero-content">
-          <h1 className="ent-hero-title">
+          <h2 className="ent-hero-title">
             Meet the A-list of
             <br />
             entertainment.
-          </h1>
+          </h2>
           <p className="ent-hero-copy">
             Award-winning movies. Binge-worthy shows. Your favourite music
             mastered in Spatial Audio. The most epic collection of mobile games.

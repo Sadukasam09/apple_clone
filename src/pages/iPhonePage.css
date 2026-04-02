@@ -65,7 +65,7 @@
   margin: 0;
   font-size: clamp(56px, 8vw, 92px);
   line-height: 0.94;
-  letter-spacing: -0.075em;
+  letter-spacing: 0.01em;
 }
 
 .iphone-header-copy {
@@ -73,7 +73,7 @@
   color: var(--iphone-subtle);
   font-size: clamp(18px, 2vw, 22px);
   line-height: 1.34;
-  letter-spacing: -0.03em;
+  letter-spacing: 0.01em;
 }
 
 .iphone-chapternav {
@@ -166,7 +166,7 @@
   margin: 0;
   font-size: clamp(38px, 5.2vw, 72px);
   line-height: 0.98;
-  letter-spacing: -0.065em;
+  letter-spacing: 0.01em;
 }
 
 .iphone-section-head-solo {
@@ -286,7 +286,7 @@
   margin: 0;
   font-size: clamp(24px, 2.4vw, 34px);
   line-height: 1.08;
-  letter-spacing: -0.04em;
+  letter-spacing: 0.01em;
 }
 
 .iphone-lineup-rail {
@@ -423,7 +423,7 @@
   margin: 0;
   font-size: clamp(28px, 3.8vw, 54px);
   line-height: 1.08;
-  letter-spacing: -0.05em;
+  letter-spacing: 0.01em;
 }
 
 .iphone-guided-button {
@@ -612,7 +612,7 @@
   font-size: 22px;
   font-weight: 600;
   line-height: 1.1;
-  letter-spacing: -0.03em;
+  letter-spacing: 0.01em;
 }
 
 .iphone-companion-tab-copy {
@@ -655,7 +655,7 @@
   margin: 0 0 30px;
   font-size: clamp(56px, 8vw, 92px);
   line-height: 0.94;
-  letter-spacing: -0.075em;
+  letter-spacing: 0.01em;
 }
 
 .iphone-router-grid {

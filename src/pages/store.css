@@ -18,13 +18,13 @@
   padding: 52px 0 34px;
 }
 
-.store-hero-copy h1 {
+.store-hero-copy h2 {
   margin: 0;
   color: #1d1d1f;
   font-size: clamp(54px, 6.2vw, 80px);
   line-height: 0.98;
-  letter-spacing: -0.055em;
-  font-weight: 700;
+  letter-spacing: 0.01em;
+  font-weight: 600;
 }
 
 .store-hero-aside {
@@ -39,7 +39,7 @@
   margin: 0 0 6px;
   font-size: 22px;
   line-height: 1.18;
-  letter-spacing: -0.03em;
+  letter-spacing: 0.01em;
   text-align: right;
   color: #1d1d1f;
 }
@@ -61,7 +61,7 @@
   color: #6e6e73;
   font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.01em;
   text-transform: uppercase;
 }
 
@@ -154,7 +154,7 @@
 .store-category-item span {
   font-size: 14px;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.01em;
   white-space: nowrap;
 }
 
@@ -193,7 +193,7 @@
   margin: 0;
   font-size: clamp(28px, 3.6vw, 48px);
   line-height: 1.08;
-  letter-spacing: -0.045em;
+  letter-spacing: 0.01em;
   color: #1d1d1f;
 }
 
@@ -201,7 +201,7 @@
   margin: 0;
   font-size: 26px;
   line-height: 1.2;
-  letter-spacing: -0.03em;
+  letter-spacing: 0.01em;
   color: #6e6e73;
 }
 
@@ -307,8 +307,8 @@
 .store-card-eyebrow {
   margin: 0 0 8px;
   font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  font-weight: 600;
+  letter-spacing: 0.01em;
 }
 
 .store-card-content h3,
@@ -316,7 +316,7 @@
   margin: 0;
   font-size: 28px;
   line-height: 1.14;
-  letter-spacing: -0.03em;
+  letter-spacing: 0.01em;
 }
 
 .store-card-content p,
@@ -324,7 +324,7 @@
   margin: 10px 0 0;
   font-size: 17px;
   line-height: 1.35;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.01em;
 }
 
 .store-info-card {
@@ -346,8 +346,8 @@
   background: #1d1d1f;
   color: #fff;
   font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   margin-bottom: 18px;
 }
 
@@ -423,7 +423,7 @@
     padding: 28px 0 26px;
   }
 
-  .store-hero-copy h1 {
+  .store-hero-copy h2 {
     font-size: 48px;
   }
 
@@ -520,7 +520,7 @@
     width: calc(100% - 24px);
   }
 
-  .store-hero-copy h1 {
+  .store-hero-copy h2 {
     font-size: clamp(36px, 14vw, 44px);
   }
 

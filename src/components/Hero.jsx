@@ -4,7 +4,7 @@ export default function Hero() {
   return (
     <section className="apple-hero">
       <div className="apple-hero-content">
-        <h1 className="apple-hero-title">iPhone</h1>
+        <h2 className="apple-hero-title">iPhone</h2>
         <p className="apple-hero-subtitle">Meet the latest iPhone lineup.</p>
         <div className="apple-hero-cta">
           <Link to="/iphone" className="pill-btn pill-btn-filled">
