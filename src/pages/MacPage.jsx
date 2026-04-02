@@ -1,43 +1,146 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import "../mac.css";
+import "./MacPage.css";
 
-/* ─── Data ──────────────────────────────────────────────── */
+/* ── helpers ── */
+const appleAsset = (path) => `https://www.apple.com${path}`;
+const cdnAsset = (key) =>
+  `https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/${key}`;
 
-const lineupProducts = [
+/* ── Chapter nav ── */
+const chapterNavItems = [
   {
-    id: "macbook-neo", badge: "New", category: "Laptops",
-    name: "MacBook Neo", fullName: "MacBook Neo",
+    label: "MacBook Neo",
+    badge: "New",
+    href: "https://www.apple.com/in/macbook-neo/",
+    image: cdnAsset(
+      "store-card-13-macbook-neo-nav-202503?wid=200&hei=200&fmt=png-alpha&.v=1740772173939",
+    ),
+  },
+  {
+    label: "MacBook Air",
+    badge: "New",
+    href: "https://www.apple.com/in/macbook-air/",
+    image: cdnAsset(
+      "store-card-13-macbook-air-nav-202503?wid=200&hei=200&fmt=png-alpha&.v=1740772174329",
+    ),
+  },
+  {
+    label: "MacBook Pro",
+    badge: "New",
+    href: "https://www.apple.com/in/macbook-pro/",
+    image: cdnAsset(
+      "store-card-13-macbook-pro-nav-202503?wid=200&hei=200&fmt=png-alpha&.v=1740782219568",
+    ),
+  },
+  {
+    label: "iMac",
+    href: "https://www.apple.com/in/imac/",
+    image: cdnAsset(
+      "store-card-13-imac-nav-202410?wid=200&hei=200&fmt=png-alpha&.v=1728342374591",
+    ),
+  },
+  {
+    label: "Mac mini",
+    href: "https://www.apple.com/in/mac-mini/",
+    image: cdnAsset(
+      "store-card-13-mac-mini-nav-202410?wid=200&hei=200&fmt=png-alpha&.v=1730075288419",
+    ),
+  },
+  {
+    label: "Mac Studio",
+    badge: "New",
+    href: "https://www.apple.com/in/mac-studio/",
+    image: cdnAsset(
+      "store-card-13-mac-studio-nav-202503?wid=200&hei=200&fmt=png-alpha&.v=1740772356783",
+    ),
+  },
+  {
+    label: "Compare",
+    href: "https://www.apple.com/in/mac/compare/",
+    image: cdnAsset(
+      "store-card-13-compare-mac-202503?wid=200&hei=200&fmt=png-alpha&.v=1740772362203",
+    ),
+  },
+  {
+    label: "Displays",
+    badge: "New",
+    href: "https://www.apple.com/in/displays/",
+    image: cdnAsset(
+      "store-card-13-display-nav-202503?wid=200&hei=200&fmt=png-alpha&.v=1740772362203",
+    ),
+  },
+  {
+    label: "Accessories",
+    href: "https://www.apple.com/in/shop/goto/mac/accessories",
+    image: cdnAsset(
+      "store-card-13-accessories-mac-202503?wid=200&hei=200&fmt=png-alpha&.v=1740772362203",
+    ),
+  },
+  {
+    label: "Shop Mac",
+    href: "https://www.apple.com/in/shop/goto/buy_mac",
+    image: cdnAsset(
+      "store-card-13-shop-mac-202503?wid=200&hei=200&fmt=png-alpha&.v=1740772362203",
+    ),
+  },
+];
+
+/* ── Lineup models ── */
+const LINEUP_FILTERS = ["All products", "Laptops", "Desktops", "Displays"];
+
+const lineupModels = [
+  {
+    id: "macbook-neo",
+    category: "Laptops",
+    badge: "New",
+    name: "MacBook Neo",
     tagline: "The magic of Mac at a surprising price.",
-    price: "From \u20b969,900.00**",
-    emi: "or \u20b911,150.00/mo. for 6 mo.*",
-    colors: ["#c9cacb","#f2c8d6","#dce873","#5a6ad4"],
-    image: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-40-macbook-neo-202503?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1740772307337",
+    price: "From ₹69,900.00**",
+    emi: "or ₹11,150.00/mo. for 6 mo.*",
+    colors: ["#c9cacb", "#f2c8d6", "#dce873", "#5a6ad4"],
+    image: cdnAsset(
+      "store-card-40-macbook-neo-202503?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1740772307337",
+    ),
+    learnHref: "https://www.apple.com/in/macbook-neo/",
+    buyHref: "https://www.apple.com/in/shop/goto/buy_mac/macbook_neo",
   },
   {
-    id: "macbook-air", badge: "New", category: "Laptops",
-    name: "MacBook Air 13\u2033 and 15\u2033", fullName: "MacBook Air",
+    id: "macbook-air",
+    category: "Laptops",
+    badge: "New",
+    name: "MacBook Air 13\u2033 and 15\u2033",
     tagline: "Thin. Fast. Powerful and portable.",
-    price: "From \u20b91,19,900.00**",
-    emi: "or \u20b918,817.00/mo. for 6 mo.*",
-    colors: ["#a9d4ff","#dad6d0","#f3e5b4","#2b3040"],
-    image: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-40-macbook-air-202503?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1740772307337",
+    price: "From ₹1,19,900.00**",
+    emi: "or ₹18,817.00/mo. for 6 mo.*",
+    colors: ["#a9d4ff", "#dad6d0", "#f3e5b4", "#2b3040"],
+    image: cdnAsset(
+      "store-card-40-macbook-air-202503?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1740772307337",
+    ),
+    learnHref: "https://www.apple.com/in/macbook-air/",
+    buyHref: "https://www.apple.com/in/shop/goto/buy_mac/macbook_air",
   },
   {
-    id: "macbook-pro", badge: "New", category: "Laptops",
-    name: "MacBook Pro 14\u2033 and 16\u2033", fullName: "MacBook Pro",
+    id: "macbook-pro",
+    category: "Laptops",
+    badge: "New",
+    name: "MacBook Pro 14\u2033 and 16\u2033",
     tagline: "The most advanced Mac laptops for demanding tasks.",
-    price: "From \u20b91,89,900.00**",
-    emi: "or \u20b929,983.00/mo. for 6 mo.*",
-    colors: ["#1e1e1e","#d6d4d0"],
-    image: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-40-macbook-pro-202503?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1740782219568",
+    price: "From ₹1,89,900.00**",
+    emi: "or ₹29,983.00/mo. for 6 mo.*",
+    colors: ["#1e1e1e", "#d6d4d0"],
+    image: cdnAsset(
+      "store-card-40-macbook-pro-202503?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1740782219568",
+    ),
+    learnHref: "https://www.apple.com/in/macbook-pro/",
+    buyHref: "https://www.apple.com/in/shop/goto/buy_mac/macbook_pro",
   },
   {
-    id: "imac", badge: null, category: "Desktops",
-    name: "iMac", fullName: "iMac",
+    id: "imac",
+    category: "Desktops",
+    name: "iMac",
     tagline: "An all-in-one desktop for creativity and productivity.",
-    price: "From \u20b91,34,900.00**",
-    emi: "or \u20b921,650.00/mo. for 6 mo.*",
+    price: "From ₹1,34,900.00**",
+    emi: "or ₹21,650.00/mo. for 6 mo.*",
     colorImages: [
       "https://www.apple.com/assets-www/en_WW/common/color_indicator/fp_color_indicator_blue_d569f351c.png",
       "https://www.apple.com/assets-www/en_WW/common/color_indicator/fp_color_indicator_purple_5184607e5.png",
@@ -46,499 +149,718 @@ const lineupProducts = [
       "https://www.apple.com/assets-www/en_WW/common/color_indicator/fp_color_indicator_yellow_3d07e057d.png",
       "https://www.apple.com/assets-www/en_WW/common/color_indicator/fp_color_indicator_green_f02f2102c.png",
     ],
-    image: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-40-imac-202410?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1728342376329",
+    image: cdnAsset(
+      "store-card-40-imac-202410?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1728342376329",
+    ),
+    learnHref: "https://www.apple.com/in/imac/",
+    buyHref: "https://www.apple.com/in/shop/goto/buy_mac/imac",
   },
   {
-    id: "mac-mini", badge: null, category: "Desktops",
-    name: "Mac mini", fullName: "Mac mini",
+    id: "mac-mini",
+    category: "Desktops",
+    badge: "New",
+    name: "Mac mini",
     tagline: "The mini-est, most affordable Mac desktop.",
-    price: "From \u20b959,900.00**",
-    emi: "or \u20b99,317.00/mo. for 6 mo.*",
-    image: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-40-mac-mini-202410?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1730075290527",
+    price: "From ₹59,900.00**",
+    emi: "or ₹9,317.00/mo. for 6 mo.*",
+    image: cdnAsset(
+      "store-card-40-mac-mini-202410?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1730075290527",
+    ),
+    learnHref: "https://www.apple.com/in/mac-mini/",
+    buyHref: "https://www.apple.com/in/shop/goto/buy_mac/mac_mini",
   },
   {
-    id: "mac-studio", badge: "New", category: "Desktops",
-    name: "Mac Studio", fullName: "Mac Studio",
+    id: "mac-studio",
+    category: "Desktops",
+    badge: "New",
+    name: "Mac Studio",
     tagline: "Powerful performance and connectivity for pros.",
-    price: "From \u20b92,14,900.00**",
-    emi: "or \u20b934,150.00/mo. for 6 mo.*",
-    image: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-40-mac-studio-202503?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1740772359059",
+    price: "From ₹2,14,900.00**",
+    emi: "or ₹34,150.00/mo. for 6 mo.*",
+    image: cdnAsset(
+      "store-card-40-mac-studio-202503?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1740772359059",
+    ),
+    learnHref: "https://www.apple.com/in/mac-studio/",
+    buyHref: "https://www.apple.com/in/shop/goto/buy_mac/mac_studio",
   },
   {
-    id: "studio-display", badge: "New", category: "Displays",
-    name: "Studio Display", fullName: "Studio Display",
+    id: "studio-display",
+    category: "Displays",
+    badge: "New",
+    name: "Studio Display",
     tagline: "A 5K Retina display that\u2019s perfect for Mac.",
-    price: "From \u20b91,89,900.00\u25ca\u25ca",
-    emi: "or \u20b933,142.00/mo. for 6 mo.\u25ca",
-    image: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-40-studio-display-202503?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1740772333996",
+    price: "From ₹1,89,900.00\u25ca\u25ca",
+    emi: "or ₹33,142.00/mo. for 6 mo.\u25ca",
+    image: cdnAsset(
+      "store-card-40-studio-display-202503?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1740772333996",
+    ),
+    learnHref: "https://www.apple.com/in/studio-display/",
+    buyHref: "https://www.apple.com/in/shop/goto/buy_mac/mac_studio_display",
   },
   {
-    id: "studio-display-xdr", badge: "New", category: "Displays",
-    name: "Studio Display XDR", fullName: "Studio Display XDR",
-    tagline: "The ultimate 5K Retina XDR display for creative and pro workflows.",
-    price: "From \u20b93,99,900.00\u25ca\u25ca",
-    emi: "or \u20b969,793.00/mo. for 6 mo.\u25ca",
-    image: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-40-pro-display-xdr-202309?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1693346626695",
+    id: "studio-display-xdr",
+    category: "Displays",
+    badge: "New",
+    name: "Studio Display XDR",
+    tagline:
+      "The ultimate 5K Retina XDR display for creative and pro workflows.",
+    price: "From ₹3,99,900.00\u25ca\u25ca",
+    emi: "or ₹69,793.00/mo. for 6 mo.\u25ca",
+    image: cdnAsset(
+      "store-card-40-pro-display-xdr-202309?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1693346626695",
+    ),
+    learnHref: "https://www.apple.com/in/studio-display-xdr/",
+    buyHref: "https://www.apple.com/in/shop/goto/buy_mac/studio_display_xdr",
   },
 ];
 
-const FILTERS = ["All products","Laptops","Desktops","Displays"];
-
-const productNavItems = [
-  { label: "MacBook Neo", badge: "New", img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-13-macbook-neo-nav-202503?wid=200&hei=200&fmt=png-alpha&.v=1740772173939" },
-  { label: "MacBook Air", badge: "New", img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-13-macbook-air-nav-202503?wid=200&hei=200&fmt=png-alpha&.v=1740772174329" },
-  { label: "MacBook Pro", badge: "New", img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-13-macbook-pro-nav-202503?wid=200&hei=200&fmt=png-alpha&.v=1740782219568" },
-  { label: "iMac",        badge: null,  img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-13-imac-nav-202410?wid=200&hei=200&fmt=png-alpha&.v=1728342374591" },
-  { label: "Mac mini",    badge: null,  img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-13-mac-mini-nav-202410?wid=200&hei=200&fmt=png-alpha&.v=1730075288419" },
-  { label: "Mac Studio",  badge: null,  img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-13-mac-studio-nav-202503?wid=200&hei=200&fmt=png-alpha&.v=1740772356783" },
-  { label: "Compare",     badge: null,  img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-13-compare-mac-202503?wid=200&hei=200&fmt=png-alpha&.v=1740772362203" },
-  { label: "Displays",    badge: "New", img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-13-display-nav-202503?wid=200&hei=200&fmt=png-alpha&.v=1740772362203" },
-  { label: "Accessories", badge: null,  img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-13-accessories-mac-202503?wid=200&hei=200&fmt=png-alpha&.v=1740772362203" },
-  { label: "Shop Mac",    badge: null,  img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-13-shop-mac-202503?wid=200&hei=200&fmt=png-alpha&.v=1740772362203" },
-];
-
-const buyReasons = [
+/* ── Why Apple cards ── */
+const whyBuyCards = [
   {
     id: "ways-to-buy",
-    eyebrow: "Ways to Buy",
+    label: "Ways to Buy",
     title: "Monthly payment options are available.",
-    desc: "Choose an easy way to finance with convenient payment options.",
-    link: "Learn more about financing options",
-    image: "https://www.apple.com/v/mac/home/cd/images/overview/why_apple/financing__dol3s5rdvqia_large.jpg",
+    copy: "Choose an easy way to finance with convenient payment options.",
+    image: appleAsset(
+      "/v/mac/home/cd/images/overview/why_apple/financing__dol3s5rdvqia_large.jpg",
+    ),
+    href: "https://www.apple.com/in/shop/goto/ways_to_buy",
   },
   {
     id: "customise",
-    eyebrow: "Customise",
+    label: "Customise",
     title: "Customise your Mac.",
-    desc: "Choose your chip, memory, storage, even colour.",
-    link: "Learn more about customising your Mac",
-    image: "https://www.apple.com/v/mac/home/cd/images/overview/why_apple/customise__cymo75dpg5ma_large.jpg",
+    copy: "Choose your chip, memory, storage, even colour.",
+    image: appleAsset(
+      "/v/mac/home/cd/images/overview/why_apple/customise__cymo75dpg5ma_large.jpg",
+    ),
+    href: "https://www.apple.com/in/shop/goto/buy_mac",
   },
   {
     id: "education",
-    eyebrow: "Education Pricing",
+    label: "Education Pricing",
     title: "Save on a new Mac with education pricing.",
-    desc: "Students and educators can save exclusively through the Apple Store.",
-    link: "Learn more about education pricing",
-    image: "https://www.apple.com/v/mac/home/cd/images/overview/why_apple/education__ek1akovofbqa_large.jpg",
+    copy: "Students and educators can save exclusively through the Apple Store.****",
+    image: appleAsset(
+      "/v/mac/home/cd/images/overview/why_apple/education__ek1akovofbqa_large.jpg",
+    ),
+    href: "https://www.apple.com/in/shop/goto/educationrouting",
   },
   {
     id: "personal-setup",
-    eyebrow: "Personal Setup",
+    label: "Personal Setup",
     title: "Meet your new Mac with Personal Setup.",
-    desc: "Get one-to-one guidance with data transfer, the latest features and more.",
-    link: "Learn more about your new Mac",
-    image: "https://www.apple.com/v/mac/home/cd/images/overview/why_apple/personal_setup__blb9x0g2mxya_large.jpg",
+    copy: "Get one-to-one guidance with data transfer, the latest features and more.",
+    image: appleAsset(
+      "/v/mac/home/cd/images/overview/why_apple/personal_setup__blb9x0g2mxya_large.jpg",
+    ),
+    href: "https://www.apple.com/in/shop/goto/personal_setup",
   },
   {
     id: "delivery",
-    eyebrow: "Delivery and Pickup",
+    label: "Delivery and Pickup",
     title: "Get flexible delivery and easy pickup.",
-    desc: "Get free delivery or pickup at your Apple Store.",
-    link: "Learn more about delivery and pickup",
-    image: "https://www.apple.com/v/mac/home/cd/images/overview/why_apple/delivery__dh8c9ne3l5ia_large.jpg",
+    copy: "Get free delivery or pickup at your Apple Store.",
+    image: appleAsset(
+      "/v/mac/home/cd/images/overview/why_apple/delivery__dh8c9ne3l5ia_large.jpg",
+    ),
+    href: "https://www.apple.com/in/shop/shipping-pickup",
   },
   {
     id: "trade-in",
-    eyebrow: "Trade In",
-    title: "Save with Apple Trade\u00a0In.",
-    desc: "Get credit towards your next Mac when you trade in an eligible device.",
-    link: "Learn more about Apple Trade In",
-    image: "https://www.apple.com/v/mac/home/cd/images/overview/why_apple/trade_in__ccfzjb6plb6e_large.jpg",
+    label: "Trade In",
+    title: "Save with Apple\u00a0Trade\u00a0In.",
+    copy: "Get credit towards your next Mac when you trade in an eligible device at an Apple Store.\u00b9",
+    image: appleAsset(
+      "/v/mac/home/cd/images/overview/why_apple/trade_in__ccfzjb6plb6e_large.jpg",
+    ),
+    href: "https://www.apple.com/in/shop/goto/trade_in",
   },
   {
     id: "guided",
-    eyebrow: "Guided Shopping",
-    title: "Shop live with a Specialist.",
-    desc: "Let us help you find what you need, one-to-one, at an Apple Store or online.",
-    link: "Learn more about Guided Shopping",
-    image: "https://www.apple.com/v/mac/home/cd/images/overview/why_apple/guided_shopping__el68i3gywpqm_large.jpg",
+    label: "Guided Shopping",
+    title: "Shop live with a\u00a0Specialist.",
+    copy: "Let us help you find what you need and answer all your questions, one-to-one, at an Apple Store or online.",
+    image: appleAsset(
+      "/v/mac/home/cd/images/overview/why_apple/guided_shopping__el68i3gywpqm_large.jpg",
+    ),
+    href: "https://contactretail.apple.com/?pg=COM:mac&ap=COM&c=in&l=en",
   },
   {
     id: "app",
-    eyebrow: "Apple Store App",
+    label: "Apple Store App",
     title: "Explore a shopping experience designed around you.",
-    desc: "Use the Apple Store app to get a more personal way to shop.",
-    link: "Learn more about the Apple Store App",
-    image: "https://www.apple.com/v/mac/home/cd/images/overview/why_apple/apple_store_app__bnbpkex5v7q2_large.jpg",
+    copy: "Use the Apple Store app to get a more personal way to shop.",
+    image: appleAsset(
+      "/v/mac/home/cd/images/overview/why_apple/apple_store_app__bnbpkex5v7q2_large.jpg",
+    ),
+    href: "https://apps.apple.com/in/app/apple-store/id375380948",
   },
 ];
 
-const knowCards = [
-  { eyebrow: "Performance and Battery Life", title: "Go fast.\u00a0Go far.",              image: "https://www.apple.com/v/mac/home/cd/images/overview/consider/performance__b7qvzyfk5r6q_large.jpg", dark: true },
-  { eyebrow: "Built for AI",                 title: "Smart. Secure.\nOn device.",          image: "https://www.apple.com/v/mac/home/cd/images/overview/consider/built_for_apple_intelligence__f2g8l46if5u2_large.jpg", dark: true },
-  { eyebrow: "macOS and Apple Intelligence", title: "Easy to use.\u00a0Easy to love.",     image: "https://www.apple.com/v/mac/home/cd/images/overview/consider/macos__b8h5me9j3cqa_large.jpg", dark: false },
-  { eyebrow: "Mac + iPhone",                 title: "Together they work wonders.",          image: "https://www.apple.com/v/mac/home/cd/images/overview/consider/mac_iphone__gh1tblkt6bqm_large.jpg", dark: false },
-  { eyebrow: "Compatibility",                title: "Mac runs your favourite apps.",        image: "https://www.apple.com/v/mac/home/cd/images/overview/consider/compatibility__f8hm76ektxua_large.jpg", dark: false },
-  { eyebrow: "Privacy and Security",         title: "Your business is nobody else\u2019s.", image: "https://www.apple.com/v/mac/home/cd/images/overview/consider/privacy__e66n36h1q0om_large.jpg", dark: false },
-  { eyebrow: "Durability",                   title: "Built to stand the test of time.",    image: "https://www.apple.com/v/mac/home/cd/images/overview/consider/durability__ck6nkw4c5rki_large.jpg", dark: false },
-  { eyebrow: "Apple Values",                 title: "Our values drive everything we do.",  image: "https://www.apple.com/v/mac/home/cd/images/overview/consider/apple_values__f9kyyvtj0b6a_large.jpg", dark: false },
+/* ── Get to know Mac (feature cards) ── */
+const featureCards = [
+  {
+    id: "performance",
+    label: "Performance and Battery Life",
+    title: "Go fast.\u00a0Go far.",
+    image: appleAsset(
+      "/v/mac/home/cd/images/overview/consider/performance__b7qvzyfk5r6q_large.jpg",
+    ),
+    tone: "dark",
+  },
+  {
+    id: "ai",
+    label: "Built for AI",
+    title: "Smart. Secure.\nOn device.",
+    image: appleAsset(
+      "/v/mac/home/cd/images/overview/consider/built_for_apple_intelligence__f2g8l46if5u2_large.jpg",
+    ),
+    tone: "dark",
+  },
+  {
+    id: "macos",
+    label: "macOS and Apple Intelligence",
+    title: "Easy to use.\u00a0Easy to love.",
+    image: appleAsset(
+      "/v/mac/home/cd/images/overview/consider/macos__b8h5me9j3cqa_large.jpg",
+    ),
+    tone: "light",
+  },
+  {
+    id: "mac-iphone",
+    label: "Mac + iPhone",
+    title: "Together they work\nwonders.",
+    image: appleAsset(
+      "/v/mac/home/cd/images/overview/consider/mac_iphone__gh1tblkt6bqm_large.jpg",
+    ),
+    tone: "light",
+  },
+  {
+    id: "compatibility",
+    label: "Compatibility",
+    title: "Mac runs your\nfavourite apps.",
+    image: appleAsset(
+      "/v/mac/home/cd/images/overview/consider/compatibility__f8hm76ektxua_large.jpg",
+    ),
+    tone: "light",
+  },
+  {
+    id: "privacy",
+    label: "Privacy and Security",
+    title: "Your business is\nnobody else\u2019s.",
+    image: appleAsset(
+      "/v/mac/home/cd/images/overview/consider/privacy__e66n36h1q0om_large.jpg",
+    ),
+    tone: "dark",
+  },
+  {
+    id: "durability",
+    label: "Durability",
+    title: "Built to stand\nthe test of time.",
+    image: appleAsset(
+      "/v/mac/home/cd/images/overview/consider/durability__ck6nkw4c5rki_large.jpg",
+    ),
+    tone: "light",
+  },
+  {
+    id: "values",
+    label: "Apple Values",
+    title: "Our values drive\neverything we do.",
+    image: appleAsset(
+      "/v/mac/home/cd/images/overview/consider/apple_values__f9kyyvtj0b6a_large.jpg",
+    ),
+    tone: "light",
+  },
 ];
 
-const continuityItems = [
+/* ── Mac essentials ── */
+const essentialsCards = [
   {
+    id: "accessories",
+    title: "Mac accessories",
+    copy: "Explore keyboards, mice and other essentials.",
+    image: cdnAsset(
+      "accessories-category-card-mac-202307?wid=800&hei=800&fmt=jpeg&qlt=90&.v=1687543083228",
+    ),
+    href: "https://www.apple.com/in/shop/goto/mac/accessories",
+    cta: "Shop Mac accessories",
+  },
+  {
+    id: "studio-display",
+    badge: "New",
+    title: "Studio Display",
+    copy: "The 68.29\u2009cm (27\u2033) 5K Retina display pairs beautifully with Mac.",
+    image: cdnAsset(
+      "store-card-40-studio-display-202503?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1740772333996",
+    ),
+    href: "https://www.apple.com/in/studio-display/",
+    cta: "Learn more",
+  },
+];
+
+/* ── Unlock the world of Apple (companion stories) ── */
+const companionStories = [
+  {
+    id: "iphone",
     title: "Mac and iPhone",
-    copy: "Answer calls or messages from your iPhone directly on your Mac. See and control what\u2019s on your iPhone from your Mac with iPhone Mirroring and Live Activities. Use Universal Clipboard to copy images, video or text from your iPhone, then paste into another app on your nearby Mac. And thanks to iCloud, you can access your files from either your iPhone or your Mac. And so much more.",
-    image: "https://www.apple.com/v/mac/home/cd/images/overview/continuity/mac_iphone__dvlbqlf8b3xy_large.jpg",
+    teaser: "Mirror, call, copy across devices — then continue on either one.",
+    description:
+      "Answer calls or messages from your iPhone directly on your Mac. See and control what\u2019s on your iPhone from your Mac with iPhone Mirroring and Live Activities. Use Universal Clipboard to copy images, video or text from your iPhone, then paste into another app on your nearby Mac.",
+    image: appleAsset(
+      "/v/mac/home/cd/images/overview/continuity/mac_iphone__dvlbqlf8b3xy_large.jpg",
+    ),
+    href: "/iphone",
   },
   {
+    id: "ipad",
     title: "Mac and iPad",
-    copy: "Use your iPad as a second display for your Mac. Or use it as a drawing tablet with Apple Pencil. Work with the same files from either device, thanks to iCloud.",
-    image: "https://www.apple.com/v/mac/home/cd/images/overview/continuity/mac_ipad__efp2s86j1xoy_large.jpg",
+    teaser: "Use iPad as a second display or drawing tablet.",
+    description:
+      "Use your iPad as a second display for your Mac. Or use it as a drawing tablet with Apple Pencil. Work with the same files from either device, thanks to iCloud.",
+    image: appleAsset(
+      "/v/mac/home/cd/images/overview/continuity/mac_ipad__efp2s86j1xoy_large.jpg",
+    ),
+    href: "/ipad",
   },
   {
+    id: "watch",
     title: "Mac and Apple Watch",
-    copy: "Unlock your Mac automatically when you\u2019re wearing your Apple Watch. Approve password requests on your Mac from your wrist.",
-    image: "https://www.apple.com/v/mac/home/cd/images/overview/continuity/mac_watch__ddkzkg9m0guq_large.jpg",
+    teaser: "Unlock your Mac just by wearing your watch.",
+    description:
+      "Unlock your Mac automatically when you\u2019re wearing your Apple Watch. Approve password requests on your Mac from your wrist.",
+    image: appleAsset(
+      "/v/mac/home/cd/images/overview/continuity/mac_watch__ddkzkg9m0guq_large.jpg",
+    ),
+    href: "/watch",
   },
 ];
 
-const macNotes = [
-  "* Includes instant cashback and No Cost EMI. No Cost EMI is available with qualifying cards on 3- or 6-month tenures. Monthly pricing is rounded to the nearest rupee.",
-  "** Listed pricing is Maximum Retail Price (inclusive of all taxes).",
-  "1. Mac trade-in is available only in-store in India. Trade-in values vary based on condition, year and configuration of your eligible trade-in device.",
+/* ── Router columns ── */
+const routerColumns = [
+  {
+    title: "Explore Mac",
+    links: [
+      { label: "Explore All Mac", href: "https://www.apple.com/in/mac/" },
+      { label: "MacBook Neo", href: "https://www.apple.com/in/macbook-neo/" },
+      { label: "MacBook Air", href: "https://www.apple.com/in/macbook-air/" },
+      { label: "MacBook Pro", href: "https://www.apple.com/in/macbook-pro/" },
+      { label: "iMac", href: "https://www.apple.com/in/imac/" },
+      { label: "Mac mini", href: "https://www.apple.com/in/mac-mini/" },
+      { label: "Mac Studio", href: "https://www.apple.com/in/mac-studio/" },
+      { label: "Displays", href: "https://www.apple.com/in/displays/" },
+      {
+        label: "Compare Mac",
+        href: "https://www.apple.com/in/mac/compare/",
+      },
+      {
+        label: "Switch from PC to Mac",
+        href: "https://www.apple.com/in/mac/mac-does-that/",
+      },
+    ],
+  },
+  {
+    title: "Shop Mac",
+    links: [
+      {
+        label: "Shop Mac",
+        href: "https://www.apple.com/in/shop/goto/buy_mac",
+      },
+      {
+        label: "Mac Accessories",
+        href: "https://www.apple.com/in/shop/goto/mac/accessories",
+      },
+      {
+        label: "Ways to Buy",
+        href: "https://www.apple.com/in/shop/goto/ways_to_buy",
+      },
+      {
+        label: "Apple Trade In",
+        href: "https://www.apple.com/in/shop/goto/trade_in",
+      },
+      {
+        label: "Personal Setup",
+        href: "https://www.apple.com/in/shop/goto/personal_setup",
+      },
+    ],
+  },
+  {
+    title: "More from Mac",
+    links: [
+      {
+        label: "Mac Support",
+        href: "https://support.apple.com/en-in/mac?cid=gn-ols-mac-psp-prodfly",
+      },
+      {
+        label: "AppleCare+ for Mac",
+        href: "https://www.apple.com/in/applecare/?filter=mac",
+      },
+      {
+        label: "macOS Tahoe",
+        href: "https://www.apple.com/in/os/macos/",
+      },
+      {
+        label: "Apple Intelligence",
+        href: "https://www.apple.com/in/apple-intelligence/",
+      },
+      { label: "Apps by Apple", href: "https://www.apple.com/in/apps/" },
+      {
+        label: "Apple Creator Studio",
+        href: "https://www.apple.com/in/apple-creator-studio/",
+      },
+      {
+        label: "Better with iPhone",
+        href: "https://www.apple.com/in/macos/continuity/",
+      },
+      { label: "iCloud+", href: "https://www.apple.com/in/icloud/" },
+      {
+        label: "Mac for Business",
+        href: "https://www.apple.com/in/business/mac/",
+      },
+      { label: "Education", href: "https://www.apple.com/in/education/" },
+    ],
+  },
 ];
 
-/* ─── Helpers ───────────────────────────────────────────── */
-
-function NavArrowLeft() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-      <path d="M11.5 3.5L6 9l5.5 5.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-  );
-}
-function NavArrowRight() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-      <path d="M6.5 3.5L12 9l-5.5 5.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-  );
-}
-function PlusIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <path d="M8 3v10M3 8h10" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
-    </svg>
-  );
-}
-
-/* ─── Carousel hook ─────────────────────────────────────── */
-function useCarousel(total, visible) {
-  const [idx, setIdx] = useState(0);
-  const max = Math.max(0, total - visible);
-  const prev = () => setIdx((i) => Math.max(0, i - 1));
-  const next = () => setIdx((i) => Math.min(max, i + 1));
-  return { idx, prev, next, canPrev: idx > 0, canNext: idx < max };
-}
-
-/* ─── Component ─────────────────────────────────────────── */
-
-export default function MacPage() {
+/* ── Component ── */
+function MacPage() {
   const [activeFilter, setActiveFilter] = useState("All products");
-  const [openContinuity, setOpenContinuity] = useState(0);
+  const [activeCompanionId, setActiveCompanionId] = useState(
+    companionStories[0].id,
+  );
 
-  const filtered = activeFilter === "All products"
-    ? lineupProducts
-    : lineupProducts.filter((p) => p.category === activeFilter);
+  const filteredModels =
+    activeFilter === "All products"
+      ? lineupModels
+      : lineupModels.filter((m) => m.category === activeFilter);
 
-  const lineupCarousel = useCarousel(filtered.length, 4);
-  const whyCarousel = useCarousel(buyReasons.length, 4);
-  const knowCarousel = useCarousel(knowCards.length, 4);
-
-  /* lineup: fixed px; why/know: % of track */
-  const LINEUP_CARD_PX = 290; /* ~4 visible at 1200px */
-  const LINEUP_STEP_PX = 302; /* card + gap */
-  const CARD_W_WHY     = 25;
-  const CARD_W_KNOW    = 25;
+  const activeCompanion =
+    companionStories.find((s) => s.id === activeCompanionId) ??
+    companionStories[0];
 
   return (
-    <main className="mac-page">
-
-      {/* ── Promo bar ── */}
-      <div className="mac-promo-bar">
-        Get up to \u20b910,000 instant cashback on selected Mac models with eligible cards.
-        {" "}Plus up to 6\u00a0months of No\u00a0Cost EMI.*{" "}
-        <a href="#">Shop Mac \u203a</a>
+    <div className="mac-page">
+      {/* Promo ribbon */}
+      <div className="mac-ribbon">
+        <div className="mac-shell">
+          <p>
+            Get up to ₹10,000 instant cashback on selected Mac models with
+            eligible cards. Plus up to 6&nbsp;months of No&nbsp;Cost EMI.{" "}
+            <a href="https://www.apple.com/in/shop/goto/buy_mac">Shop Mac</a>
+          </p>
+        </div>
       </div>
 
-      {/* ── Hero ── */}
-      <section className="mac-hero">
-        <div className="mac-content-width">
-          <h1 className="mac-hero-title">Mac</h1>
-        </div>
-      </section>
+      {/* Mac header */}
+      <header className="mac-header mac-shell">
+        <h1 className="mac-header-title">Mac</h1>
+      </header>
 
-      {/* ── Sticky product nav ── */}
-      <nav className="mac-product-nav" aria-label="Mac models">
-        <div className="mac-product-nav-inner mac-content-width">
-          {productNavItems.map((item) => (
-            <a key={item.label} href="#" className="mac-nav-item">
-              <img src={item.img} alt={item.label} loading="lazy" />
-              <span className="mac-nav-label">{item.label}</span>
-              {item.badge && <span className="mac-nav-badge">{item.badge}</span>}
-            </a>
-          ))}
-          <button className="mac-nav-arrow" aria-label="Scroll right"><NavArrowRight /></button>
+      {/* Sticky chapter nav */}
+      <nav className="mac-chapternav" aria-label="Mac family">
+        <div className="mac-shell mac-chapternav-scroll">
+          <div className="mac-chapternav-track">
+            {chapterNavItems.map((item) => (
+              <a key={item.label} className="mac-chapter-item" href={item.href}>
+                <span className="mac-chapter-media">
+                  <img src={item.image} alt="" loading="lazy" />
+                </span>
+                <span className="mac-chapter-label">{item.label}</span>
+                {item.badge ? (
+                  <span className="mac-chapter-badge">{item.badge}</span>
+                ) : null}
+              </a>
+            ))}
+          </div>
         </div>
       </nav>
 
-      {/* ── Lineup ── */}
-      <section className="mac-lineup-section">
-        <div className="mac-content-width">
-          <div className="mac-lineup-head">
-            <h2 className="mac-h2">Explore the line&#8209;up.</h2>
-            <div className="mac-filter-row" role="group">
-              {FILTERS.map((f) => (
-                <button
-                  key={f}
-                  className={`mac-filter-btn${activeFilter === f ? " is-active" : ""}`}
-                  onClick={() => { setActiveFilter(f); lineupCarousel.idx && lineupCarousel.prev(); }}
-                >
-                  {f}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="mac-carousel-wrap">
-            <div
-              className="mac-carousel-track"
-              style={{ transform: `translateX(-${lineupCarousel.idx * LINEUP_STEP_PX}px)` }}
-            >
-              {filtered.map((p) => (
-                <div key={p.id} className="mac-lineup-card" style={{ width: `${LINEUP_CARD_PX}px`, flex: `0 0 ${LINEUP_CARD_PX}px` }}>
-                  <div className="mac-lineup-img-area">
-                    <img src={p.image} alt={p.name} loading="lazy" />
-                  </div>
-                  <div className="mac-lineup-info">
-                    {p.colors && (
-                      <div className="mac-dots">
-                        {p.colors.map((c) => <span key={c} className="mac-dot" style={{ background: c }} />)}
-                      </div>
-                    )}
-                    {p.colorImages && (
-                      <div className="mac-dots">
-                        {p.colorImages.map((s) => <img key={s} src={s} alt="" className="mac-dot-img" loading="lazy" />)}
-                      </div>
-                    )}
-                    {!p.colors && !p.colorImages && <div className="mac-dots-ph" />}
-                    {p.badge && <div className="mac-card-badge">{p.badge}</div>}
-                    <h3 className="mac-lineup-name">{p.name}</h3>
-                    <p className="mac-lineup-tagline">{p.tagline}</p>
-                    <p className="mac-lineup-price">{p.price}</p>
-                    <p className="mac-lineup-emi">{p.emi}</p>
-                    <div className="mac-lineup-actions">
-                      <a href="#" className="mac-btn-learn">Learn more</a>
-                      <a href="#" className="mac-link-buy">Buy \u203a</a>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Prev/Next arrows */}
-            <div className="mac-carousel-arrows">
-              <button
-                className={`mac-arr-btn${lineupCarousel.canPrev ? "" : " is-hidden"}`}
-                onClick={lineupCarousel.prev}
-                aria-label="Previous"
-              ><NavArrowLeft /></button>
-              <button
-                className={`mac-arr-btn${lineupCarousel.canNext ? "" : " is-hidden"}`}
-                onClick={lineupCarousel.next}
-                aria-label="Next"
-              ><NavArrowRight /></button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Why Apple ── */}
-      <section className="mac-why-section">
-        <div className="mac-content-width">
+      <main className="mac-main">
+        {/* Explore the line-up */}
+        <section className="mac-section mac-shell">
           <div className="mac-section-head">
-            <h2 className="mac-h2">Why Apple is the best{"\u00a0"}place<br />to buy Mac.</h2>
-            <Link to="/store" className="mac-text-link">Shop Mac \u203a</Link>
-          </div>
-
-          <div className="mac-carousel-wrap">
-            <div
-              className="mac-carousel-track"
-              style={{ transform: `translateX(-${whyCarousel.idx * CARD_W_WHY}%)` }}
+            <h2>Explore the line&#8209;up.</h2>
+            <a
+              className="mac-section-link"
+              href="https://www.apple.com/in/mac/compare/"
             >
-              {buyReasons.map((r) => (
-                <div key={r.id} className="mac-why-card" style={{ minWidth: `${CARD_W_WHY}%` }}>
-                  <div className="mac-why-top">
-                    <p className="mac-why-eyebrow">{r.eyebrow}</p>
-                    <h3 className="mac-why-title">{r.title}</h3>
-                    <p className="mac-why-desc">{r.desc}</p>
-                    <a href="#" className="mac-text-link">{r.link}</a>
-                  </div>
-                  <div className="mac-why-img-area">
-                    <img src={r.image} alt={r.eyebrow} loading="lazy" />
-                    <button className="mac-plus-btn" aria-label="More info"><PlusIcon /></button>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="mac-carousel-arrows">
-              <button className={`mac-arr-btn${whyCarousel.canPrev ? "" : " is-hidden"}`} onClick={whyCarousel.prev} aria-label="Previous"><NavArrowLeft /></button>
-              <button className={`mac-arr-btn${whyCarousel.canNext ? "" : " is-hidden"}`} onClick={whyCarousel.next} aria-label="Next"><NavArrowRight /></button>
-            </div>
+              Compare all models <span>&rsaquo;</span>
+            </a>
           </div>
-        </div>
-      </section>
 
-      {/* ── Get to know Mac ── */}
-      <section className="mac-know-section">
-        <div className="mac-content-width">
-          <h2 className="mac-h2">Get to know Mac.</h2>
-          <div className="mac-carousel-wrap">
-            <div
-              className="mac-carousel-track"
-              style={{ transform: `translateX(-${knowCarousel.idx * CARD_W_KNOW}%)` }}
+          {/* Filter tabs */}
+          <div
+            className="mac-filter-row"
+            role="group"
+            aria-label="Filter Mac products"
+          >
+            {LINEUP_FILTERS.map((f) => (
+              <button
+                key={f}
+                className={`mac-filter-btn${activeFilter === f ? " is-active" : ""}`}
+                onClick={() => setActiveFilter(f)}
+              >
+                {f}
+              </button>
+            ))}
+          </div>
+
+          <div className="mac-rail mac-lineup-rail">
+            {filteredModels.map((model) => (
+              <article key={model.id} className="mac-lineup-card">
+                <div className="mac-lineup-media">
+                  <img src={model.image} alt={model.name} loading="lazy" />
+                </div>
+
+                {/* Color dots */}
+                {model.colors ? (
+                  <div className="mac-lineup-colors">
+                    {model.colors.map((c) => (
+                      <span
+                        key={`${model.id}-${c}`}
+                        className="mac-color-dot"
+                        style={{ backgroundColor: c }}
+                      />
+                    ))}
+                  </div>
+                ) : model.colorImages ? (
+                  <div className="mac-lineup-colors">
+                    {model.colorImages.map((src) => (
+                      <img
+                        key={src}
+                        src={src}
+                        alt=""
+                        className="mac-color-dot-img"
+                        loading="lazy"
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="mac-lineup-colors-ph" />
+                )}
+
+                <div className="mac-lineup-copy">
+                  {model.badge ? (
+                    <span className="mac-badge">{model.badge}</span>
+                  ) : null}
+                  <h3>{model.name}</h3>
+                  <p>{model.tagline}</p>
+                  <p className="mac-lineup-price">{model.price}</p>
+                  <p className="mac-lineup-emi">{model.emi}</p>
+                </div>
+
+                <div className="mac-card-actions mac-lineup-actions">
+                  <a
+                    className="mac-button mac-button-primary"
+                    href={model.learnHref}
+                  >
+                    Learn more
+                  </a>
+                  <a className="mac-lineup-buy-link" href={model.buyHref}>
+                    Buy <span>&rsaquo;</span>
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {/* Why Apple is the best place to buy Mac */}
+        <section className="mac-section mac-shell">
+          <div className="mac-section-head">
+            <h2>
+              Why Apple is the best
+              <br />
+              place to buy Mac.
+            </h2>
+            <a
+              className="mac-section-link"
+              href="https://www.apple.com/in/shop/goto/buy_mac"
             >
-              {knowCards.map((c) => (
-                <div
-                  key={c.eyebrow}
-                  className={`mac-know-card${c.dark ? " is-dark" : ""}`}
-                  style={{ minWidth: `${CARD_W_KNOW}%` }}
-                >
-                  <div className="mac-know-text-overlay">
-                    <p className="mac-know-eyebrow">{c.eyebrow}</p>
-                    <h3 className="mac-know-title">{c.title}</h3>
-                  </div>
-                  <div className="mac-know-img-fill">
-                    <img src={c.image} alt={c.eyebrow} loading="lazy" />
-                  </div>
-                  <button className="mac-plus-btn mac-plus-dark" aria-label="More info"><PlusIcon /></button>
-                </div>
-              ))}
-            </div>
-            <div className="mac-carousel-arrows">
-              <button className={`mac-arr-btn${knowCarousel.canPrev ? "" : " is-hidden"}`} onClick={knowCarousel.prev} aria-label="Previous"><NavArrowLeft /></button>
-              <button className={`mac-arr-btn${knowCarousel.canNext ? "" : " is-hidden"}`} onClick={knowCarousel.next} aria-label="Next"><NavArrowRight /></button>
-            </div>
+              Shop Mac <span>&rsaquo;</span>
+            </a>
           </div>
-        </div>
-      </section>
 
-      {/* ── Switch to Mac ── */}
-      <section className="mac-switch-section">
-        <div className="mac-content-width">
-          <h2 className="mac-h2">Switch to Mac.</h2>
-          <article className="mac-switch-card">
-            <div className="mac-switch-left">
-              <h3 className="mac-switch-eyebrow">Mac does that.</h3>
-              <p className="mac-switch-copy">See how easy it is to move to Mac.</p>
-              <a href="#" className="mac-text-link">Learn more \u203a</a>
+          <div className="mac-rail mac-buy-rail">
+            {whyBuyCards.map((card) => (
+              <a key={card.id} className="mac-buy-card" href={card.href}>
+                <div className="mac-buy-copy">
+                  <p className="mac-card-label">{card.label}</p>
+                  <h3>{card.title}</h3>
+                  <p className="mac-card-body">{card.copy}</p>
+                </div>
+                <div className="mac-buy-media">
+                  <img src={card.image} alt={card.label} loading="lazy" />
+                </div>
+                <span className="mac-card-plus" aria-hidden="true">
+                  +
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        {/* Get to know Mac */}
+        <section className="mac-section mac-shell">
+          <div className="mac-section-head mac-section-head-solo">
+            <h2>Get to know Mac.</h2>
+          </div>
+          <div className="mac-rail">
+            {featureCards.map((card) => (
+              <article
+                key={card.id}
+                className={`mac-feature-card mac-card-tone-${card.tone}`}
+              >
+                <img src={card.image} alt={card.label} loading="lazy" />
+                <div className="mac-feature-overlay" />
+                <div className="mac-feature-copy">
+                  <p className="mac-card-label">{card.label}</p>
+                  <h3 style={{ whiteSpace: "pre-line" }}>{card.title}</h3>
+                </div>
+                <span className="mac-card-plus" aria-hidden="true">
+                  +
+                </span>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {/* Switch to Mac */}
+        <section className="mac-section mac-shell">
+          <div className="mac-section-head mac-section-head-solo">
+            <h2>Switch to Mac.</h2>
+          </div>
+          <div className="mac-switch-card">
+            <div className="mac-switch-copy">
+              <p className="mac-eyebrow">Mac does that.</p>
+              <h3>See how easy it is to move to Mac.</h3>
+              <a
+                className="mac-inline-link"
+                href="https://www.apple.com/in/mac/mac-does-that/"
+              >
+                Learn more <span>&rsaquo;</span>
+              </a>
             </div>
-            <div className="mac-switch-right">
+            <div className="mac-switch-media">
               <img
-                src="https://www.apple.com/v/mac/home/cd/images/overview/switch/mac_does_that__f4t5v2wmwa6e_large.jpg"
+                src={appleAsset(
+                  "/v/mac/home/cd/images/overview/switch/mac_does_that__f4t5v2wmwa6e_large.jpg",
+                )}
                 alt="Mac does that"
                 loading="lazy"
               />
             </div>
-          </article>
-        </div>
-      </section>
+          </div>
+        </section>
 
-      {/* ── Mac essentials ── */}
-      <section className="mac-essentials-section">
-        <div className="mac-content-width">
-          <h2 className="mac-h2">Mac essentials.</h2>
+        {/* Mac essentials */}
+        <section className="mac-section mac-shell">
+          <div className="mac-section-head mac-section-head-solo">
+            <h2>Mac essentials.</h2>
+          </div>
           <div className="mac-essentials-grid">
-            {/* Card 1 – Accessories */}
-            <article className="mac-ess-card">
-              <div className="mac-ess-top">
-                <h3>Mac accessories</h3>
-                <p>Explore keyboards, mice and other essentials.</p>
-                <a href="#" className="mac-text-link">Shop Mac accessories \u203a</a>
-              </div>
-              <div className="mac-ess-img">
-                <img
-                  src="https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/accessories-category-card-mac-202307?wid=800&hei=800&fmt=jpeg&qlt=90&.v=1687543083228"
-                  alt="Mac accessories"
-                  loading="lazy"
-                />
-              </div>
-            </article>
-            {/* Card 2 – Studio Display */}
-            <article className="mac-ess-card">
-              <div className="mac-ess-top">
-                <span className="mac-card-badge">New</span>
-                <h3>Studio Display</h3>
-                <p>The 68.29&thinsp;cm (27\u2033) 5K Retina display pairs beautifully with Mac.</p>
-                <a href="#" className="mac-text-link">Learn more \u203a</a>
-              </div>
-              <div className="mac-ess-img">
-                <img
-                  src="https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-40-studio-display-202503?wid=800&hei=1000&fmt=jpeg&qlt=90&.v=1740772333996"
-                  alt="Studio Display"
-                  loading="lazy"
-                />
-              </div>
-            </article>
+            {essentialsCards.map((card) => (
+              <a key={card.id} className="mac-essential-card" href={card.href}>
+                <div className="mac-essential-copy">
+                  {card.badge ? (
+                    <span className="mac-badge">{card.badge}</span>
+                  ) : null}
+                  <h3>{card.title}</h3>
+                  <p>{card.copy}</p>
+                  <span className="mac-inline-link">
+                    {card.cta} <span>&rsaquo;</span>
+                  </span>
+                </div>
+                <div className="mac-essential-media">
+                  <img src={card.image} alt={card.title} loading="lazy" />
+                </div>
+              </a>
+            ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ── Unlock the world of Apple (accordion) ── */}
-      <section className="mac-continuity-section">
-        <div className="mac-content-width">
+        {/* Unlock the world of Apple */}
+        <section className="mac-section mac-shell">
           <div className="mac-section-head">
-            <h2 className="mac-h2">Unlock the world of Apple.</h2>
-            <a href="#" className="mac-text-link">Learn how Apple devices work better together \u203a</a>
+            <h2>Unlock the world of Apple.</h2>
+            <a
+              className="mac-section-link"
+              href="https://www.apple.com/in/macos/continuity/"
+            >
+              Learn how Apple devices work better together <span>&rsaquo;</span>
+            </a>
           </div>
-          <div className="mac-accordion-card">
-            {/* Left accordion list */}
-            <div className="mac-acc-left">
-              {continuityItems.map((item, i) => (
-                <div key={item.title} className="mac-acc-row">
+
+          <div className="mac-companion-surface">
+            <div
+              className="mac-companion-nav"
+              role="tablist"
+              aria-label="Mac pairings"
+            >
+              {companionStories.map((story) => {
+                const isActive = story.id === activeCompanionId;
+                return (
                   <button
-                    className="mac-acc-trigger"
-                    onClick={() => setOpenContinuity(openContinuity === i ? -1 : i)}
-                    aria-expanded={openContinuity === i}
+                    key={story.id}
+                    type="button"
+                    className={`mac-companion-tab${isActive ? " mac-companion-tab-active" : ""}`}
+                    onClick={() => setActiveCompanionId(story.id)}
+                    role="tab"
+                    aria-selected={isActive}
                   >
-                    <span className="mac-acc-title">{item.title}</span>
-                    <span className="mac-acc-chevron">
-                      {openContinuity === i
-                        ? <svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 10l5-5 5 5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>
-                        : <svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 6l5 5 5-5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>
-                      }
+                    <span className="mac-companion-tab-title">
+                      {story.title}
+                    </span>
+                    <span className="mac-companion-tab-copy">
+                      {story.teaser}
                     </span>
                   </button>
-                  {openContinuity === i && (
-                    <div className="mac-acc-body">
-                      <p>{item.copy}</p>
-                    </div>
-                  )}
+                );
+              })}
+            </div>
+
+            <div className="mac-companion-panel" role="tabpanel">
+              <div className="mac-companion-panel-copy">
+                <h3>{activeCompanion.title}</h3>
+                <p>{activeCompanion.description}</p>
+                <a className="mac-inline-link" href={activeCompanion.href}>
+                  Explore more <span>&rsaquo;</span>
+                </a>
+              </div>
+              <div className="mac-companion-panel-media">
+                <img
+                  src={activeCompanion.image}
+                  alt={activeCompanion.title}
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Bottom router */}
+        <section className="mac-section mac-shell mac-router-section">
+          <div className="mac-router-surface">
+            <h2 className="mac-router-title">Mac</h2>
+            <div className="mac-router-grid">
+              {routerColumns.map((column) => (
+                <div key={column.title} className="mac-router-column">
+                  <h3>{column.title}</h3>
+                  <ul>
+                    {column.links.map((link) => (
+                      <li key={link.label}>
+                        <a href={link.href}>{link.label}</a>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               ))}
             </div>
-            {/* Right image panel */}
-            <div className="mac-acc-image-panel">
-              {openContinuity >= 0 && (
-                <img
-                  src={continuityItems[openContinuity].image}
-                  alt={continuityItems[openContinuity].title}
-                  loading="lazy"
-                />
-              )}
-            </div>
           </div>
-        </div>
-      </section>
-
-      {/* ── Footnotes ── */}
-      <footer className="mac-footnotes">
-        <div className="mac-content-width">
-          {macNotes.map((n, i) => <p key={i}>{n}</p>)}
-        </div>
-      </footer>
-
-    </main>
+        </section>
+      </main>
+    </div>
   );
 }
+
+export default MacPage;

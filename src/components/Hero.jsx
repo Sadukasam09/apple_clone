@@ -1,16 +1,22 @@
+import { Link } from "react-router-dom";
+
 export default function Hero() {
   return (
     <section className="apple-hero">
       <div className="apple-hero-content">
-        <p className="apple-hero-eyebrow">New</p>
         <h1 className="apple-hero-title">iPhone</h1>
-        <p className="apple-hero-subtitle">Hello, Apple Intelligence.</p>
+        <p className="apple-hero-subtitle">Meet the latest iPhone lineup.</p>
         <div className="apple-hero-cta">
-          <a href="#" className="pill-btn pill-btn-filled">
+          <Link to="/iphone" className="pill-btn pill-btn-filled">
             Learn more
-          </a>
-          <a href="#" className="pill-btn pill-btn-outline">
-            Buy
+          </Link>
+          <a
+            href="https://www.apple.com/in/shop/goto/buy_iphone"
+            className="pill-btn pill-btn-outline"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Shop iPhone
           </a>
         </div>
       </div>

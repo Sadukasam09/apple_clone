@@ -1,326 +1,342 @@
 import { useState } from "react";
 import "./SupportPage.css";
 
-const PRODUCTS = [
+const productLinks = [
   {
-    name: "iPhone",
-    icon: "📱",
-    img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone17-pro-finish-select-202509-6-9inch-blacktitanium?wid=200&hei=200&fmt=jpeg&qlt=90",
+    name: "iPhone Support",
+    href: "https://support.apple.com/en-in/iphone",
+    image:
+      "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/iphone17-pro-finish-select-202509-6-3inch-blacktitanium?wid=300&hei=300&fmt=png-alpha",
   },
   {
-    name: "Mac",
-    icon: "💻",
-    img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-40-macbook-air-202503?wid=200&hei=200&fmt=jpeg&qlt=90",
+    name: "Mac Support",
+    href: "https://support.apple.com/en-in/mac",
+    image:
+      "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/store-card-40-macbook-air-202503?wid=300&hei=300&fmt=png-alpha&qlt=90",
   },
   {
-    name: "iPad",
-    icon: "📲",
-    img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-pro-11-select-cell-spacegray-202405?wid=200&hei=200&fmt=jpeg&qlt=90",
+    name: "iPad Support",
+    href: "https://support.apple.com/en-in/ipad",
+    image:
+      "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/ipad-air-select-wifi-blue-202503?wid=300&hei=300&fmt=png-alpha&.v=1740769332690",
   },
   {
-    name: "Apple Watch",
-    icon: "⌚",
-    img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/watch-s11-45-alum-midnight-nc-s11_VW_34FR_WF_CO?wid=200&hei=200&fmt=jpeg&qlt=90",
+    name: "Apple Watch Support",
+    href: "https://support.apple.com/en-in/watch",
+    image:
+      "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/watch-series11-unselect-gallery-1-202409?wid=300&hei=300&fmt=png-alpha",
   },
   {
-    name: "AirPods",
-    icon: "🎧",
-    img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/airpods-pro-2-hero-select-202409?wid=200&hei=200&fmt=jpeg&qlt=90",
+    name: "AirPods Support",
+    href: "https://support.apple.com/en-in/airpods",
+    image:
+      "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/airpods-pro3-select-202409?wid=300&hei=300&fmt=png-alpha",
   },
   {
-    name: "Apple TV",
-    icon: "📺",
-    img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/apple-tv-4k-202210-gallery?wid=200&hei=200&fmt=jpeg&qlt=90",
-  },
-];
-
-const SUPPORT_TOOLS = [
-  {
-    title: "Apple ID",
-    desc: "Manage your Apple ID, reset your password, or find out if your account has been compromised.",
-    link: "https://account.apple.com",
-    icon: "🔑",
-  },
-  {
-    title: "Check Coverage",
-    desc: "Check your service and support coverage, including limited warranty, AppleCare plan, and more.",
-    link: "https://checkcoverage.apple.com",
-    icon: "🛡️",
-  },
-  {
-    title: "Apple Repair",
-    desc: "Get your Apple product repaired at an Apple Store or Apple Authorised Service Provider.",
-    link: "https://support.apple.com/en-in/repair",
-    icon: "🔧",
-  },
-  {
-    title: "Find My",
-    desc: "Locate, lock, or erase your lost or stolen Apple device using iCloud.com or the Find My app.",
-    link: "https://icloud.com/find",
-    icon: "📍",
+    name: "TV Support",
+    href: "https://support.apple.com/en-in/tv",
+    image:
+      "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/apple-tv-4k-hero-select-202210?wid=300&hei=300&fmt=png-alpha&.v=1664896361408",
   },
 ];
 
-const POPULAR_TOPICS = [
+const supportTools = [
   {
-    title: "Set up your new iPhone",
-    link: "https://support.apple.com/en-in/102538",
+    title: "Reset your Apple Account password",
+    copy: "Use iforgot to recover access to your Apple Account quickly and securely.",
+    href: "https://iforgot.apple.com/",
   },
   {
-    title: "Back up your iPhone",
-    link: "https://support.apple.com/en-in/108771",
+    title: "Check your warranty or AppleCare plan",
+    copy: "See your coverage status and service eligibility in a few clicks.",
+    href: "https://checkcoverage.apple.com/?locale=en_IN",
   },
   {
-    title: "Transfer data to new iPhone",
-    link: "https://support.apple.com/en-in/111796",
-  },
-  {
-    title: "Apple ID password reset",
-    link: "https://support.apple.com/en-in/111825",
-  },
-  { title: "Update macOS", link: "https://support.apple.com/en-in/100100" },
-  {
-    title: "Set up Family Sharing",
-    link: "https://support.apple.com/en-in/108380",
+    title: "Manage subscriptions",
+    copy: "Review or change your subscriptions from the Apple Account site.",
+    href: "https://account.apple.com/account/manage/section/subscriptions",
   },
 ];
 
-const SERVICE_PROGRAMS = [
+const exploreCards = [
   {
-    title: "AppleCare+",
-    desc: "Your plan. Your peace of mind. Includes expert technical support, accidental damage protection, and hardware repair coverage.",
-    link: "https://www.apple.com/in/support/products/",
-    cta: "Learn more",
-  },
-  {
-    title: "Apple Trade In",
-    desc: "Get credit towards a new Apple device when you trade in your eligible device.",
-    link: "https://www.apple.com/in/trade-in/",
-    cta: "Get your estimate",
+    title: "Apple Support app",
+    copy: "Get help for all of your Apple products in one place, or connect with an expert.",
+    href: "https://apps.apple.com/in/app/apple-support/id1130498044?pt=2003&ct=support.home&mt=8&l=en",
   },
   {
     title: "Today at Apple",
-    desc: "Free sessions to help you get the most from your Apple devices — in‑store and online.",
-    link: "https://www.apple.com/in/today/",
-    cta: "Find a session",
+    copy: "Learn, create and be inspired in hands-on sessions at your Apple Store.",
+    href: "https://www.apple.com/in/today/",
+  },
+  {
+    title: "Apple Repair and Service",
+    copy: "Find repair options, mail-in service and trusted support with genuine Apple parts.",
+    href: "https://support.apple.com/en-in/repair",
+  },
+  {
+    title: "My Support",
+    copy: "Track your devices, support history and upcoming service activity.",
+    href: "https://support.apple.com/en-in/my-support",
+  },
+];
+
+const servicePrograms = [
+  {
+    title: "Mac mini Service Programme for No Power Issue",
+    href: "https://support.apple.com/en-in/mac-mini-2023-service-program-for-no-power-issue",
+  },
+  {
+    title: "iPhone 14 Plus Service Programme for Rear Camera Issue",
+    href: "https://support.apple.com/en-in/iphone-14-plus-service-program-for-rear-camera-issue",
+  },
+  {
+    title: "15-inch MacBook Pro Battery Recall Programme",
+    href: "https://support.apple.com/en-in/15-inch-macbook-pro-battery-recall",
   },
 ];
 
 export default function SupportPage() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchError, setSearchError] = useState("");
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      window.open(
-        `https://support.apple.com/en-in/search?q=${encodeURIComponent(searchQuery)}`,
-        "_blank",
-        "noopener,noreferrer",
-      );
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const query = searchQuery.trim();
+
+    if (!query) {
+      setSearchError("Enter a question or keyword to search support.");
+      return;
     }
+
+    if (query.length < 2) {
+      setSearchError("Use at least 2 characters for better results.");
+      return;
+    }
+
+    setSearchError("");
+
+    window.open(
+      `https://support.apple.com/en-in/search?q=${encodeURIComponent(query)}`,
+      "_blank",
+      "noopener,noreferrer",
+    );
   };
 
   return (
     <div className="sup-page">
-      {/* Hero / Search */}
       <section className="sup-hero">
         <div className="sup-content-width">
-          <h1 className="sup-hero-title">Need help? Start here.</h1>
-          <form className="sup-search-form" onSubmit={handleSearch}>
-            <div className="sup-search-wrap">
-              <svg className="sup-search-icon" viewBox="0 0 20 20" fill="none">
-                <path
-                  d="M13.5 13.5L18 18M8.5 15A6.5 6.5 0 1 1 8.5 2a6.5 6.5 0 0 1 0 13Z"
-                  stroke="#6e6e73"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-              </svg>
+          <img
+            className="sup-hero-logo"
+            src="https://support.apple.com/content/dam/edam/applecare/images/en_US/psp/psp_heroes/support-home-apple-logo-circle-blue.png"
+            alt="Apple Support"
+          />
+          <h1>Need help? Start here.</h1>
+          <p>
+            Search articles, explore product help and reach trusted Apple
+            support resources from one place.
+          </p>
+          <form className="sup-search-form" onSubmit={handleSubmit}>
+            <div className="sup-search-field">
               <input
                 type="search"
-                className="sup-search-input"
-                placeholder="Search Support"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(event) => {
+                  setSearchQuery(event.target.value);
+                  if (searchError) {
+                    setSearchError("");
+                  }
+                }}
+                placeholder="Search Support"
                 aria-label="Search Support"
+                aria-invalid={Boolean(searchError)}
+                aria-describedby="sup-search-helper"
               />
+              {searchQuery ? (
+                <button
+                  type="button"
+                  className="sup-search-clear"
+                  onClick={() => {
+                    setSearchQuery("");
+                    setSearchError("");
+                  }}
+                  aria-label="Clear support search"
+                >
+                  Clear
+                </button>
+              ) : null}
             </div>
-            <button type="submit" className="sup-search-btn">
+            <button type="submit" disabled={searchQuery.trim().length === 0}>
               Search
             </button>
           </form>
+          <p
+            id="sup-search-helper"
+            className={`sup-search-helper${searchError ? " is-error" : ""}`}
+            role="status"
+          >
+            {searchError ||
+              "Tip: press Enter to search articles and troubleshooting steps."}
+          </p>
         </div>
       </section>
 
-      {/* Product quick links */}
-      <section className="sup-products">
+      <section className="sup-products-section">
         <div className="sup-content-width">
-          <h2 className="sup-section-title">Support by product</h2>
-          <div className="sup-product-grid">
-            {PRODUCTS.map((p) => (
+          <h2>Support by product</h2>
+          <div className="sup-products-grid">
+            {productLinks.map((product) => (
               <a
-                key={p.name}
-                href={`https://support.apple.com/en-in/${p.name.toLowerCase().replace(" ", "-")}`}
-                className="sup-product-card"
+                key={product.name}
+                href={product.href}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noreferrer"
               >
-                <div className="sup-product-img">
-                  <img
-                    src={p.img}
-                    alt={p.name}
-                    onError={(e) => (e.currentTarget.style.display = "none")}
-                  />
-                </div>
-                <span className="sup-product-name">{p.name}</span>
+                <img src={product.image} alt={product.name} />
+                <span>{product.name}</span>
               </a>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Support tools */}
       <section className="sup-tools-section">
         <div className="sup-content-width">
-          <h2 className="sup-section-title">Support tools</h2>
+          <div className="sup-section-header">
+            <h2>Support Tools</h2>
+          </div>
           <div className="sup-tools-grid">
-            {SUPPORT_TOOLS.map((tool) => (
+            {supportTools.map((tool) => (
+              <article key={tool.title} className="sup-tool-card">
+                <h3>{tool.title}</h3>
+                <p>{tool.copy}</p>
+                <a href={tool.href} target="_blank" rel="noreferrer">
+                  Open tool &rsaquo;
+                </a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="sup-spotlight-section">
+        <div className="sup-content-width sup-spotlight-grid">
+          <article className="sup-spotlight-card is-blue">
+            <p className="sup-spotlight-eyebrow">Handled with AppleCare</p>
+            <h2>One-stop service for your Apple products.</h2>
+            <p>
+              Every AppleCare plan provides expert support, easy service and
+              coverage for accidents such as drops and spills.
+            </p>
+            <a
+              href="https://www.apple.com/in/applecare/?cid=aaa-ols-home-acpp-psp-0922"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Find out more &rsaquo;
+            </a>
+          </article>
+          <article className="sup-spotlight-card is-light">
+            <p className="sup-spotlight-eyebrow">Apple Repair and Service</p>
+            <h2>Trusted experts. Genuine Apple parts.</h2>
+            <p>
+              We can help you find an Apple-certified repair at an Apple Store
+              or authorised service provider.
+            </p>
+            <a
+              href="https://support.apple.com/en-in/repair"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Start a repair &rsaquo;
+            </a>
+          </article>
+        </div>
+      </section>
+
+      <section className="sup-explore-section">
+        <div className="sup-content-width">
+          <div className="sup-section-header">
+            <h2>More to Explore</h2>
+          </div>
+          <div className="sup-explore-grid">
+            {exploreCards.map((card) => (
+              <article key={card.title} className="sup-explore-card">
+                <h3>{card.title}</h3>
+                <p>{card.copy}</p>
+                <a href={card.href} target="_blank" rel="noreferrer">
+                  Learn more &rsaquo;
+                </a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="sup-warning-section">
+        <div className="sup-content-width">
+          <article className="sup-warning-card">
+            <div className="sup-warning-copy">
+              <p className="sup-spotlight-eyebrow">
+                Beware of counterfeit parts
+              </p>
+              <h2>
+                Protect your device with genuine Apple parts and certified
+                service.
+              </h2>
+              <p>
+                Some counterfeit and third-party batteries, adapters and
+                displays may not be designed properly and could result in safety
+                or performance issues.
+              </p>
               <a
-                key={tool.title}
-                href={tool.link}
-                className="sup-tool-card"
+                href="https://locate.apple.com/in/en/"
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noreferrer"
               >
-                <span className="sup-tool-icon" role="img" aria-hidden="true">
-                  {tool.icon}
-                </span>
-                <div className="sup-tool-body">
-                  <h3 className="sup-tool-title">{tool.title}</h3>
-                  <p className="sup-tool-desc">{tool.desc}</p>
-                </div>
-                <svg className="sup-tool-arrow" viewBox="0 0 12 12" fill="none">
-                  <path
-                    d="M4 2l4 4-4 4"
-                    stroke="#06c"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                Find an Apple Authorised Service Provider &rsaquo;
+              </a>
+            </div>
+            <div className="sup-warning-media" aria-hidden="true" />
+          </article>
+        </div>
+      </section>
+
+      <section className="sup-programmes-section">
+        <div className="sup-content-width">
+          <div className="sup-section-header">
+            <h2>Apple Service Programmes</h2>
+          </div>
+          <div className="sup-programmes-list">
+            {servicePrograms.map((programme) => (
+              <a
+                key={programme.title}
+                href={programme.href}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {programme.title}
+                <span>&rsaquo;</span>
               </a>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Popular topics */}
-      <section className="sup-popular-section">
-        <div className="sup-content-width">
-          <h2 className="sup-section-title">Popular topics</h2>
-          <ul className="sup-popular-list">
-            {POPULAR_TOPICS.map((t) => (
-              <li key={t.title} className="sup-popular-item">
-                <a
-                  href={t.link}
-                  className="sup-popular-link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {t.title}
-                  <svg viewBox="0 0 12 12" fill="none" width="12" height="12">
-                    <path
-                      d="M4 2l4 4-4 4"
-                      stroke="#06c"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* AppleCare section */}
-      <section className="sup-applecare">
-        <div className="sup-content-width">
-          <div className="sup-applecare-card">
-            <div className="sup-applecare-body">
-              <p className="sup-applecare-eyebrow">AppleCare+</p>
-              <h2 className="sup-applecare-title">
-                Expert support and service coverage for every Apple product.
-              </h2>
-              <p className="sup-applecare-desc">
-                Get unlimited repairs for accidental damage, 24/7 access to
-                Apple experts, and hardware repair coverage — all in one plan.
-              </p>
-              <div className="sup-applecare-actions">
-                <a
-                  href="https://www.apple.com/in/support/products/"
-                  className="sup-btn-primary"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Learn about AppleCare+
-                </a>
-                <a
-                  href="https://checkcoverage.apple.com"
-                  className="sup-btn-link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Check your coverage &rsaquo;
-                </a>
-              </div>
-            </div>
-            <div className="sup-applecare-img">
-              <img
-                src="https://www.apple.com/v/applecare-products/f/images/overview/hero__dvvfbsqq1kia_large.jpg"
-                alt="AppleCare+"
-                onError={(e) => (e.currentTarget.style.display = "none")}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Service programs */}
-      <section className="sup-service-section">
-        <div className="sup-content-width">
-          <h2 className="sup-section-title">More to explore</h2>
-          <div className="sup-service-grid">
-            {SERVICE_PROGRAMS.map((s) => (
-              <div key={s.title} className="sup-service-card">
-                <h3 className="sup-service-title">{s.title}</h3>
-                <p className="sup-service-desc">{s.desc}</p>
-                <a
-                  href={s.link}
-                  className="sup-service-link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {s.cta} &rsaquo;
-                </a>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Footer note */}
-      <div className="sup-footnotes">
+      <section className="sup-footnotes">
         <div className="sup-content-width">
           <p>
-            Apple Support is available in India. For in‑person service or
-            repairs, schedule an appointment at an Apple Store or Authorised
-            Service Provider.
+            AppleCare products, repair options and support availability vary by
+            product and region.
           </p>
-          <p>1800‑108‑4600 — Available Mon–Fri, 9 am to 9 pm IST.</p>
+          <p>
+            Service programmes are subject to eligibility requirements and may
+            be revised or withdrawn by Apple.
+          </p>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

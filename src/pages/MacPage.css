@@ -1,0 +1,915 @@
+.mac-page {
+  --mac-shell-width: min(
+    var(--apple-content-width),
+    calc(100% - (var(--apple-page-gutter) * 2))
+  );
+  --mac-surface: #ffffff;
+  --mac-surface-muted: #f5f5f7;
+  --mac-stroke: rgba(29, 29, 31, 0.08);
+  --mac-text: #1d1d1f;
+  --mac-subtle: #6e6e73;
+  --mac-blue: #0071e3;
+  background:
+    radial-gradient(
+      ellipse at 60% -8%,
+      rgba(200, 218, 248, 0.84),
+      transparent 32%
+    ),
+    linear-gradient(180deg, #fbfbfd 0%, #f5f5f7 28%, #f5f5f7 100%);
+  color: var(--mac-text);
+  font-family:
+    "SF Pro Display",
+    "SF Pro Text",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+.mac-shell {
+  width: var(--mac-shell-width);
+  margin: 0 auto;
+}
+
+/* ── Ribbon ── */
+.mac-ribbon {
+  border-bottom: 1px solid rgba(210, 210, 215, 0.7);
+  background: rgba(255, 255, 255, 0.88);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+  backdrop-filter: saturate(180%) blur(18px);
+}
+
+.mac-ribbon p {
+  margin: 0;
+  padding: 12px 0;
+  color: var(--mac-subtle);
+  font-size: 12px;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.mac-ribbon a,
+.mac-section-link,
+.mac-inline-link,
+.mac-lineup-buy-link {
+  color: var(--mac-blue);
+  text-decoration: none;
+}
+
+.mac-ribbon a:hover,
+.mac-section-link:hover,
+.mac-inline-link:hover,
+.mac-lineup-buy-link:hover {
+  text-decoration: underline;
+}
+
+/* ── Header ── */
+.mac-header {
+  padding: 54px 0 28px;
+}
+
+.mac-header-title {
+  margin: 0;
+  font-size: clamp(56px, 8vw, 92px);
+  line-height: 0.94;
+  letter-spacing: -0.075em;
+}
+
+/* ── Chapter nav ── */
+.mac-chapternav {
+  position: sticky;
+  top: 44px;
+  z-index: 10;
+  border-top: 1px solid rgba(210, 210, 215, 0.4);
+  border-bottom: 1px solid rgba(210, 210, 215, 0.7);
+  background: rgba(250, 250, 252, 0.88);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+}
+
+.mac-chapternav-scroll {
+  overflow-x: auto;
+}
+
+.mac-chapternav-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.mac-chapternav-track {
+  display: flex;
+  gap: 32px;
+  width: max-content;
+  min-width: 100%;
+  justify-content: center;
+  padding: 18px 0 14px;
+}
+
+.mac-chapter-item {
+  display: flex;
+  min-width: 78px;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  color: var(--mac-text);
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.mac-chapter-item:hover {
+  color: var(--mac-blue);
+}
+
+.mac-chapter-media {
+  display: grid;
+  width: 66px;
+  height: 66px;
+  place-items: center;
+}
+
+.mac-chapter-media img {
+  width: 66px;
+  height: 66px;
+  object-fit: contain;
+}
+
+.mac-chapter-label {
+  font-size: 12px;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.mac-chapter-badge,
+.mac-badge {
+  color: #bf4800;
+  font-size: 11px;
+  line-height: 1;
+}
+
+/* ── Main ── */
+.mac-main {
+  padding-bottom: 96px;
+}
+
+.mac-section {
+  padding-top: clamp(64px, 8vw, 108px);
+}
+
+.mac-section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.mac-section-head h2 {
+  margin: 0;
+  font-size: clamp(38px, 5.2vw, 72px);
+  line-height: 0.98;
+  letter-spacing: -0.065em;
+}
+
+.mac-section-head-solo {
+  justify-content: flex-start;
+}
+
+.mac-section-link {
+  flex-shrink: 0;
+  font-size: 17px;
+  line-height: 1.35;
+}
+
+.mac-section-link span,
+.mac-inline-link span,
+.mac-lineup-buy-link span {
+  transition: transform 180ms ease;
+  display: inline-block;
+}
+
+.mac-section-link:hover span,
+.mac-inline-link:hover span,
+.mac-lineup-buy-link:hover span {
+  transform: translateX(2px);
+}
+
+/* ── Filter row ── */
+.mac-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.mac-filter-btn {
+  padding: 8px 18px;
+  border: 1px solid rgba(29, 29, 31, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--mac-text);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
+}
+
+.mac-filter-btn:hover {
+  border-color: rgba(29, 29, 31, 0.26);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.mac-filter-btn.is-active {
+  background: #1d1d1f;
+  border-color: #1d1d1f;
+  color: #ffffff;
+}
+
+/* ── Rail (horizontal scroll) ── */
+.mac-rail {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  padding: 4px 0 12px;
+  scroll-snap-type: x mandatory;
+}
+
+.mac-rail::-webkit-scrollbar {
+  display: none;
+}
+
+.mac-rail > * {
+  scroll-snap-align: start;
+}
+
+/* ── Shared card labels/copy ── */
+.mac-card-label {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.mac-card-body,
+.mac-buy-copy p,
+.mac-lineup-copy p,
+.mac-essential-copy p,
+.mac-companion-panel-copy p {
+  margin: 0;
+  color: var(--mac-subtle);
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.mac-eyebrow {
+  margin: 0;
+  color: var(--mac-subtle);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ── Button ── */
+.mac-button {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 22px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+.mac-button:hover {
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
+.mac-button-primary {
+  background: var(--mac-blue);
+  color: #ffffff;
+}
+
+.mac-button-primary:hover {
+  background: #0077ed;
+}
+
+.mac-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.mac-card-plus {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.98);
+  color: #1d1d1f;
+  font-size: 28px;
+  line-height: 1;
+  font-weight: 300;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+/* ── Lineup ── */
+.mac-lineup-rail {
+  gap: 28px;
+}
+
+.mac-lineup-card {
+  display: flex;
+  flex: 0 0 min(320px, 86vw);
+  flex-direction: column;
+  align-items: center;
+}
+
+.mac-lineup-media {
+  width: 100%;
+  margin-bottom: 18px;
+  overflow: hidden;
+  border-radius: 28px;
+  background: linear-gradient(180deg, #ffffff 0%, #fafafc 100%);
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.08);
+  aspect-ratio: 4 / 5;
+  display: grid;
+  place-items: center;
+}
+
+.mac-lineup-media img {
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+}
+
+.mac-lineup-colors {
+  display: flex;
+  gap: 8px;
+  min-height: 16px;
+  margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.mac-lineup-colors-ph {
+  min-height: 16px;
+  margin-bottom: 20px;
+}
+
+.mac-color-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.14);
+}
+
+.mac-color-dot-img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.mac-lineup-copy {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 20px;
+  justify-items: center;
+  text-align: center;
+}
+
+.mac-lineup-copy h3,
+.mac-buy-copy h3,
+.mac-feature-copy h3,
+.mac-essential-copy h3,
+.mac-companion-panel-copy h3,
+.mac-switch-card h3 {
+  margin: 0;
+  font-size: clamp(24px, 2.4vw, 32px);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.mac-lineup-price,
+.mac-lineup-emi {
+  font-weight: 600;
+  text-align: center;
+}
+
+.mac-lineup-price {
+  margin-top: 6px;
+  font-size: 17px;
+}
+
+.mac-lineup-emi {
+  font-size: 15px;
+  color: var(--mac-subtle);
+  font-weight: 400;
+}
+
+.mac-lineup-actions {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.mac-lineup-buy-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+/* ── Why Buy cards ── */
+.mac-buy-rail {
+  gap: 18px;
+}
+
+.mac-buy-card {
+  position: relative;
+  display: flex;
+  min-height: 460px;
+  flex: 0 0 min(300px, 84vw);
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 28px;
+  background: var(--mac-surface);
+  color: var(--mac-text);
+  text-decoration: none;
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.08);
+  animation: macFadeUp 720ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.mac-buy-copy {
+  display: grid;
+  gap: 14px;
+  padding: 26px 26px 0;
+}
+
+.mac-buy-media {
+  margin-top: auto;
+  min-height: 185px;
+  padding: 12px 18px 18px;
+}
+
+.mac-buy-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ── Feature cards (Get to know Mac) ── */
+.mac-feature-card {
+  position: relative;
+  display: flex;
+  min-height: 560px;
+  flex: 0 0 min(430px, 88vw);
+  align-items: flex-end;
+  overflow: hidden;
+  border-radius: 32px;
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.08);
+  animation: macFadeUp 720ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.mac-feature-card > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mac-feature-overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.mac-card-tone-dark {
+  background: #16171b;
+  color: #fff;
+}
+
+.mac-card-tone-dark .mac-feature-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(10, 12, 18, 0.08) 0%,
+    rgba(10, 12, 18, 0.42) 54%,
+    rgba(10, 12, 18, 0.72) 100%
+  );
+}
+
+.mac-card-tone-light {
+  background: var(--mac-surface);
+  color: var(--mac-text);
+}
+
+.mac-card-tone-light .mac-feature-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.62) 54%,
+    rgba(255, 255, 255, 0.94) 100%
+  );
+}
+
+.mac-card-tone-light .mac-card-plus {
+  background: rgba(29, 29, 31, 0.9);
+  color: #fff;
+}
+
+.mac-feature-copy {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 8px;
+  padding: 30px;
+  color: inherit;
+}
+
+/* ── Switch to Mac ── */
+.mac-switch-card {
+  display: grid;
+  grid-template-columns: minmax(280px, 400px) minmax(0, 1fr);
+  overflow: hidden;
+  border-radius: 32px;
+  background: var(--mac-surface);
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.08);
+  animation: macFadeUp 720ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.mac-switch-copy {
+  display: grid;
+  align-content: center;
+  gap: 18px;
+  padding: clamp(28px, 4vw, 52px);
+}
+
+.mac-switch-copy p {
+  margin: 0;
+  color: var(--mac-subtle);
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.mac-inline-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 17px;
+}
+
+.mac-switch-media {
+  background: linear-gradient(160deg, #f0f4f8 0%, #e8ecf2 100%);
+}
+
+.mac-switch-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Mac essentials ── */
+.mac-essentials-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.mac-essential-card {
+  display: grid;
+  overflow: hidden;
+  border-radius: 32px;
+  background: var(--mac-surface);
+  color: var(--mac-text);
+  text-decoration: none;
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.08);
+  animation: macFadeUp 720ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.mac-essential-copy {
+  display: grid;
+  gap: 16px;
+  padding: 32px 32px 18px;
+}
+
+.mac-essential-copy p {
+  margin: 0;
+  color: var(--mac-subtle);
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.mac-essential-media {
+  min-height: 300px;
+  background: var(--mac-surface-muted);
+}
+
+.mac-essential-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Unlock the world of Apple (companion) ── */
+.mac-companion-surface {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  overflow: hidden;
+  border-radius: 36px;
+  background: var(--mac-surface);
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.08);
+  animation: macFadeUp 720ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.mac-companion-nav {
+  display: grid;
+  gap: 0;
+  border-right: 1px solid var(--mac-stroke);
+  background: linear-gradient(180deg, #fbfbfd 0%, #f5f5f7 100%);
+}
+
+.mac-companion-tab {
+  display: grid;
+  gap: 10px;
+  padding: 28px;
+  border: 0;
+  border-bottom: 1px solid var(--mac-stroke);
+  background: transparent;
+  color: var(--mac-text);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 180ms ease;
+}
+
+.mac-companion-tab:last-child {
+  border-bottom: 0;
+}
+
+.mac-companion-tab:hover,
+.mac-companion-tab-active {
+  background: rgba(0, 113, 227, 0.06);
+}
+
+.mac-companion-tab-title {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.mac-companion-tab-copy {
+  color: var(--mac-subtle);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.mac-companion-panel {
+  display: grid;
+  grid-template-columns: minmax(240px, 340px) minmax(0, 1fr);
+  gap: 28px;
+  padding: 36px;
+}
+
+.mac-companion-panel-copy {
+  display: grid;
+  align-content: start;
+  gap: 18px;
+}
+
+.mac-companion-panel-copy p {
+  margin: 0;
+  color: var(--mac-subtle);
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.mac-companion-panel-media {
+  min-height: 340px;
+  overflow: hidden;
+  border-radius: 24px;
+  background: var(--mac-surface-muted);
+}
+
+.mac-companion-panel-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Router ── */
+.mac-router-section {
+  padding-bottom: 24px;
+}
+
+.mac-router-surface {
+  padding: 12px 0 0;
+}
+
+.mac-router-title {
+  margin: 0 0 30px;
+  font-size: clamp(56px, 8vw, 92px);
+  line-height: 0.94;
+  letter-spacing: -0.075em;
+}
+
+.mac-router-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+}
+
+.mac-router-column h3 {
+  margin: 0 0 14px;
+  color: var(--mac-subtle);
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.mac-router-column ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mac-router-column li + li {
+  margin-top: 8px;
+}
+
+.mac-router-column a {
+  color: var(--mac-text);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.35;
+  text-decoration: none;
+}
+
+.mac-router-column a:hover {
+  color: var(--mac-blue);
+}
+
+/* ── Animation ── */
+@keyframes macFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Responsive ── */
+@media (max-width: 1200px) {
+  .mac-companion-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .mac-router-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1068px) {
+  .mac-switch-card,
+  .mac-companion-surface,
+  .mac-companion-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .mac-companion-nav {
+    border-right: 0;
+    border-bottom: 1px solid var(--mac-stroke);
+  }
+
+  .mac-essentials-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 734px) {
+  .mac-page {
+    --mac-shell-width: calc(100% - (var(--apple-page-gutter-mobile) * 2));
+  }
+
+  .mac-chapternav-track {
+    justify-content: flex-start;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  .mac-section-head {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+
+  .mac-filter-row {
+    gap: 6px;
+  }
+
+  .mac-filter-btn {
+    padding: 7px 14px;
+    font-size: 13px;
+  }
+
+  .mac-lineup-card,
+  .mac-buy-card,
+  .mac-feature-card {
+    flex-basis: 88vw;
+  }
+
+  .mac-lineup-price {
+    font-size: 15px;
+  }
+
+  .mac-lineup-emi {
+    font-size: 14px;
+  }
+
+  .mac-buy-copy,
+  .mac-feature-copy,
+  .mac-essential-copy,
+  .mac-switch-copy {
+    padding: 28px;
+  }
+
+  .mac-buy-media,
+  .mac-essential-media {
+    min-height: 260px;
+  }
+
+  .mac-ribbon p {
+    padding: 10px 0;
+  }
+
+  .mac-main {
+    padding-bottom: 72px;
+  }
+
+  .mac-companion-panel-media {
+    min-height: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mac-card-actions,
+  .mac-lineup-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .mac-button {
+    width: 100%;
+  }
+
+  .mac-lineup-card,
+  .mac-buy-card,
+  .mac-feature-card {
+    flex-basis: 92vw;
+  }
+
+  .mac-buy-copy,
+  .mac-feature-copy,
+  .mac-essential-copy,
+  .mac-switch-copy {
+    padding: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mac-buy-card,
+  .mac-feature-card,
+  .mac-switch-card,
+  .mac-essential-card,
+  .mac-companion-surface {
+    animation: none;
+  }
+
+  .mac-button,
+  .mac-companion-tab,
+  .mac-filter-btn {
+    transition: none;
+  }
+}

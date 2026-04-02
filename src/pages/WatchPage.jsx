@@ -1,559 +1,849 @@
-import { useState } from "react";
-import "../product-page.css";
+import { useEffect, useRef, useState } from "react";
+import "./WatchPage.css";
 
-/* ── Helpers ── */
-function useCarousel(total, visible) {
-  const [idx, setIdx] = useState(0);
-  const max = Math.max(0, total - visible);
-  return {
-    idx,
-    prev: () => setIdx((i) => Math.max(0, i - 1)),
-    next: () => setIdx((i) => Math.min(max, i + 1)),
-    canPrev: idx > 0,
-    canNext: idx < max,
-  };
-}
-const NavArrowLeft = () => (
-  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-    <path
-      d="M9 2L4 7l5 5"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
-const NavArrowRight = () => (
-  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-    <path
-      d="M5 2l5 5-5 5"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
+const appleAsset = (path) => `https://www.apple.com${path}`;
 
-/* ── Data ── */
-const lineupProducts = [
-  {
-    id: "watch-series-11",
-    badge: null,
-    category: "Series 11",
-    name: "Apple Watch Series\u00a011",
-    tagline: "The ultimate watch for a healthy life.",
-    price: "From \u20b946,900.00**",
-    emi: "or \u20b97,150.00/mo. for 6 mo.*",
-    colors: [
-      "#68696e",
-      "#e8e8ed",
-      "#e8b4b8",
-      "#1c1c1e",
-      "#e8dac8",
-      "#e8c87c",
-      "#6e7882",
-    ],
-    image:
-      "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/watch-series11-unselect-gallery-1-202409?wid=800&hei=1000&fmt=png-alpha&.v=1725311366473",
-  },
-  {
-    id: "watch-se-3",
-    badge: null,
-    category: "SE 3",
-    name: "Apple Watch SE\u00a03",
-    tagline: "Essential health features at a great value.",
-    price: "From \u20b925,900.00**",
-    emi: "or \u20b93,983.00/mo. for 6 mo.*",
-    colors: ["#1c1c1e", "#e8e3da"],
-    image:
-      "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/watch-se3-unselect-gallery-1-202409?wid=800&hei=1000&fmt=png-alpha",
-  },
-  {
-    id: "watch-ultra-3",
-    badge: null,
-    category: "Ultra 3",
-    name: "Apple Watch Ultra\u00a03",
-    tagline: "The ultimate sports and adventure watch.",
-    price: "From \u20b989,900.00**",
-    emi: "or \u20b913,983.00/mo. for 6 mo.*",
-    colors: ["#d4c0a0", "#1c1c1e"],
-    image:
-      "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/watch-ultra3-unselect-gallery-natural-202409?wid=800&hei=1000&fmt=png-alpha",
-  },
-];
-
-const FILTERS = ["All products", "Series 11", "SE 3", "Ultra 3"];
-
-const productNavItems = [
+const chapterNavItems = [
   {
     label: "Series 11",
-    badge: null,
-    img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/watch-series11-nav-202409?wid=88&hei=88&fmt=png-alpha",
+    href: "https://www.apple.com/in/apple-watch-series-11/",
+    image: appleAsset(
+      "/assets-www/en_WW/watch/chapter_nav/watch_s11_f3d43534c.svg",
+    ),
   },
   {
     label: "SE 3",
-    badge: null,
-    img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/watch-se3-nav-202409?wid=88&hei=88&fmt=png-alpha",
+    href: "https://www.apple.com/in/apple-watch-se-3/",
+    image: appleAsset(
+      "/assets-www/en_WW/watch/chapter_nav/watch_se_5af4fbe6c.svg",
+    ),
   },
   {
     label: "Ultra 3",
-    badge: null,
-    img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/watch-ultra3-nav-natural-202409?wid=88&hei=88&fmt=png-alpha",
+    href: "https://www.apple.com/in/apple-watch-ultra-3/",
+    image: appleAsset(
+      "/assets-www/en_WW/watch/chapter_nav/watch_ultra_c6d26b96b.svg",
+    ),
   },
   {
     label: "Nike",
-    badge: null,
-    img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/watch-nike-nav?wid=88&hei=88&fmt=png-alpha",
+    href: "https://www.apple.com/in/apple-watch-nike/",
+    image: appleAsset(
+      "/assets-www/en_WW/watch/chapter_nav/watch_nike_095f6983c.svg",
+    ),
   },
   {
     label: "Compare",
-    badge: null,
-    img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/compare-watch-nav?wid=88&hei=88&fmt=png-alpha",
+    href: "https://www.apple.com/in/watch/compare/",
+    image: appleAsset(
+      "/assets-www/en_WW/watch/chapter_nav/compare_watch_6b6259c4a.svg",
+    ),
   },
   {
     label: "Straps",
     badge: "New",
-    img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/watch-bands-nav?wid=88&hei=88&fmt=png-alpha",
+    href: "https://www.apple.com/in/shop/goto/watch/bands",
+    image: appleAsset(
+      "/assets-www/en_WW/watch/chapter_nav/watch_bands_0e3eb7a2d.svg",
+    ),
   },
   {
     label: "Accessories",
-    badge: null,
-    img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/watch-accessories-nav?wid=88&hei=88&fmt=png-alpha",
+    href: "https://www.apple.com/in/shop/goto/watch/accessories",
+    image: appleAsset(
+      "/assets-www/en_WW/watch/chapter_nav/accessories_watch_6ad7b5f53.svg",
+    ),
+  },
+  {
+    label: "Apple Fitness+",
+    href: "https://www.apple.com/in/apple-fitness-plus/",
+    image: appleAsset(
+      "/assets-www/en_WW/watch/chapter_nav/fitness_plus_5e817af2a.svg",
+    ),
   },
   {
     label: "Shop Watch",
-    badge: null,
-    img: "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/shop-watch-nav?wid=88&hei=88&fmt=png-alpha",
+    href: "https://www.apple.com/in/shop/goto/buy_watch",
+    image: appleAsset(
+      "/assets-www/en_WW/watch/chapter_nav/shop_watch_4b61b477b.svg",
+    ),
+  },
+  {
+    label: "watchOS 26",
+    href: "https://www.apple.com/in/os/watchos/",
+    image: appleAsset(
+      "/assets-www/en_WW/watch/chapter_nav/watchos_cfaae638b.svg",
+    ),
   },
 ];
 
-const whyCards = [
+const lineupModels = [
+  {
+    id: "series-11",
+    name: "Apple Watch Series 11",
+    tagline: "The ultimate watch for a healthy life.",
+    finish: "41 mm or 45 mm case. Aluminium or titanium.",
+    price: "From \u20b946,900.00**",
+    image: appleAsset(
+      "/assets-www/en_WW/watch/product_tile/large/s11_01ae61a6b_2x.png",
+    ),
+    learnHref: "https://www.apple.com/in/apple-watch-series-11/",
+    buyHref:
+      "https://www.apple.com/in/shop/goto/buy_watch/apple_watch_series_11",
+    colors: [
+      "#d8d8dd",
+      "#5f6167",
+      "#1d1d1f",
+      "#e5cbc6",
+      "#d3c8ba",
+      "#c8b07c",
+      "#70818b",
+    ],
+  },
+  {
+    id: "se-3",
+    name: "Apple Watch SE 3",
+    tagline: "Essential health features at a great value.",
+    finish: "40 mm or 44 mm aluminium case.",
+    price: "From \u20b925,900.00**",
+    image: appleAsset(
+      "/assets-www/en_WW/watch/product_tile/large/se_32690d524_2x.png",
+    ),
+    learnHref: "https://www.apple.com/in/apple-watch-se-3/",
+    buyHref: "https://www.apple.com/in/shop/goto/buy_watch/apple_watch_se",
+    colors: ["#d9d6d1", "#2d2d31"],
+  },
+  {
+    id: "ultra-3",
+    name: "Apple Watch Ultra 3",
+    tagline: "The ultimate sports and adventure watch.",
+    finish: "49 mm titanium case with precision dual-frequency GPS.",
+    price: "From \u20b989,900.00**",
+    image: appleAsset(
+      "/assets-www/en_IN/watch/product_tile/large/u3_6b7e98fe2_2x.png",
+    ),
+    learnHref: "https://www.apple.com/in/apple-watch-ultra-3/",
+    buyHref: "https://www.apple.com/in/shop/goto/buy_watch/apple_watch_ultra_3",
+    colors: ["#c9b393", "#3d515b"],
+  },
+];
+
+const whyBuyCards = [
   {
     title: "Ways to Buy",
-    desc: "Monthly payment options are available. Choose the easy way to finance with convenient monthly payment options.",
-    img: "https://www.apple.com/v/watch/home/cv/images/overview/why-apple/ways_to_buy__large.jpg",
+    description:
+      "Choose a way to pay, including convenient monthly payment options.",
+    image: appleAsset(
+      "/assets-www/en_WW/watch/incentive_card/large/financing_04ab3d017_2x.jpg",
+    ),
   },
   {
     title: "Delivery and Pickup",
-    desc: "Get flexible delivery and easy pickup. Get free delivery or pickup at your Apple Store.",
-    img: "https://www.apple.com/v/watch/home/cv/images/overview/why-apple/delivery__large.jpg",
+    description: "Enjoy free delivery or easy pickup at your Apple Store.",
+    image: appleAsset(
+      "/assets-www/en_WW/watch/incentive_card/large/delivery_and_pickup_2a582422f_2x.jpg",
+    ),
   },
   {
     title: "Personal Setup",
-    desc: "Make the most of your Apple Watch with an online session. Talk one-to-one with a Specialist.",
-    img: "https://www.apple.com/v/watch/home/cv/images/overview/why-apple/personal_setup__large.jpg",
+    description:
+      "Set up your new Apple Watch with an online Specialist session.",
+    image: appleAsset(
+      "/assets-www/en_WW/watch/incentive_card/large/personal_setup_df47efc29_2x.jpg",
+    ),
   },
   {
     title: "Guided Video Shopping",
-    desc: "Shop live with a Specialist. Let us help you find what you need and answer all of your questions.",
-    img: "https://www.apple.com/v/watch/home/cv/images/overview/why-apple/guided_shopping__large.jpg",
+    description:
+      "Shop live with a Specialist over video and get answers in real time.",
+    image: appleAsset(
+      "/assets-www/en_IN/watch/incentive_card/large/specialist_81772a16c_2x.jpg",
+    ),
   },
   {
     title: "Apple Trade In",
-    desc: "Save on a new Apple Watch with a trade\u2011in. Get credit towards your next Apple Watch at an Apple Store.",
-    img: "https://www.apple.com/v/watch/home/cv/images/overview/why-apple/trade_in__large.jpg",
+    description:
+      "Save on a new Apple Watch when you trade in an eligible device at an Apple Store.",
+    image: appleAsset(
+      "/assets-www/en_WW/watch/incentive_card/large/trade_in_d7fa0dfa7_2x.jpg",
+    ),
   },
   {
     title: "Apple Store App",
-    desc: "Explore a shopping experience designed around you. Use the app to get a more personal way to shop.",
-    img: "https://www.apple.com/v/watch/home/cv/images/overview/why-apple/apple_store_app__large.jpg",
+    description: "Get a more personal way to shop with the Apple Store app.",
+    image: appleAsset(
+      "/assets-www/en_WW/watch/incentive_card/large/store_app_fba803b7c_2x.jpg",
+    ),
   },
 ];
 
-const knowCards = [
+const featureCards = [
   {
-    cat: "Health",
+    category: "Health",
     title: "Knows you.\nInsights and out.",
-    dark: true,
-    img: "https://www.apple.com/v/watch/home/cv/images/overview/consider/health__large.jpg",
+    tone: "dark",
+    image: appleAsset(
+      "/assets-www/en_WW/watch/feature_card/large/health_a1aa3fe20_2x.jpg",
+    ),
   },
   {
-    cat: "Fitness",
+    category: "Fitness",
     title: "Unlimited motivation.",
-    dark: true,
-    img: "https://www.apple.com/v/watch/home/cv/images/overview/consider/fitness__large.jpg",
+    tone: "dark",
+    image: appleAsset(
+      "/assets-www/en_IN/watch1/feature_card/large/fitness_cab5dfca5_2x.jpg",
+    ),
   },
   {
-    cat: "Safety",
+    category: "Safety",
     title: "Keep help close at hand.",
-    dark: false,
-    img: "https://www.apple.com/v/watch/home/cv/images/overview/consider/safety__large.jpg",
+    tone: "light",
+    image: appleAsset(
+      "/assets-www/en_WW/watch/feature_card/large/safety_b3e0fe93f_2x.jpg",
+    ),
   },
   {
-    cat: "Apple Watch Ultra 3",
+    category: "Apple Watch Ultra 3",
     title: "The ultimate sports\nand adventure watch.",
-    dark: true,
-    img: "https://www.apple.com/v/watch/home/cv/images/overview/consider/ultra3__large.jpg",
+    tone: "dark",
+    image: appleAsset(
+      "/assets-www/en_IN/watch1/feature_card/large/adventure_43270ba52_2x.jpg",
+    ),
   },
   {
-    cat: "Connectivity",
+    category: "Connectivity",
     title: "The right call for\nstaying in touch.",
-    dark: false,
-    img: "https://www.apple.com/v/watch/home/cv/images/overview/consider/connectivity__large.jpg",
+    tone: "light",
+    image: appleAsset(
+      "/assets-www/en_IN/watch1/feature_card/large/connectivity_9f98b7daf_2x.jpg",
+    ),
   },
   {
-    cat: "Personalisation",
+    category: "Personalisation",
     title: "Make it you-nique.",
-    dark: true,
-    img: "https://www.apple.com/v/watch/home/cv/images/overview/consider/personalisation__large.jpg",
+    tone: "dark",
+    image: appleAsset(
+      "/assets-www/en_WW/watch/feature_card/large/personalization_186f896b8_2x.jpg",
+    ),
   },
   {
-    cat: "For Your Kids",
+    category: "Apple Watch For Your Kids",
     title: "Independence for them.\nPeace of mind for you.",
-    dark: false,
-    img: "https://www.apple.com/v/watch/home/cv/images/overview/consider/kids__large.jpg",
+    tone: "light",
+    image: appleAsset(
+      "/assets-www/en_IN/watch1/feature_card/large/family_setup_322cbddb5_2x.jpg",
+    ),
+  },
+  {
+    category: "Apple Watch + iPhone",
+    title: "Dynamic duo.",
+    tone: "light",
+    image: appleAsset(
+      "/assets-www/en_WW/watch/feature_card/large/watch_and_iphone_44eb2d765_2x.jpg",
+    ),
   },
 ];
 
-const essentials = [
+const companionStories = [
   {
-    title: "Colour the moment.",
-    desc: "Explore the latest straps in fresh shades, styles and materials.",
-    link: "Shop Apple Watch straps",
-    img: "https://www.apple.com/v/watch/home/cv/images/overview/essentials/straps__large.jpg",
-  },
-  {
-    title: "Apple Watch Studio",
-    desc: "Pair any Apple Watch case with any band to create a look that\u2019s uniquely yours.",
-    link: "Design your watch",
-    img: "https://www.apple.com/v/watch/home/cv/images/overview/essentials/studio__large.jpg",
-  },
-];
-
-const others = [
-  {
+    id: "watch-iphone",
     title: "Apple Watch and iPhone",
-    desc: "Combining Apple Watch and iPhone opens up a world of features. You can start a cycling workout on your watch and see your metrics automatically appear as a Live Activity on your iPhone.",
-    img: "https://www.apple.com/v/watch/home/cv/images/overview/significant_others/watch_iphone__large.jpg",
+    teaser: "Start a workout on your wrist and bring it to life on iPhone.",
+    description:
+      "Combining Apple Watch and iPhone opens up a world of features. You can start a cycling workout on your watch and see your metrics automatically appear as a Live Activity on your iPhone.",
+    image: appleAsset(
+      "/assets-www/en_IN/watch/image_accordion/large/watch_and_iphone_963309f31_2x.jpg",
+    ),
+    href: "https://www.apple.com/in/iphone/",
   },
   {
+    id: "watch-airpods",
     title: "Apple Watch and AirPods",
-    desc: "Apple Watch and AirPods are made for each other. Control your AirPods from your wrist and let your watch automatically switch your audio as you move between devices.",
-    img: "https://www.apple.com/v/watch/home/cv/images/overview/significant_others/watch_airpods__large.jpg",
+    teaser: "Control your listening without reaching for your phone.",
+    description:
+      "Apple Watch and AirPods are made for each other. Control your AirPods from your wrist and let your watch automatically switch your audio as you move between devices.",
+    image: appleAsset(
+      "/assets-www/en_IN/watch/image_accordion/large/watch_and_airpods_d359e9f1d_2x.jpg",
+    ),
+    href: "https://www.apple.com/in/airpods/",
   },
   {
+    id: "watch-fitness-plus",
     title: "Apple Watch and Apple Fitness+",
-    desc: "Apple Fitness+ is a fitness and wellness service built for Apple Watch. With thousands of workouts and meditations, it\u2019s easy to find something you love.",
-    img: "https://www.apple.com/v/watch/home/cv/images/overview/significant_others/watch_fitness__large.jpg",
+    teaser: "See live metrics during every Fitness+ session.",
+    description:
+      "Apple Fitness+ is a fitness and wellness service built for Apple Watch. With thousands of workouts and meditations, it is easy to find something you love.",
+    image: appleAsset(
+      "/assets-www/en_IN/watch/image_accordion/large/watch_and_fitness_plus_f19ef6975_2x.jpg",
+    ),
+    href: "https://www.apple.com/in/apple-fitness-plus/",
   },
 ];
 
-const CARD_W = 290,
-  CARD_STEP = 302;
-const WHY_W = 25,
-  KNOW_W = 25;
+const routerColumns = [
+  {
+    title: "Explore Watch",
+    links: [
+      {
+        label: "Apple Watch Series 11",
+        href: "https://www.apple.com/in/apple-watch-series-11/",
+      },
+      {
+        label: "Apple Watch SE 3",
+        href: "https://www.apple.com/in/apple-watch-se-3/",
+      },
+      {
+        label: "Apple Watch Ultra 3",
+        href: "https://www.apple.com/in/apple-watch-ultra-3/",
+      },
+      {
+        label: "Apple Watch Nike",
+        href: "https://www.apple.com/in/apple-watch-nike/",
+      },
+      {
+        label: "watchOS 26",
+        href: "https://www.apple.com/in/os/watchos/",
+      },
+    ],
+  },
+  {
+    title: "Shop Watch",
+    links: [
+      {
+        label: "Shop Apple Watch",
+        href: "https://www.apple.com/in/shop/goto/buy_watch",
+      },
+      {
+        label: "Apple Watch Studio",
+        href: "https://www.apple.com/in/shop/goto/buy_watch",
+      },
+      {
+        label: "Apple Watch Straps",
+        href: "https://www.apple.com/in/shop/goto/watch/bands",
+      },
+      {
+        label: "Apple Watch Accessories",
+        href: "https://www.apple.com/in/shop/goto/watch/accessories",
+      },
+      {
+        label: "Ways to Buy",
+        href: "https://www.apple.com/in/shop/ways-to-buy",
+      },
+    ],
+  },
+  {
+    title: "More from Watch",
+    links: [
+      {
+        label: "Compare",
+        href: "https://www.apple.com/in/watch/compare/",
+      },
+      {
+        label: "Why Apple Watch",
+        href: "https://www.apple.com/in/watch/why-apple-watch/",
+      },
+      {
+        label: "Apple Fitness+",
+        href: "https://www.apple.com/in/apple-fitness-plus/",
+      },
+      {
+        label: "Personal Setup",
+        href: "https://www.apple.com/in/shop/goto/personal_setup",
+      },
+      {
+        label: "Apple Watch For Your Kids",
+        href: "https://www.apple.com/in/watch/for-your-kids/",
+      },
+    ],
+  },
+];
+
+const footnotes = [
+  "* Instant cashback and No Cost EMI offers vary by eligible card, tenure and order total.",
+  "** Listed pricing is Maximum Retail Price inclusive of all taxes.",
+  "Apple Watch trade-in is available only in store in India, and trade-in values vary based on the condition, year and configuration of the eligible device.",
+];
+
+function AppleLink({ href, className, children }) {
+  return (
+    <a href={href} className={className} target="_blank" rel="noreferrer">
+      {children}
+    </a>
+  );
+}
+
+function ArrowIcon({ direction }) {
+  return (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 14 14"
+      fill="none"
+      aria-hidden="true"
+    >
+      {direction === "left" ? (
+        <path
+          d="M9 2L4 7l5 5"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      ) : (
+        <path
+          d="M5 2l5 5-5 5"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      )}
+    </svg>
+  );
+}
+
+function RailControls({ canPrev, canNext, onPrev, onNext, label }) {
+  return (
+    <div className="watch-rail-controls" aria-label={label}>
+      <button
+        type="button"
+        className="watch-rail-button"
+        onClick={onPrev}
+        disabled={!canPrev}
+        aria-label="Scroll backward"
+      >
+        <ArrowIcon direction="left" />
+      </button>
+      <button
+        type="button"
+        className="watch-rail-button"
+        onClick={onNext}
+        disabled={!canNext}
+        aria-label="Scroll forward"
+      >
+        <ArrowIcon direction="right" />
+      </button>
+    </div>
+  );
+}
+
+function useRailControls() {
+  const railRef = useRef(null);
+  const [controls, setControls] = useState({ canPrev: false, canNext: false });
+
+  useEffect(() => {
+    const rail = railRef.current;
+    if (!rail) {
+      return undefined;
+    }
+
+    const update = () => {
+      const maxScroll = rail.scrollWidth - rail.clientWidth - 4;
+      setControls({
+        canPrev: rail.scrollLeft > 4,
+        canNext: rail.scrollLeft < maxScroll,
+      });
+    };
+
+    update();
+    rail.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+
+    return () => {
+      rail.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
+  const scroll = (direction) => {
+    const rail = railRef.current;
+    if (!rail) {
+      return;
+    }
+
+    rail.scrollBy({
+      left: direction * Math.max(rail.clientWidth * 0.85, 320),
+      behavior: "smooth",
+    });
+  };
+
+  return [
+    railRef,
+    controls.canPrev,
+    controls.canNext,
+    () => scroll(-1),
+    () => scroll(1),
+  ];
+}
 
 export default function WatchPage() {
-  const [activeFilter, setActiveFilter] = useState("All products");
-  const filtered =
-    activeFilter === "All products"
-      ? lineupProducts
-      : lineupProducts.filter((p) => p.category === activeFilter);
+  const [
+    lineupRailRef,
+    lineupCanPrev,
+    lineupCanNext,
+    handleLineupPrev,
+    handleLineupNext,
+  ] = useRailControls();
+  const [whyRailRef, whyCanPrev, whyCanNext, handleWhyPrev, handleWhyNext] =
+    useRailControls();
+  const [
+    featureRailRef,
+    featureCanPrev,
+    featureCanNext,
+    handleFeaturePrev,
+    handleFeatureNext,
+  ] = useRailControls();
+  const [activeCompanion, setActiveCompanion] = useState(
+    companionStories[0].id,
+  );
 
-  const lineupC = useCarousel(filtered.length, 3);
-  const whyC = useCarousel(whyCards.length, 4);
-  const knowC = useCarousel(knowCards.length, 4);
+  const activeStory =
+    companionStories.find((story) => story.id === activeCompanion) ??
+    companionStories[0];
 
   return (
-    <div className="pp-page">
-      <div className="pp-promo-bar">
-        Get up to ₹6000 instant cashback on Apple Watch with eligible cards.
-        Plus up to 6 months of No Cost EMI.{" "}
-        <a href="#">Shop Apple Watch &rsaquo;</a>
-      </div>
-
-      <section className="pp-hero">
-        <div className="pp-content-width">
-          <h1 className="pp-hero-title">Apple Watch</h1>
-        </div>
-      </section>
-
-      <nav className="pp-product-nav" aria-label="Apple Watch products">
-        <div className="pp-content-width">
-          <div className="pp-product-nav-inner">
-            {productNavItems.map((item) => (
-              <button key={item.label} className="pp-nav-item">
-                {item.badge && (
-                  <span className="pp-nav-badge">{item.badge}</span>
-                )}
-                <img
-                  src={item.img}
-                  alt={item.label}
-                  onError={(e) => {
-                    e.target.style.display = "none";
-                  }}
-                />
-                <span>{item.label}</span>
-              </button>
+    <main className="watch-page">
+      <nav
+        className="watch-chapternav"
+        aria-label="Apple Watch family of products"
+      >
+        <div className="watch-chapternav-scroll">
+          <div className="watch-chapternav-list">
+            {chapterNavItems.map((item) => (
+              <AppleLink
+                key={item.label}
+                href={item.href}
+                className="watch-chapternav-item"
+              >
+                <span className="watch-chapternav-media">
+                  <img
+                    src={item.image}
+                    alt=""
+                    loading="lazy"
+                    aria-hidden="true"
+                  />
+                </span>
+                <span className="watch-chapternav-label">{item.label}</span>
+                {item.badge ? (
+                  <span className="watch-chapternav-badge">{item.badge}</span>
+                ) : null}
+              </AppleLink>
             ))}
           </div>
         </div>
       </nav>
 
-      <section className="pp-lineup-section">
-        <div className="pp-content-width">
-          <div className="pp-lineup-header">
-            <h2 className="pp-h2">Explore the line&#8209;up.</h2>
-            <a href="#" className="pp-text-link">
-              Compare all models &rsaquo;
-            </a>
-          </div>
-          <div className="pp-filter-row">
-            {FILTERS.map((f) => (
-              <button
-                key={f}
-                className={`pp-filter-btn${activeFilter === f ? " active" : ""}`}
-                onClick={() => setActiveFilter(f)}
+      <div className="watch-ribbon">
+        <p>
+          Get up to \u20b96000 instant cashback on Apple Watch with eligible
+          cards. Plus up to 6 months of No Cost EMI.{" "}
+          <AppleLink
+            href="https://www.apple.com/in/shop/goto/buy_watch"
+            className="watch-inline-link"
+          >
+            Shop Apple Watch &rsaquo;
+          </AppleLink>
+        </p>
+      </div>
+
+      <header className="watch-hero">
+        <div className="watch-shell watch-hero-grid">
+          <div className="watch-hero-copy">
+            <h1>Apple Watch</h1>
+            <p className="watch-hero-lede">
+              Apple Watch is the ultimate device for a healthy life. Available
+              in three models: Apple Watch Series 11, Apple Watch SE 3 and Apple
+              Watch Ultra 3.
+            </p>
+            <div className="watch-hero-actions">
+              <AppleLink
+                href="https://www.apple.com/in/shop/goto/buy_watch"
+                className="watch-button watch-button-primary"
               >
-                {f}
-              </button>
+                Shop Apple Watch
+              </AppleLink>
+              <AppleLink
+                href="https://www.apple.com/in/watch/compare/"
+                className="watch-button watch-button-secondary"
+              >
+                Compare all models
+              </AppleLink>
+            </div>
+          </div>
+
+          <div className="watch-hero-stage" aria-hidden="true">
+            <div className="watch-hero-stage-surface" />
+            {lineupModels.map((model, index) => (
+              <img
+                key={model.id}
+                src={model.image}
+                alt=""
+                className={`watch-hero-device watch-hero-device-${index + 1}`}
+              />
             ))}
           </div>
-          <div className="pp-carousel-wrap">
-            <div
-              className="pp-carousel-track"
-              style={{ transform: `translateX(-${lineupC.idx * CARD_STEP}px)` }}
-            >
-              {filtered.map((p) => (
-                <div
-                  key={p.id}
-                  className="pp-lineup-card"
-                  style={{ width: `${CARD_W}px`, flex: `0 0 ${CARD_W}px` }}
-                >
-                  <div className="pp-lineup-card-img">
-                    <img
-                      src={p.image}
-                      alt={p.name}
-                      onError={(e) => {
-                        e.target.style.opacity = "0";
-                      }}
-                    />
-                  </div>
-                  <div className="pp-lineup-card-body">
-                    {p.badge && (
-                      <span className="pp-card-badge">{p.badge}</span>
-                    )}
-                    <h3 className="pp-card-name">{p.name}</h3>
-                    <p className="pp-card-tagline">{p.tagline}</p>
-                    <p className="pp-card-price">{p.price}</p>
-                    <p className="pp-card-emi">{p.emi}</p>
-                    <div className="pp-card-colors">
-                      {p.colors.map((c, i) => (
-                        <span
-                          key={i}
-                          className="pp-color-dot"
-                          style={{ background: c }}
-                        />
-                      ))}
-                    </div>
-                    <div className="pp-card-actions">
-                      <a href="#" className="pp-card-btn-primary">
-                        Learn more
-                      </a>
-                      <a href="#" className="pp-card-link">
-                        Buy &rsaquo;
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="pp-carousel-nav">
-            <button
-              className={`pp-arr-btn${!lineupC.canPrev ? " is-hidden" : ""}`}
-              onClick={lineupC.prev}
-              aria-label="Previous"
-            >
-              <NavArrowLeft />
-            </button>
-            <button
-              className={`pp-arr-btn${!lineupC.canNext ? " is-hidden" : ""}`}
-              onClick={lineupC.next}
-              aria-label="Next"
-            >
-              <NavArrowRight />
-            </button>
-          </div>
         </div>
-      </section>
+      </header>
 
-      <section className="pp-why-section">
-        <div className="pp-content-width">
-          <div className="pp-why-header">
-            <h2 className="pp-h2">
-              Why Apple is the best
-              <br />
-              place to buy Apple Watch.
-            </h2>
-            <a href="#" className="pp-text-link">
-              Shop Apple Watch &rsaquo;
-            </a>
-          </div>
-          <div className="pp-carousel-wrap">
-            <div
-              className="pp-carousel-track"
-              style={{ transform: `translateX(-${whyC.idx * WHY_W}%)` }}
+      <section className="watch-section">
+        <div className="watch-shell">
+          <div className="watch-section-head">
+            <h2>Explore the line-up.</h2>
+            <AppleLink
+              href="https://www.apple.com/in/watch/compare/"
+              className="watch-section-link"
             >
-              {whyCards.map((c) => (
-                <div
-                  key={c.title}
-                  className="pp-why-card"
-                  style={{ width: `${WHY_W}%`, flex: `0 0 ${WHY_W}%` }}
-                >
-                  <div className="pp-why-card-body">
-                    <h3 className="pp-why-card-title">{c.title}</h3>
-                    <p className="pp-why-card-desc">{c.desc}</p>
-                  </div>
-                  <img
-                    src={c.img}
-                    alt={c.title}
-                    className="pp-why-card-img"
-                    onError={(e) => {
-                      e.target.style.display = "none";
-                    }}
-                  />
+              Compare all models &rsaquo;
+            </AppleLink>
+          </div>
+
+          <div className="watch-rail" ref={lineupRailRef}>
+            {lineupModels.map((model) => (
+              <article key={model.id} className="watch-model-card">
+                <div className="watch-model-image-wrap">
+                  <img src={model.image} alt={model.name} loading="lazy" />
                 </div>
-              ))}
-            </div>
-          </div>
-          <div className="pp-carousel-nav">
-            <button
-              className={`pp-arr-btn${!whyC.canPrev ? " is-hidden" : ""}`}
-              onClick={whyC.prev}
-              aria-label="Previous"
-            >
-              <NavArrowLeft />
-            </button>
-            <button
-              className={`pp-arr-btn${!whyC.canNext ? " is-hidden" : ""}`}
-              onClick={whyC.next}
-              aria-label="Next"
-            >
-              <NavArrowRight />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <section className="pp-know-section">
-        <div className="pp-content-width">
-          <div className="pp-why-header">
-            <h2 className="pp-h2">Get to know Apple Watch.</h2>
-          </div>
-          <div className="pp-carousel-wrap">
-            <div
-              className="pp-carousel-track"
-              style={{ transform: `translateX(-${knowC.idx * KNOW_W}%)` }}
-            >
-              {knowCards.map((c) => (
-                <div
-                  key={c.cat}
-                  className={`pp-know-card${c.dark ? "" : " is-light"}`}
-                  style={{ width: `${KNOW_W}%`, flex: `0 0 ${KNOW_W}%` }}
-                >
-                  <img
-                    src={c.img}
-                    alt={c.cat}
-                    onError={(e) => {
-                      e.target.style.display = "none";
-                    }}
-                  />
-                  <div className="pp-know-card-overlay">
-                    <p className="pp-know-card-cat">{c.cat}</p>
-                    <h3
-                      className="pp-know-card-title"
-                      style={{ whiteSpace: "pre-line" }}
+                <div className="watch-model-body">
+                  <div className="watch-model-colors" aria-hidden="true">
+                    {model.colors.map((color) => (
+                      <span
+                        key={`${model.id}-${color}`}
+                        className="watch-model-color"
+                        style={{ backgroundColor: color }}
+                      />
+                    ))}
+                  </div>
+                  <h3>{model.name}</h3>
+                  <p className="watch-model-tagline">{model.tagline}</p>
+                  <p className="watch-model-finish">{model.finish}</p>
+                  <p className="watch-model-price">{model.price}</p>
+                  <div className="watch-card-actions">
+                    <AppleLink
+                      href={model.learnHref}
+                      className="watch-button watch-button-primary watch-button-small"
                     >
-                      {c.title}
-                    </h3>
+                      Learn more
+                    </AppleLink>
+                    <AppleLink href={model.buyHref} className="watch-text-link">
+                      Buy &rsaquo;
+                    </AppleLink>
                   </div>
                 </div>
-              ))}
-            </div>
+              </article>
+            ))}
           </div>
-          <div className="pp-carousel-nav">
-            <button
-              className={`pp-arr-btn${!knowC.canPrev ? " is-hidden" : ""}`}
-              onClick={knowC.prev}
-              aria-label="Previous"
-            >
-              <NavArrowLeft />
-            </button>
-            <button
-              className={`pp-arr-btn${!knowC.canNext ? " is-hidden" : ""}`}
-              onClick={knowC.next}
-              aria-label="Next"
-            >
-              <NavArrowRight />
-            </button>
-          </div>
+
+          <RailControls
+            canPrev={lineupCanPrev}
+            canNext={lineupCanNext}
+            onPrev={handleLineupPrev}
+            onNext={handleLineupNext}
+            label="Apple Watch lineup carousel controls"
+          />
         </div>
       </section>
 
-      <section className="pp-essentials-section">
-        <div className="pp-content-width">
-          <h2 className="pp-h2">Apple Watch essentials.</h2>
-          <div className="pp-essentials-grid">
-            {essentials.map((e) => (
-              <div key={e.title} className="pp-essentials-card">
-                <h3 className="pp-essentials-card-title">{e.title}</h3>
-                <p className="pp-essentials-card-desc">{e.desc}</p>
-                <a href="#" className="pp-essentials-card-link">
-                  {e.link} &rsaquo;
-                </a>
+      <section className="watch-section">
+        <div className="watch-shell">
+          <div className="watch-section-head">
+            <h2>
+              Why Apple is the best place
+              <br />
+              to buy Apple Watch.
+            </h2>
+            <AppleLink
+              href="https://www.apple.com/in/shop/goto/buy_watch"
+              className="watch-section-link"
+            >
+              Shop Apple Watch &rsaquo;
+            </AppleLink>
+          </div>
+
+          <div className="watch-rail" ref={whyRailRef}>
+            {whyBuyCards.map((card) => (
+              <article key={card.title} className="watch-benefit-card">
+                <img src={card.image} alt={card.title} loading="lazy" />
+                <div className="watch-benefit-body">
+                  <h3>{card.title}</h3>
+                  <p>{card.description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <RailControls
+            canPrev={whyCanPrev}
+            canNext={whyCanNext}
+            onPrev={handleWhyPrev}
+            onNext={handleWhyNext}
+            label="Why Apple Watch carousel controls"
+          />
+        </div>
+      </section>
+
+      <section className="watch-section">
+        <div className="watch-shell">
+          <div className="watch-section-head watch-section-head-solo">
+            <h2>Get to know Apple Watch.</h2>
+          </div>
+
+          <div className="watch-rail watch-rail-feature" ref={featureRailRef}>
+            {featureCards.map((card) => (
+              <article
+                key={card.category}
+                className={`watch-feature-card${card.tone === "light" ? " is-light" : ""}`}
+              >
+                <img src={card.image} alt={card.category} loading="lazy" />
+                <div className="watch-feature-overlay">
+                  <p>{card.category}</p>
+                  <h3>{card.title}</h3>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <RailControls
+            canPrev={featureCanPrev}
+            canNext={featureCanNext}
+            onPrev={handleFeaturePrev}
+            onNext={handleFeatureNext}
+            label="Get to know Apple Watch carousel controls"
+          />
+        </div>
+      </section>
+
+      <section className="watch-section">
+        <div className="watch-shell">
+          <div className="watch-section-head">
+            <h2>Apple Watch essentials.</h2>
+            <AppleLink
+              href="https://www.apple.com/in/shop/goto/watch/accessories"
+              className="watch-section-link"
+            >
+              All Apple Watch accessories &rsaquo;
+            </AppleLink>
+          </div>
+
+          <article className="watch-essentials-banner">
+            <div className="watch-essentials-copy">
+              <p className="watch-eyebrow">Bands and accessories</p>
+              <h3>Colour the moment.</h3>
+              <p>
+                Explore the latest straps in fresh shades, styles and materials.
+              </p>
+              <AppleLink
+                href="https://www.apple.com/in/shop/goto/watch/bands"
+                className="watch-text-link"
+              >
+                Shop Apple Watch straps &rsaquo;
+              </AppleLink>
+            </div>
+            <div className="watch-essentials-media">
+              <img
+                src={appleAsset(
+                  "/assets-www/en_WW/watch/01_banner_card_1up/large/essentials_319dfa557_2x.jpg",
+                )}
+                alt="Apple Watch straps in fresh colours"
+                loading="lazy"
+              />
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section className="watch-section">
+        <div className="watch-shell">
+          <div className="watch-section-head watch-section-head-solo">
+            <h2>Made for each other.</h2>
+          </div>
+
+          <div className="watch-companion-layout">
+            <div
+              className="watch-companion-tabs"
+              role="tablist"
+              aria-label="Made for each other"
+            >
+              {companionStories.map((story) => (
+                <button
+                  key={story.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={activeCompanion === story.id}
+                  aria-controls={`watch-companion-panel-${story.id}`}
+                  id={`watch-companion-tab-${story.id}`}
+                  className={`watch-companion-tab${activeCompanion === story.id ? " is-active" : ""}`}
+                  onClick={() => setActiveCompanion(story.id)}
+                >
+                  <span className="watch-companion-tab-title">
+                    {story.title}
+                  </span>
+                  <span className="watch-companion-tab-copy">
+                    {story.teaser}
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            <article
+              className="watch-companion-card"
+              role="tabpanel"
+              id={`watch-companion-panel-${activeStory.id}`}
+              aria-labelledby={`watch-companion-tab-${activeStory.id}`}
+            >
+              <div className="watch-companion-copy">
+                <p className="watch-eyebrow">Made for each other</p>
+                <h3>{activeStory.title}</h3>
+                <p>{activeStory.description}</p>
+                <AppleLink href={activeStory.href} className="watch-text-link">
+                  Learn more &rsaquo;
+                </AppleLink>
+              </div>
+              <div className="watch-companion-media">
                 <img
-                  src={e.img}
-                  alt={e.title}
-                  onError={(ev) => {
-                    ev.target.style.display = "none";
-                  }}
+                  src={activeStory.image}
+                  alt={activeStory.title}
+                  loading="lazy"
                 />
               </div>
-            ))}
+            </article>
           </div>
         </div>
       </section>
 
-      <section className="pp-others-section">
-        <div className="pp-content-width">
-          <h2 className="pp-h2">Made for each other.</h2>
-          <div className="pp-others-list">
-            {others.map((o) => (
-              <div key={o.title} className="pp-others-card">
-                <div className="pp-others-card-body">
-                  <p className="pp-others-card-eyebrow">{o.title}</p>
-                  <h3 className="pp-others-card-title">{o.title}</h3>
-                  <p className="pp-others-card-desc">{o.desc}</p>
+      <section className="watch-section watch-router-section">
+        <div className="watch-shell">
+          <div className="watch-router-surface">
+            <p className="watch-router-label">Apple Watch</p>
+            <div className="watch-router-grid">
+              {routerColumns.map((column) => (
+                <div key={column.title} className="watch-router-column">
+                  <h3>{column.title}</h3>
+                  <ul>
+                    {column.links.map((link) => (
+                      <li key={link.label}>
+                        <AppleLink
+                          href={link.href}
+                          className="watch-router-link"
+                        >
+                          {link.label}
+                        </AppleLink>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <div className="pp-others-card-img-wrap">
-                  <img
-                    src={o.img}
-                    alt={o.title}
-                    onError={(e) => {
-                      e.target.style.display = "none";
-                    }}
-                  />
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="pp-footnotes">
-        <div className="pp-content-width">
-          <p>
-            * Includes instant cashback and No Cost EMI. Monthly pricing is
-            rounded to the nearest rupee.
-          </p>
-          <p>
-            ** Listed pricing is Maximum Retail Price (inclusive of all taxes).
-          </p>
+      <section className="watch-footnotes">
+        <div className="watch-shell">
+          {footnotes.map((note) => (
+            <p key={note}>{note}</p>
+          ))}
         </div>
       </section>
-    </div>
+    </main>
   );
 }

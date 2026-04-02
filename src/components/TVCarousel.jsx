@@ -9,6 +9,7 @@ const shows = [
     blurb: "Who can you trust when it's all on the line?",
     image:
       "https://is1-ssl.mzstatic.com/image/thumb/5hSLmiaBKPfXrtjUJ6GHTQ/980x551.jpg",
+    href: "https://tv.apple.com/in/show/hijack/umc.cmc.1dg08zn0g3zx52hs8npoj5qe3",
   },
   {
     id: 2,
@@ -18,6 +19,7 @@ const shows = [
     blurb: "A workplace thriller where nothing stays compartmentalized.",
     image:
       "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=80",
+    href: "https://tv.apple.com/in/channel/tvs.sbd.4000",
   },
   {
     id: 3,
@@ -27,6 +29,7 @@ const shows = [
     blurb: "Ambition, scandal and live television under pressure.",
     image:
       "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1600&q=80",
+    href: "https://tv.apple.com/in/channel/tvs.sbd.4000",
   },
   {
     id: 4,
@@ -36,6 +39,7 @@ const shows = [
     blurb: "British espionage with sharp edges and sharper fallout.",
     image:
       "https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1600&q=80",
+    href: "https://tv.apple.com/in/channel/tvs.sbd.4000",
   },
   {
     id: 5,
@@ -45,6 +49,7 @@ const shows = [
     blurb: "An alternate future where the space race never slowed down.",
     image:
       "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1600&q=80",
+    href: "https://tv.apple.com/in/channel/tvs.sbd.4000",
   },
   {
     id: 6,
@@ -54,6 +59,7 @@ const shows = [
     blurb: "A courtroom drama where every detail changes the case.",
     image:
       "https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=1600&q=80",
+    href: "https://tv.apple.com/in/channel/tvs.sbd.4000",
   },
 ];
 
@@ -264,8 +270,10 @@ export default function TVCarousel() {
                 <div className="tv-card-info">
                   <div className="tv-card-meta">
                     <a
-                      href="#"
+                      href={show.href}
                       className="pill-btn pill-btn-filled-white tv-card-btn"
+                      target="_blank"
+                      rel="noreferrer"
                     >
                       Stream now
                     </a>
@@ -291,8 +299,10 @@ export default function TVCarousel() {
                 </p>
                 <div className="tv-card-cta">
                   <a
-                    href="#"
+                    href={show.href}
                     className="pill-btn pill-btn-filled-white tv-card-btn"
+                    target="_blank"
+                    rel="noreferrer"
                   >
                     Stream now
                   </a>

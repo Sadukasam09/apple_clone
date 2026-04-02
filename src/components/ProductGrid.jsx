@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const products = [
   {
     id: 1,
@@ -15,7 +17,13 @@ const products = [
     imageMask:
       "linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.08) 8%, rgba(0, 0, 0, 0.45) 16%, black 34%, black 66%, rgba(0, 0, 0, 0.45) 84%, rgba(0, 0, 0, 0.08) 92%, transparent 100%)",
     contentPosition: "bottom",
-    links: [{ label: "Read the letter from Tim", href: "#" }],
+    links: [
+      {
+        label: "Read the letter from Tim",
+        href: "https://www.apple.com/in/50-years-of-thinking-different/",
+        external: true,
+      },
+    ],
   },
   {
     id: 2,
@@ -28,8 +36,12 @@ const products = [
     imageFit: "contain",
     imagePosition: "center center",
     links: [
-      { label: "Learn more", href: "#" },
-      { label: "Buy", href: "#" },
+      { label: "Learn more", href: "/mac" },
+      {
+        label: "Buy",
+        href: "https://www.apple.com/in/shop/goto/buy_mac/macbook_pro",
+        external: true,
+      },
     ],
   },
   {
@@ -45,8 +57,12 @@ const products = [
     imagePosition: "center center",
     contentPosition: "bottom",
     links: [
-      { label: "Learn more", href: "#" },
-      { label: "Order", href: "#" },
+      { label: "Learn more", href: "/airpods" },
+      {
+        label: "Order",
+        href: "https://www.apple.com/in/shop/goto/buy_airpods/airpods_max_2",
+        external: true,
+      },
     ],
   },
   {
@@ -61,8 +77,12 @@ const products = [
     imageFit: "contain",
     imagePosition: "center center",
     links: [
-      { label: "Learn more", href: "#" },
-      { label: "Buy", href: "#" },
+      { label: "Learn more", href: "/watch" },
+      {
+        label: "Buy",
+        href: "https://www.apple.com/in/shop/goto/buy_watch/apple_watch_series_11",
+        external: true,
+      },
     ],
   },
   {
@@ -75,8 +95,12 @@ const products = [
     img: "/images/grid/ipad_pro/promo_ipad_pro__c529dk533k4m_medium_2x.jpg",
     imagePosition: "center center",
     links: [
-      { label: "Learn more", href: "#" },
-      { label: "Buy", href: "#" },
+      { label: "Learn more", href: "/ipad" },
+      {
+        label: "Buy",
+        href: "https://www.apple.com/in/shop/goto/ipad_pro/select",
+        external: true,
+      },
     ],
   },
   {
@@ -89,7 +113,13 @@ const products = [
     fg: "#1d1d1f",
     img: "/images/grid/trade_in/promo_iphone_tradein__bugw15ka691e_medium_2x.jpg",
     imagePosition: "center center",
-    links: [{ label: "Get your estimate", href: "#" }],
+    links: [
+      {
+        label: "Get your estimate",
+        href: "https://www.apple.com/in/shop/goto/trade_in",
+        external: true,
+      },
+    ],
   },
 ];
 
@@ -135,15 +165,27 @@ function ProductCard({ product }) {
           <p className="apple-product-subcopy">{product.subcopy}</p>
         ) : null}
         <div className="promo-buttons apple-product-cta">
-          {product.links.map((link, index) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className={`pill-btn ${index === 0 ? "pill-btn-filled" : "pill-btn-outline"}`}
-            >
-              {link.label}
-            </a>
-          ))}
+          {product.links.map((link, index) =>
+            link.external ? (
+              <a
+                key={link.label}
+                href={link.href}
+                className={`pill-btn ${index === 0 ? "pill-btn-filled" : "pill-btn-outline"}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {link.label}
+              </a>
+            ) : (
+              <Link
+                key={link.label}
+                to={link.href}
+                className={`pill-btn ${index === 0 ? "pill-btn-filled" : "pill-btn-outline"}`}
+              >
+                {link.label}
+              </Link>
+            ),
+          )}
         </div>
       </div>
     </div>

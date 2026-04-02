@@ -1,5 +1,6 @@
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import "../store.css";
+import "./store.css";
 
 const categories = [
   {
@@ -344,7 +345,11 @@ function StoreRail({ title, subtitle, cards, compact = false, info = null }) {
       <div className="store-section-head">
         <h2>{title}</h2>
         {subtitle ? <p>{subtitle}</p> : null}
-        {info ? <a href="#" className="store-section-link">{info}</a> : null}
+        {info ? (
+          <a href="#" className="store-section-link">
+            {info}
+          </a>
+        ) : null}
       </div>
       <div className={`store-rail${compact ? " store-rail-compact" : ""}`}>
         {cards.map((card) => (
@@ -354,7 +359,9 @@ function StoreRail({ title, subtitle, cards, compact = false, info = null }) {
           >
             <img src={card.image} alt={card.title} loading="lazy" />
             <div className="store-card-content">
-              {card.eyebrow ? <p className="store-card-eyebrow">{card.eyebrow}</p> : null}
+              {card.eyebrow ? (
+                <p className="store-card-eyebrow">{card.eyebrow}</p>
+              ) : null}
               <h3>{card.title}</h3>
               {card.copy ? <p>{card.copy}</p> : null}
             </div>
@@ -366,6 +373,34 @@ function StoreRail({ title, subtitle, cards, compact = false, info = null }) {
 }
 
 export default function StorePage() {
+  const [storeQuery, setStoreQuery] = useState("");
+
+  const normalizedQuery = storeQuery.trim().toLowerCase();
+
+  const filteredCategories = useMemo(() => {
+    if (!normalizedQuery) {
+      return categories;
+    }
+
+    return categories.filter((category) =>
+      category.title.toLowerCase().includes(normalizedQuery),
+    );
+  }, [normalizedQuery]);
+
+  const filteredQuickLinks = useMemo(() => {
+    if (!normalizedQuery) {
+      return quickLinks;
+    }
+
+    return quickLinks.filter((item) =>
+      item.toLowerCase().includes(normalizedQuery),
+    );
+  }, [normalizedQuery]);
+
+  const handleStoreSearchSubmit = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <main className="store-page">
       <section className="store-hero">
@@ -376,27 +411,91 @@ export default function StorePage() {
           <h2>The best way to buy the products you love.</h2>
           <a href="#">Connect with a Specialist</a>
           <a href="#">Find an Apple Store</a>
+
+          <form
+            className="store-search-form"
+            onSubmit={handleStoreSearchSubmit}
+          >
+            <label htmlFor="store-search" className="store-search-label">
+              Quick find in Store
+            </label>
+            <div className="store-search-field">
+              <input
+                id="store-search"
+                type="search"
+                value={storeQuery}
+                onChange={(event) => setStoreQuery(event.target.value)}
+                placeholder="Search categories or links"
+                aria-describedby="store-search-helper"
+              />
+              {storeQuery ? (
+                <button
+                  type="button"
+                  className="store-search-clear"
+                  onClick={() => setStoreQuery("")}
+                  aria-label="Clear store search"
+                >
+                  Clear
+                </button>
+              ) : null}
+            </div>
+            <p
+              id="store-search-helper"
+              className="store-search-helper"
+              role="status"
+            >
+              {normalizedQuery
+                ? `${filteredCategories.length} matching categories, ${filteredQuickLinks.length} quick links.`
+                : "Tip: use keyboard search to jump to what you need faster."}
+            </p>
+          </form>
         </div>
       </section>
 
       <section className="store-categories">
         <div className="store-category-strip">
           <div className="store-category-row">
-            {categories.map((category) => (
+            {filteredCategories.map((category) =>
               category.href !== "#" ? (
-                <Link to={category.href} key={category.title} className="store-category-item">
-                  <img src={category.image} alt={category.title} loading="lazy" />
+                <Link
+                  to={category.href}
+                  key={category.title}
+                  className="store-category-item"
+                >
+                  <img
+                    src={category.image}
+                    alt={category.title}
+                    loading="lazy"
+                  />
                   <span>{category.title}</span>
                 </Link>
               ) : (
-                <a href="#" key={category.title} className="store-category-item">
-                  <img src={category.image} alt={category.title} loading="lazy" />
+                <a
+                  href="#"
+                  key={category.title}
+                  className="store-category-item"
+                >
+                  <img
+                    src={category.image}
+                    alt={category.title}
+                    loading="lazy"
+                  />
                   <span>{category.title}</span>
                 </a>
-              )
-            ))}
+              ),
+            )}
           </div>
-          <button type="button" className="store-category-next" aria-label="Next categories">
+          {normalizedQuery && filteredCategories.length === 0 ? (
+            <p className="store-search-empty" role="status">
+              No category match for "{storeQuery.trim()}". Try terms like
+              iPhone, Mac or Accessories.
+            </p>
+          ) : null}
+          <button
+            type="button"
+            className="store-category-next"
+            aria-label="Next categories"
+          >
             <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
               <path d="M7.65 4.23a.75.75 0 0 1 1.06 0l5.24 5.24a.75.75 0 0 1 0 1.06l-5.24 5.24a.75.75 0 1 1-1.06-1.06L12.36 10 7.65 5.29a.75.75 0 0 1 0-1.06Z" />
             </svg>
@@ -478,12 +577,17 @@ export default function StorePage() {
           <h2>Quick Links</h2>
         </div>
         <div className="store-link-pills">
-          {quickLinks.map((item) => (
+          {filteredQuickLinks.map((item) => (
             <a key={item} href="#" className="store-link-pill">
               {item}
             </a>
           ))}
         </div>
+        {normalizedQuery && filteredQuickLinks.length === 0 ? (
+          <p className="store-search-empty" role="status">
+            No quick links matched "{storeQuery.trim()}".
+          </p>
+        ) : null}
       </section>
 
       <section className="store-section store-notes">

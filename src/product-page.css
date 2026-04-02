@@ -19,7 +19,7 @@
   overflow-x: hidden;
 }
 .pp-content-width {
-  width: min(1200px, calc(100% - 48px));
+  width: min(var(--apple-content-width), calc(100% - var(--apple-page-gutter)));
   margin-inline: auto;
 }
 
@@ -63,7 +63,7 @@
 /* ── Hero ── */
 .pp-hero {
   background: #fff;
-  padding: 56px 0 48px;
+  padding: 64px 0 56px;
 }
 .pp-hero-title {
   font-size: clamp(44px, 6.5vw, 80px);
@@ -137,7 +137,7 @@
 /* ── Lineup section ── */
 .pp-lineup-section {
   background: #f5f5f7;
-  padding: 56px 0 72px;
+  padding: 64px 0 84px;
 }
 .pp-lineup-header {
   display: flex;
@@ -151,7 +151,7 @@
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
-  margin-bottom: 24px;
+  margin-bottom: 30px;
 }
 .pp-filter-btn {
   background: none;
@@ -192,7 +192,7 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.06);
+  background: rgba(0, 0, 0, 0.08);
   border: none;
   cursor: pointer;
   display: flex;
@@ -211,16 +211,18 @@
 /* ── Lineup card ── */
 .pp-lineup-card {
   background: #fff;
-  border-radius: 20px;
-  margin-right: 12px;
+  border-radius: var(--apple-card-radius);
+  margin-right: 16px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   flex-shrink: 0;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: var(--apple-card-shadow);
 }
 .pp-lineup-card-img {
   aspect-ratio: 4 / 3.8;
-  padding: 10% 8% 3%;
+  padding: 12% 10% 4%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -232,10 +234,10 @@
   object-fit: contain;
 }
 .pp-lineup-card-body {
-  padding: 12px 16px 18px;
+  padding: 16px 20px 22px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
   flex: 1;
 }
 .pp-card-badge {
@@ -251,25 +253,25 @@
   align-self: flex-start;
 }
 .pp-card-name {
-  font-size: clamp(16px, 1.5vw, 20px);
+  font-size: clamp(18px, 1.6vw, 22px);
   font-weight: 700;
   color: #1d1d1f;
   line-height: 1.15;
   margin: 0;
 }
 .pp-card-tagline {
-  font-size: 13px;
+  font-size: 14px;
   color: #6e6e73;
   margin: 2px 0 0;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 .pp-card-price {
-  font-size: 13px;
+  font-size: 14px;
   color: #1d1d1f;
   margin: 4px 0 0;
 }
 .pp-card-emi {
-  font-size: 11px;
+  font-size: 12px;
   color: #6e6e73;
 }
 .pp-card-colors {
@@ -322,7 +324,7 @@
 /* ── Why Buy section ── */
 .pp-why-section {
   background: #fff;
-  padding: 80px 0;
+  padding: 92px 0;
 }
 .pp-why-header {
   display: flex;
@@ -334,16 +336,17 @@
 }
 .pp-why-card {
   background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  border-radius: var(--apple-card-radius);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  margin-right: 12px;
+  margin-right: 16px;
+  box-shadow: var(--apple-card-shadow);
 }
 .pp-why-card-body {
-  padding: 24px;
+  padding: 28px;
   flex: 1;
 }
 .pp-why-card-title {
@@ -368,16 +371,17 @@
 /* ── Get to Know section ── */
 .pp-know-section {
   background: #f5f5f7;
-  padding: 80px 0;
+  padding: 92px 0;
 }
 .pp-know-card {
-  border-radius: 20px;
+  border-radius: var(--apple-card-radius);
   overflow: hidden;
   position: relative;
   aspect-ratio: 3/4;
   flex-shrink: 0;
-  margin-right: 12px;
+  margin-right: 16px;
   background: #1d1d1f;
+  box-shadow: var(--apple-card-shadow);
 }
 .pp-know-card.is-light {
   background: #fff;
@@ -421,7 +425,7 @@
 /* ── Essentials section ── */
 .pp-essentials-section {
   background: #fff;
-  padding: 80px 0;
+  padding: 92px 0;
 }
 .pp-essentials-grid {
   display: grid;
@@ -431,12 +435,13 @@
 }
 .pp-essentials-card {
   background: #f5f5f7;
-  border-radius: 20px;
+  border-radius: var(--apple-card-radius);
   overflow: hidden;
-  padding: 36px 32px 0;
+  padding: 40px 36px 0;
   display: flex;
   flex-direction: column;
   min-height: 360px;
+  box-shadow: var(--apple-card-shadow);
 }
 .pp-essentials-card-title {
   font-size: clamp(17px, 1.8vw, 22px);
@@ -469,7 +474,7 @@
 /* ── Significant Others / Integration section ── */
 .pp-others-section {
   background: #f5f5f7;
-  padding: 80px 0;
+  padding: 92px 0;
 }
 .pp-others-list {
   margin-top: 32px;
@@ -479,11 +484,12 @@
 }
 .pp-others-card {
   background: #fff;
-  border-radius: 20px;
+  border-radius: var(--apple-card-radius);
   overflow: hidden;
   display: grid;
   grid-template-columns: 1.4fr 1fr;
   min-height: 280px;
+  box-shadow: var(--apple-card-shadow);
 }
 .pp-others-card-body {
   padding: 40px 40px;
@@ -551,6 +557,12 @@
   }
 }
 @media (max-width: 600px) {
+  .pp-content-width {
+    width: min(
+      var(--apple-content-width),
+      calc(100% - var(--apple-page-gutter-mobile))
+    );
+  }
   .pp-hero-title {
     font-size: clamp(36px, 12vw, 60px);
   }
