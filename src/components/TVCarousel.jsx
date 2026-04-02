@@ -65,32 +65,13 @@ const shows = [
 
 export default function TVCarousel() {
   const trackRef = useRef(null);
-  const drag = useRef({ active: false, startX: 0, scrollLeft: 0 });
+  const cardRefs = useRef([]);
   const scrollEndTimeoutRef = useRef(null);
-  const interactionTimeoutRef = useRef(null);
-  const programmaticScrollTimeoutRef = useRef(null);
-  const programmaticScrollRef = useRef(false);
+  const activeIndexRef = useRef(0);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [isUserInteracting, setIsUserInteracting] = useState(false);
 
-  function getPointerX(event) {
-    if ("touches" in event && event.touches.length > 0) {
-      return event.touches[0].pageX;
-    }
-
-    if ("changedTouches" in event && event.changedTouches.length > 0) {
-      return event.changedTouches[0].pageX;
-    }
-
-    return event.pageX;
-  }
-
-  const getCards = useCallback(() => {
-    const track = trackRef.current;
-    if (!track) return [];
-    return Array.from(track.querySelectorAll(".tv-card"));
-  }, []);
+  const getCards = useCallback(() => cardRefs.current.filter(Boolean), []);
 
   const getNearestIndex = useCallback(() => {
     const track = trackRef.current;
@@ -113,144 +94,116 @@ export default function TVCarousel() {
     return nearestIndex;
   }, [getCards]);
 
-  const scrollToIndex = useCallback(
+  const centerCardInTrack = useCallback((card, behavior = "smooth") => {
+    const track = trackRef.current;
+    if (!track || !card) return;
+
+    const targetLeft =
+      card.offsetLeft - (track.clientWidth - card.offsetWidth) / 2;
+    const maxScrollLeft = track.scrollWidth - track.clientWidth;
+    const nextLeft = Math.max(0, Math.min(targetLeft, maxScrollLeft));
+
+    if (typeof track.scrollTo === "function") {
+      track.scrollTo({ left: nextLeft, behavior });
+    } else {
+      track.scrollLeft = nextLeft;
+    }
+  }, []);
+
+  const goToIndex = useCallback(
     (index, behavior = "smooth") => {
-      const track = trackRef.current;
       const cards = getCards();
-      const card = cards[index];
-      if (!track || !card) return;
+      if (cards.length === 0) return;
 
-      const targetLeft =
-        card.offsetLeft - (track.clientWidth - card.offsetWidth) / 2;
-      const maxScrollLeft = track.scrollWidth - track.clientWidth;
-      const nextLeft = Math.max(0, Math.min(targetLeft, maxScrollLeft));
+      const clampedIndex =
+        ((index % cards.length) + cards.length) % cards.length;
+      const card = cards[clampedIndex];
+      if (!card) return;
 
-      programmaticScrollRef.current = true;
-      window.clearTimeout(programmaticScrollTimeoutRef.current);
-      track.scrollTo({
-        left: nextLeft,
-        behavior,
-      });
-      programmaticScrollTimeoutRef.current = window.setTimeout(
-        () => {
-          programmaticScrollRef.current = false;
-        },
-        behavior === "auto" ? 0 : 500,
-      );
-      setActiveIndex(index);
+      centerCardInTrack(card, behavior);
+
+      activeIndexRef.current = clampedIndex;
+      setActiveIndex(clampedIndex);
     },
-    [getCards],
-  );
-
-  function beginUserInteraction() {
-    window.clearTimeout(interactionTimeoutRef.current);
-    setIsUserInteracting(true);
-  }
-
-  function endUserInteraction(delay = 2200) {
-    window.clearTimeout(interactionTimeoutRef.current);
-    interactionTimeoutRef.current = window.setTimeout(() => {
-      setIsUserInteracting(false);
-    }, delay);
-  }
-
-  const snapToNearest = useCallback(
-    (behavior = "smooth") => {
-      scrollToIndex(getNearestIndex(), behavior);
-    },
-    [getNearestIndex, scrollToIndex],
+    [getCards, centerCardInTrack],
   );
 
   useEffect(() => {
-    if (isPaused || isUserInteracting) return undefined;
+    activeIndexRef.current = activeIndex;
+  }, [activeIndex]);
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      const firstCard = cardRefs.current[0];
+      if (!firstCard) return;
+
+      centerCardInTrack(firstCard, "auto");
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [centerCardInTrack]);
+
+  useEffect(() => {
+    if (isPaused) return undefined;
 
     const intervalId = window.setInterval(() => {
-      setActiveIndex((currentIndex) => {
-        const nextIndex = (currentIndex + 1) % shows.length;
-        scrollToIndex(nextIndex);
-        return nextIndex;
-      });
+      if (document.hidden) return;
+
+      const nextIndex = (activeIndexRef.current + 1) % shows.length;
+      goToIndex(nextIndex);
     }, 5000);
 
     return () => window.clearInterval(intervalId);
-  }, [isPaused, isUserInteracting, scrollToIndex]);
+  }, [isPaused, goToIndex]);
 
   useEffect(() => {
-    function handleResize() {
-      scrollToIndex(activeIndex, "auto");
-    }
+    const handleResize = () => {
+      goToIndex(activeIndexRef.current, "auto");
+    };
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [activeIndex, scrollToIndex]);
+  }, [goToIndex]);
 
   useEffect(() => {
     return () => {
       window.clearTimeout(scrollEndTimeoutRef.current);
-      window.clearTimeout(interactionTimeoutRef.current);
-      window.clearTimeout(programmaticScrollTimeoutRef.current);
     };
   }, []);
 
-  function onMouseDown(e) {
-    beginUserInteraction();
-    window.clearTimeout(scrollEndTimeoutRef.current);
-    drag.current = {
-      active: true,
-      startX: getPointerX(e) - trackRef.current.offsetLeft,
-      scrollLeft: trackRef.current.scrollLeft,
-    };
-    trackRef.current.style.cursor = "grabbing";
-  }
-  function onMouseUp() {
-    if (!drag.current.active) return;
-    drag.current.active = false;
-    trackRef.current.style.cursor = "grab";
-    snapToNearest();
-    endUserInteraction();
-  }
-  function onMouseMove(e) {
-    if (!drag.current.active) return;
-    e.preventDefault();
-    const x = getPointerX(e) - trackRef.current.offsetLeft;
-    trackRef.current.scrollLeft =
-      drag.current.scrollLeft - (x - drag.current.startX) * 1.5;
-  }
-
-  function onScroll() {
-    const track = trackRef.current;
-    if (!track) return;
-
-    setActiveIndex(getNearestIndex());
-
-    if (programmaticScrollRef.current || drag.current.active) return;
-
-    beginUserInteraction();
+  const onScroll = useCallback(() => {
     window.clearTimeout(scrollEndTimeoutRef.current);
     scrollEndTimeoutRef.current = window.setTimeout(() => {
-      snapToNearest();
-      endUserInteraction();
-    }, 140);
-  }
+      const nearest = getNearestIndex();
+      activeIndexRef.current = nearest;
+      setActiveIndex(nearest);
+    }, 90);
+  }, [getNearestIndex]);
+
+  const handleDotSelect = (index) => {
+    goToIndex(index);
+  };
+
+  const handlePauseToggle = () => {
+    setIsPaused((paused) => !paused);
+  };
 
   return (
     <section className="tv-carousel-section">
       <div
         className="tv-carousel-track-wrapper"
         ref={trackRef}
-        onMouseDown={onMouseDown}
-        onMouseUp={onMouseUp}
-        onMouseLeave={onMouseUp}
-        onMouseMove={onMouseMove}
-        onTouchStart={onMouseDown}
-        onTouchEnd={onMouseUp}
-        onTouchCancel={onMouseUp}
-        onTouchMove={onMouseMove}
         onScroll={onScroll}
       >
         <div className="tv-carousel-track">
-          {shows.map((show) => (
-            <div key={show.id} className="tv-card">
+          {shows.map((show, index) => (
+            <div
+              key={show.id}
+              className="tv-card"
+              ref={(element) => {
+                cardRefs.current[index] = element;
+              }}
+            >
               <div
                 className="tv-card-img"
                 style={{ backgroundImage: `url(${show.image})` }}
@@ -326,18 +279,19 @@ export default function TVCarousel() {
               className={`tv-carousel-dot${index === activeIndex ? " is-active" : ""}`}
               aria-label={`Go to ${show.title}`}
               aria-selected={index === activeIndex}
-              onClick={() => scrollToIndex(index)}
+              aria-current={index === activeIndex ? "true" : undefined}
+              onClick={() => handleDotSelect(index)}
             />
           ))}
         </div>
 
         <button
           type="button"
-          className="tv-carousel-pause"
+          className={`tv-carousel-pause${isPaused ? " is-paused" : ""}`}
           aria-label={
             isPaused ? "Resume carousel autoplay" : "Pause carousel autoplay"
           }
-          onClick={() => setIsPaused((paused) => !paused)}
+          onClick={handlePauseToggle}
         >
           {isPaused ? (
             <svg

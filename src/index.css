@@ -2,6 +2,39 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  letter-spacing: 0.01em;
+}
+
+@font-face {
+  font-family: "SF Pro Display Custom";
+  src: url("/fonts/SFPRODISPLAYREGULAR.OTF") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SF Pro Display Custom";
+  src: url("/fonts/SFPRODISPLAYMEDIUM.OTF") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SF Pro Display Custom";
+  src: url("/fonts/SFPRODISPLAYBOLD.OTF") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SF Pro Display Custom";
+  src: url("/fonts/SFPRODISPLAYBOLD.OTF") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
 }
 
 :root {
@@ -32,11 +65,18 @@
 body {
   margin: 0;
   font-family:
-    "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
-    "Helvetica Neue", Helvetica, Arial, sans-serif;
+    "SF Pro Display Custom",
+    "SF Pro Display",
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Text",
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif;
   font-size: 17px;
   line-height: 1.47059;
-  letter-spacing: -0.022em;
+  letter-spacing: 0.01em;
   background: #fff;
   color: #1d1d1f;
   -webkit-font-smoothing: antialiased;
@@ -214,6 +254,24 @@ a {
 }
 .apple-nav-logo {
   justify-self: start;
+}
+.apple-nav-logo-img {
+  width: 14px;
+  height: 18px;
+  display: block;
+  object-fit: contain;
+}
+.apple-nav-icon-img {
+  display: block;
+  object-fit: contain;
+}
+.apple-nav-icon-img-search {
+  width: 17px;
+  height: 17px;
+}
+.apple-nav-icon-img-cart {
+  width: 19px;
+  height: 19px;
 }
 .apple-nav-links {
   display: flex;
@@ -1109,7 +1167,7 @@ a {
   scrollbar-width: none;
   -ms-overflow-style: none;
   padding: 0 36px;
-  cursor: grab;
+  cursor: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   scroll-padding-inline: 50%;
@@ -1220,6 +1278,7 @@ a {
 .tv-card-title-wrap {
   margin-left: auto;
   text-align: right;
+  max-width: min(48%, 420px);
 }
 .tv-card-title {
   font-size: clamp(44px, 5vw, 80px);
@@ -1228,6 +1287,7 @@ a {
   margin: 8px 0 0;
   line-height: 0.96;
   letter-spacing: -0.06em;
+  overflow-wrap: anywhere;
 }
 .tv-card-genre {
   font-weight: 700;
@@ -1247,8 +1307,9 @@ a {
   margin-top: 12px;
 }
 .tv-card-btn {
-  height: 36px;
-  padding: 0 18px;
+  height: 40px;
+  padding: 0 20px;
+  border-radius: 999px;
   font-size: 16px;
 }
 .tv-card-meta {
@@ -1264,8 +1325,8 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 14px;
-  margin-top: 14px;
+  gap: 12px;
+  margin-top: 16px;
 }
 .tv-carousel-dots {
   display: flex;
@@ -1273,35 +1334,54 @@ a {
   gap: 10px;
 }
 .tv-carousel-dot {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
+  min-width: 10px;
+  min-height: 10px;
   border: none;
   border-radius: 50%;
   padding: 0;
-  background: rgba(255, 255, 255, 0.34);
+  background: rgba(255, 255, 255, 0.38);
+  color: inherit;
   cursor: pointer;
   transition:
     transform var(--apple-motion-fast) var(--apple-ease-smooth),
     background-color var(--apple-motion-fast) var(--apple-ease-smooth),
-    width var(--apple-motion-fast) var(--apple-ease-smooth);
+    opacity var(--apple-motion-fast) var(--apple-ease-smooth);
 }
 .tv-carousel-dot.is-active {
-  width: 24px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.92);
+  background: #fff;
+  transform: scale(1.22);
 }
 .tv-carousel-pause {
-  width: 28px;
-  height: 28px;
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+  min-height: 38px;
   border: none;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.18);
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.24);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
   color: #fff;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background-color var(--apple-motion-fast) var(--apple-ease-smooth);
+  transition:
+    transform var(--apple-motion-fast) var(--apple-ease-smooth),
+    background-color var(--apple-motion-fast) var(--apple-ease-smooth);
+}
+.tv-carousel-pause.is-paused {
+  background: rgba(255, 255, 255, 0.34);
+}
+
+.tv-carousel-dot:active,
+.tv-carousel-pause:active {
+  transform: scale(0.96);
+}
+
+.tv-carousel-pause svg {
+  display: block;
 }
 
 .apple-footer a,
@@ -1314,10 +1394,6 @@ a {
     opacity var(--apple-motion-fast) var(--apple-ease-smooth),
     transform var(--apple-motion-fast) var(--apple-ease-smooth),
     background-color var(--apple-motion-fast) var(--apple-ease-smooth);
-}
-.tv-carousel-pause:hover,
-.tv-carousel-dot:hover {
-  background: rgba(255, 255, 255, 0.58);
 }
 @media (max-width: 734px) {
   .apple-hero {
