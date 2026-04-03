@@ -419,18 +419,19 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
   gap: 6px;
   flex-wrap: wrap;
   padding: 10px 22px;
   background: linear-gradient(180deg, #f7f7fa 0%, #f3f3f6 100%);
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   color: #1d1d1f;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.45;
   text-align: center;
 }
 .apple-nav-promo span {
-  max-width: 860px;
+ 
 }
 .apple-nav-promo a {
   color: #06c;
